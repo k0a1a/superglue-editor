@@ -1,0 +1,50 @@
+#sg-editing-menu-backgroundRepeat {
+	background-image: url("icons/backgroundRepeat.svg");;
+}
+
+
+
+#sg-editing-menu-backgroundRepeat-panel {
+	position: 			absolute;
+	top: 				0px;
+	left: 				30px;
+	width: 				98px;
+	height: 			32px;
+}
+
+
+
+
+.sg-editing-menu-panel > .sg-menu-triangle-right {
+	top:  		0px;;
+	left: 		-15px;
+}
+
+
+
+#sg-editing-menu-backgroundRepeat-panel .sg-editing-menu-button {
+	background-color: rgb(255, 41, 61);
+}
+
+#sg-editing-menu-backgroundRepeat-panel .sg-editing-menu-button:hover {
+	background-color: rgb(183, 12, 29);
+}
+
+
+#sg-editing-menu-backgroundRepeat-tile {
+	top: 	2px;
+	left: 	2px;
+	background-image: url("icons/tile.svg");
+}
+
+#sg-editing-menu-backgroundRepeat-tileX {
+	top:	2px;
+	left: 	34px;
+	background-image: url("icons/tileX.svg");
+}
+
+#sg-editing-menu-backgroundRepeat-tileY {
+	top:	2px;
+	left: 	66px;
+	background-image: url("icons/tileY.svg");
+}

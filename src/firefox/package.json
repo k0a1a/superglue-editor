@@ -1,0 +1,9 @@
+{
+  "name": "superglue",
+  "title": "SuperGlue",
+  "id": "jid1-C1BbtcqPveDNXw",
+  "description": "This is the SuperGlue Plugin to create and modify web content stored on a SuperGlue server",
+  "author": "The SuperGlue Team (2014). www.superglue.it",
+  "license": "GPL",
+  "version": "1.0"
+}

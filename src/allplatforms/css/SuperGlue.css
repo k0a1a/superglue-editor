@@ -1,0 +1,25 @@
+
+
+@font-face {
+    font-family: Dosis;
+    src: url("./fonts/dosis/Dosis-Regular.otf") format("opentype");
+}
+@font-face {
+    font-family: Dosis;
+    font-weight: bold;
+    src: url("./fonts/dosis/Dosis-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: Dosis;
+    font-weight: light;
+    src: url("./fonts/dosis/Dosis-Light.otf") format("opentype");
+}
+
+
+
+body {
+	cursor: 				default;
+	user-select: 			none;
+	-moz-user-select: 		none;
+	-webkit-user-select: 	none;
+}

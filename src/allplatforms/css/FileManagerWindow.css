@@ -1,0 +1,389 @@
+.sg-filemanager-working {
+	position: 			absolute;
+	top: 				30px;
+	right: 				15px;
+	width: 				30px;
+	height: 			30px;
+	background-image:	url(./icons/loading.gif);
+	background-repeat: 	no-repeat;
+	background-size:	28px auto;
+	background-position: center;
+}
+
+.sg-filemanager-operations {
+	position:			absolute;
+	bottom:				15px;
+	left:				15px;
+	height: 			30px;
+	margin-right: 		15px;
+	z-index:			1;
+}
+
+.sg-filemanager-operation {
+	width: 				30px;
+	height: 			30px;
+	background-color: 	rgb(255, 41, 61);
+	background-repeat: 	no-repeat;
+	background-size: 	auto 26px;
+	background-position: center;
+	opacity:			.6;
+}
+
+.sg-filemanager-operation.active {
+	opacity:			1;
+}
+
+.sg-filemanager-operations .sg-filemanager-operation {
+	float: 				left;
+}
+
+.sg-filemanager-operation.active:hover {
+	background-color:	rgb(183, 12, 29);
+	cursor:				pointer;
+}
+
+.sg-filemanager-operations .sg-filemanager-operation.file-upload {
+	background-image:	url(./icons/uploadFile.png);
+}
+
+.sg-filemanager-operations .sg-filemanager-operation.directory-new {
+	background-image:	url(./icons/newDirectory.png);
+}
+
+.sg-filemanager-operations .sg-filemanager-operation.rename {
+	background-image:	url(./icons/copy.svg);
+}
+
+.sg-filemanager-operations .sg-filemanager-operation.copy {
+	background-image:	url(./icons/copy.svg);
+}
+
+.sg-filemanager-operations .sg-filemanager-operation.paste {
+	background-image:	url(./icons/uploadFile.png);
+}
+
+.sg-filemanager-operations .sg-filemanager-operation.delete {
+	background-image:	url(./icons/delete.svg);
+}
+
+.sg-filemanager-directory-container {
+	position: 			relative;
+	width:				100%;
+	height:				100%;
+	border-style:		solid;
+	border-color:		rgb(255, 41, 61);
+	border-width:		45px 0 45px 0;
+	-moz-box-sizing:	border-box;
+	-webkit-box-sizing:	border-box;
+	box-sizing:			border-box;
+}
+
+.sg-filemanager-directory-container.nameInput {
+	border-width:		45px 0 75px 0;
+}
+
+.sg-filemanager-directory-container.nameInput .sg-modal-name-input {
+	position: 			absolute;
+	bottom: 			-37px;
+	left: 				0px;
+	width: 				100%;
+	font-size:			14px;
+	font-family: 		Dosis, sans-serif;
+	letter-spacing: 	1px;
+	padding: 			1px 3px;
+	-moz-box-sizing:	border-box;
+	-webkit-box-sizing:	border-box;
+	box-sizing:			border-box;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing {
+	width:				100%;
+	height:				100%;
+	margin: 			0;
+	padding: 			0;
+	overflow-x: 		hidden;
+	overflow-y: 		auto;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-blocked {
+	position:			absolute;
+	top:				0;
+	left:				0;
+	width:				100%;
+	height:				100%;
+	background-color:	rgba(255, 41, 61, .6);
+	z-index:			3;
+	cursor: 			default;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li {
+	position: 			relative;
+	color:				#fff;
+	padding:			6px 6px 6px 31px;
+	background-repeat:	no-repeat;
+	background-size:	auto 20px;
+	background-position: 4px center;
+	opacity: 			.88;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li span.size {
+	position:			absolute;
+	right: 				0px;
+	top: 				0px;
+	height: 			100%;
+	width:				62px;
+	background-color:	rgb(255, 41, 61);
+	padding:			6px;
+	text-align:			right;
+	color:				#ffbfcf;
+	-moz-box-sizing:	border-box;
+	-webkit-box-sizing:	border-box;
+	box-sizing:			border-box;
+	opacity: 			0;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li:after {
+	content:			'';
+	position:			absolute;
+	top:				0;
+	right: 				0px;
+	width: 				20px;
+	height: 			100%;
+	background: 		moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,41,61,0.99) 99%, rgba(255,41,61,1) 100%);
+	background: 		webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(99%,rgba(255,41,61,0.99)), color-stop(100%,rgba(255,41,61,1)));
+	background: 		webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,41,61,0.99) 99%,rgba(255,41,61,1) 100%);
+	background:			linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,41,61,0.99) 99%,rgba(255,41,61,1) 100%);
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li:hover, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active {
+	background-color:	rgb(183, 12, 29);
+	cursor:				pointer;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li.active {
+	opacity: 			1;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li:hover:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.new:after {
+	display:			none;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li[data-type="file"]:hover:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li[data-type="file"].active:after {
+	content:			'';
+	position:			absolute;
+	top:				0;
+	right: 				56px;
+	width: 				20px;
+	height: 			100%;
+	background: 		moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(183, 12, 29, 99) 99%, rgba(255,41,61,1) 100%);
+	background: 		webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(99%,rgba(183, 12, 29, 99)), color-stop(100%,rgba(255,41,61,1)));
+	background: 		webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(183, 12, 29, 99) 99%,rgba(255,41,61,1) 100%);
+	background:			linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(183, 12, 29, 99) 99%,rgba(255,41,61,1) 100%);
+	display: 			block !important;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li:hover span.size, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active span.size {
+	opacity: 			1;
+	-moz-transition-property: opacity;
+	-moz-transition-duration: 300ms;
+	-moz-transition-delay: 400ms;
+	-webkit-transition-property: opacity;
+	-webkit-transition-duration: 300ms;
+	-webkit-transition-delay: 400ms;
+	transition-property: opacity;
+	transition-duration: 300ms;
+	transition-delay: 400ms;
+	background-color:	rgb(183, 12, 29);
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li.edit:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active.edit:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.edit:hover:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.edit span.size {
+	display: 			none !important;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-directory {
+	background-image:	url(./icons/resourceDirectory.png);
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-file {
+	background-image:	url(./icons/resourceFile.png);
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li.new, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.edit {
+	background-color:	rgb(183, 12, 29);
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li input[type="text"] {
+	font-family: 		Dosis, sans-serif;
+	letter-spacing: 	1px;
+	padding: 			1px 3px;
+	position: 			absolute;
+	top: 				4px;
+	left: 				26px;
+	width: 				80%;
+	font-size: 			14px;
+	height: 			17px;
+}
+
+.sg-filemanager-directory-controls {
+	position:			absolute;
+	top: 				30px;
+	left:				0;
+	width: 				100%;
+	height: 			30px;
+	border-style:		solid;
+	border-color:		rgb(255, 41, 61);
+	border-width:		0px 15px 0px 15px;
+	-moz-box-sizing:	border-box;
+	-webkit-box-sizing:	border-box;
+	box-sizing:			border-box;
+	overflow:			hidden;
+}
+
+.sg-filemanager-directory-controls .sg-filemanager-operation.directory-up {
+	position:			absolute;
+	top:				0;
+	left:				0;
+	z-index:			1;
+	background-image:	url(./icons/levelUp.png);
+}
+
+.sg-filemanager-directory-controls .sg-filemanager-current-path {
+	width:				100%;
+	height:				30px;
+	color:				#fff;
+	line-height:		30px;
+	border-style:		solid;
+	border-color:		rgb(255, 41, 61);
+	border-width:		0px 0px 0px 40px;
+	white-space: 		nowrap;
+	-moz-box-sizing:	border-box;
+	-webkit-box-sizing:	border-box;
+	box-sizing:			border-box;
+}
+
+.sg-filemanager-directory-controls .sg-filemanager-current-path:after {
+	content:			'';
+	position:			absolute;
+	top:				0;
+	right: 				0;
+	width: 				15px;
+	height: 			100%;
+	background: 		moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,41,61,0.99) 99%, rgba(255,41,61,1) 100%);
+	background: 		webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(99%,rgba(255,41,61,0.99)), color-stop(100%,rgba(255,41,61,1)));
+	background: 		webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,41,61,0.99) 99%,rgba(255,41,61,1) 100%);
+	background:			linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,41,61,0.99) 99%,rgba(255,41,61,1) 100%);
+}
+
+.sg-filemanager-preview {
+	position: 			absolute;
+	bottom: 			15px;
+	right: 				15px;
+	width: 				60px;
+	height:				37px;
+	padding: 			3px;
+	background-color:	transparent;
+	overflow: 			hidden;
+	-moz-transition-property: width, height;
+	-moz-transition-duration: 600ms;
+	-moz-transition-delay: 600ms;
+	-webkit-transition-property: width, height;
+	-webkit-transition-duration: 600ms;
+	-webkit-transition-delay: 600ms;
+	transition-property: width, height;
+	transition-duration: 600ms;
+	transition-delay: 600ms;
+}
+
+.sg-filemanager-preview.active {
+	background-color:	#ef9999;
+	border:				2px solid rgb(183, 12, 29);
+}
+
+.sg-filemanager-preview img {
+	display: 			block;
+	margin: 			0 auto;
+	max-width: 			100%;
+	max-height: 		100%;
+}
+
+.sg-filemanager-preview.active:hover {
+	width: 				100px;
+	height:				62px;
+}
+
+.sg-filemanager-progress-bar {
+	position: 			absolute;
+	bottom:				0;
+	left: 				0;
+	width: 				100%;
+	height: 			7.5px;
+	z-index: 			3;
+}
+
+.sg-filemanager-progress-bar .sg-filemanager-progress {
+	position:			absolute;
+	top:				0;
+	left:				0;
+	width: 				0px;
+	height: 			100%;
+	background-color:	rgb(183, 12, 29);
+	-moz-transition-property: all;
+	-moz-transition-duration: 800ms;
+	-webkit-transition-property: all;
+	-webkit-transition-duration: 800ms;
+	transition-property: all;
+	transition-duration: 800ms;
+}
+
+.sg-editing-filemanager-modal-container {
+	position: 			absolute;
+	bottom: 			-38px;
+	right: 				0px;
+	width: 				60px;
+	height: 			30px;
+	padding:			4px;
+	background-color: 	rgb(255, 41, 61);
+}
+
+.sg-editing-filemanager-modal-container:before {
+	content:			'';
+	position:			absolute;
+	z-index: 			-1;
+	top: 				0;
+	left: 				0;
+	width:				68px;
+	height:				38px;
+	-moz-box-shadow:	0 0 2px 3px #555;
+	-webkit-box-shadow:	0 0 2px 3px #555;
+	box-shadow:			0 0 2px 3px #555;
+}
+
+.sg-editing-filemanager-modal-container button {
+	display:			inline-block;
+	width: 				30px;
+	height: 			30px;
+	border:				none;
+	outline:			none;
+	background-color: 	rgb(255, 41, 61);
+	background-repeat: 	no-repeat;
+	background-size: 	30px auto;
+	background-position: center;
+	opacity: 			.6;
+}
+
+.sg-editing-filemanager-modal-container button.active {
+	opacity:			1;
+}
+
+.sg-editing-filemanager-modal-container button.active:hover {
+	background-color: 	rgb(183, 12, 29);
+	cursor:				pointer;
+}
+
+.sg-editing-filemanager-modal-container button.confirm {
+	background-image:	url(./icons/copy.svg);
+}
+
+.sg-editing-filemanager-modal-container button.cancel {
+	background-image:	url(./icons/copy.svg);
+}

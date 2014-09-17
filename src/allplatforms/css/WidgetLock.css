@@ -1,0 +1,7 @@
+#sg-editing-widget-lock {
+	background-image: url("icons/locked.svg");
+}
+
+#sg-editing-widget-lock.unlocked {
+	background-image: url("icons/unlocked.svg");
+}

@@ -1,0 +1,83 @@
+
+.sg-editing-element-no-outline {
+	outline: none !important;
+}
+
+.sg-editing-resize-handles {
+	position: absolute;
+	pointer-events: none;
+}
+
+.sg-editing-resize-handles:before {
+	/* Firefox workaround css outline behavior */
+	content: '';
+	position: absolute; 
+	margin: 0px;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	outline: 1px dashed rgb(255, 41, 61);
+}
+
+.sg-editing-resize-handle {
+	position: absolute;
+	pointer-events: all;
+	width: 10px;
+	height: 10px;
+	background-color: rgb(255, 41, 61);
+	border: none;
+}
+
+.sg-editing-resize-handle.nwgrip {
+	cursor: nw-resize;
+	top:-1px;
+	left:-1px;
+}
+
+.sg-editing-resize-handle.negrip {
+	cursor: ne-resize;
+	top:-1px;
+	right:-1px;
+}
+
+.sg-editing-resize-handle.swgrip {
+	cursor: sw-resize;
+	bottom:-1px;
+	left:-1px;
+}
+
+.sg-editing-resize-handle.segrip {
+	cursor: se-resize;
+	bottom:-1px;
+	right:-1px;
+}
+
+.sg-editing-resize-handle.ngrip {
+	cursor: n-resize;
+	top:-1px; 
+	left:50%;
+	margin-left:-5px;
+}
+
+.sg-editing-resize-handle.egrip {
+	cursor: e-resize;
+	right:-1px; 
+	top:50%;
+	margin-top:-5px;
+}
+
+.sg-editing-resize-handle.sgrip {
+	cursor: s-resize;
+	bottom:-1px; 
+	left:50%;
+	margin-left:-5px;
+}
+
+.sg-editing-resize-handle.wgrip {
+	cursor: w-resize;
+	left:-1px; 
+	top:50%;
+	margin-top:-5px;
+}

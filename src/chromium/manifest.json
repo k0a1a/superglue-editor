@@ -1,0 +1,36 @@
+{
+  
+    "manifest_version": 2,
+
+    "name": "SuperGlue",
+    "description": "This is the SuperGlue Plugin to create and modify web content stored on a SuperGlue server",
+    "author": "The SuperGlue Team (2014). www.superglue.it",
+    "version": "1.0",
+
+    "permissions": [ "tabs", "activeTab", "<all_urls>" ],
+
+    "web_accessible_resources": [ "*" ],
+
+    "browser_action": {
+        "default_icon": {
+            "19": "icon-19-powerOff.png",
+            "38": "icon-38-powerOff.png"
+        },
+        "default_title": "SuperGlue"
+    },
+
+    "background": {
+        "scripts":      [ "background.js" ],
+        "persistent":   true
+    },
+
+    "content_scripts": [
+        {
+          "matches":    [ "<all_urls>" ],
+          "js":         ["content_probeForSG.js"]
+        }
+    ]
+
+    
+
+}

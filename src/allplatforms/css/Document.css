@@ -1,0 +1,27 @@
+
+/* Changes to user content */
+
+.sg-editing-outlines > .sg-element {
+   outline: 1px dashed rgb(255, 41, 61);
+}
+
+
+.sg-editing-block-events {
+	pointer-events: 		all;
+}
+.sg-editing-block-events > * {
+	pointer-events: 		none;
+}
+
+
+/* Editing Container */
+
+#sg-editing-container {
+	pointer-events: 	none;
+	position: 			relative;
+	top: 				0px;
+}
+#sg-editing-container.sg-editing-container-centered {
+	margin: 0px auto;
+}
+

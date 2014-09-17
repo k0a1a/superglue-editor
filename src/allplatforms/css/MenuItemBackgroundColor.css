@@ -1,0 +1,18 @@
+#sg-editing-menu-backgroundColor {
+	background-image: url("icons/backgroundColor.svg");
+}
+
+
+.sg-editing-menu-colorPicker-panel {
+	position: 			absolute;
+	top: 				0px;
+	left: 				30px;
+}
+
+
+
+.sg-editing-menu-panel > .sg-widget-triangle-right {
+	top:  		0px;;
+	left: 		0px;
+}
+

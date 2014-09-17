@@ -1,0 +1,65 @@
+#!/bin/sh
+
+
+case "$1" in
+
+
+    "clean") 
+        echo "removing ./build dir..." 
+        rm -R ./build
+        ;;
+
+
+    "build") 
+        echo "building SuperGlue clients..." 
+        mkdir -p ./build
+        mkdir -p ./build/firefox
+        mkdir -p ./build/chromium
+
+
+        cp -R ./src/firefox/* ./build/firefox
+        cp -R ./src/chromium/* ./build/chromium
+
+        cp -R ./src/allplatforms/* ./build/firefox/data/superglue-client
+        cp -R ./src/allplatforms/* ./build/chromium/superglue-client
+        ;;
+
+
+    "testFF") 
+        echo "Testing Firefox add-on..."
+        cd ./tools/firefox-addon-sdk-1.16
+        source bin/activate
+        cd ../..
+        cd ./build/firefox
+        cfx run
+        cd ../..
+        ;;
+        
+
+    "pkgFF")
+        echo "Packaging Firefox add-on..."
+        cd ./tools/firefox-addon-sdk-1.16
+        source bin/activate
+        cd ../..
+        cd ./build/firefox
+        cfx xpi
+        cd ../..
+        ;;
+
+
+   *) 
+        echo "Usage: $0"
+        echo " "
+        echo "  clean    Remove build dir"
+        echo "  build    Build SuperGlue clients"
+        echo " "
+        echo "  testFF   Test Firefox add-on in sandboxed browser"
+        echo "  pkgFF    Make Firefox add-on package (./build/SuperGlue.xpi)"
+        echo "  (----    To package Chromium extension, go there to chrome://extensions)" 
+        echo " "
+        echo "ATTENTION!! Call $0 only in root of the project directory!"
+        echo " "
+        ;;
+
+
+esac

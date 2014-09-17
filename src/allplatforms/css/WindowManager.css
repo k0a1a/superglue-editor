@@ -1,0 +1,9 @@
+#sg-editing-windows-container {
+	pointer-events: 	none;
+	position: 			relative;
+	top: 				0px;
+
+	font-family: 		Dosis, sans-serif;
+	font-size:			15px;
+	letter-spacing: 	1px;
+}

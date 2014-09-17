@@ -1,0 +1,36 @@
+
+.sg-editing-selection {
+	position: absolute;
+	pointer-events: none;
+}
+
+.sg-editing-selection-outline:before {
+	/* Firefox workaround css outline behavior */
+	content:  '';
+	position: absolute;
+	z-index:  100;
+	margin:   0px;
+	padding:  0px;
+	top:      0px;
+	left:     0px;
+	right:    0px;
+	bottom:   0px;
+	outline:  2px dashed rgb(255, 41, 61);
+}
+
+.sg-editing-selection-widget-menu-right {
+	position: absolute;
+	z-index:  100;
+	right:    -45px;
+	bottom:   0px;
+	width:    30px;
+}
+
+.sg-editing-selection-widget-menu-bottom {
+	position: absolute;
+	z-index:  100;
+	right:    0px;
+	bottom:   -45px;
+	height:   30px;
+	width:    500px;
+}

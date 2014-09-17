@@ -1,0 +1,31 @@
+
+
+#sg-editing-width-marker-left {
+	position: 		absolute;
+	pointer-events: all;
+	cursor: 		col-resize;
+	top: 			0px;
+	left: 			-14px;
+	width: 			12px;
+	min-height: 	150px;
+}
+
+#sg-editing-width-marker-right {
+	position: 		absolute;
+	pointer-events: all;
+	cursor: 		col-resize;
+	top: 			0px;
+	right: 			-14px;
+	width: 			12px;
+	min-height: 	150px;
+}
+
+
+
+.sg-editing-width-marker-left-visible {
+	border-right: 2px dashed rgb(255, 41, 61);
+}
+
+.sg-editing-width-marker-right-visible {
+	border-left: 2px dashed rgb(255, 41, 61);
+}

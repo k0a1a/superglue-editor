@@ -1,0 +1,40 @@
+#sg-editing-menu-saveRemote {
+	background-image: url("icons/saveRemote.svg");;
+}
+
+
+#sg-editing-menu-saveRemote-panel {
+	position: 			absolute;
+	top: 				30px;
+	left: 				0px;
+	width: 				216px;
+	height: 			32px;
+}
+
+#sg-editing-menu-saveRemote-panel .sg-editing-menu-panel {
+	top: 				15px;
+	left: 				0px;
+}
+
+
+.sg-editing-menu-panel > .sg-menu-triangle-top {
+	top:  		-15px;;
+	left: 		0px;
+}
+
+#sg-editing-menu-saveRemote-input {
+	position: absolute;
+	top:		2px;
+	left:		2px;
+	width:		170px;
+
+}
+
+#sg-editing-menu-saveRemote-confirm {
+	top:		2px;
+	left:		183px;
+}
+
+#sg-editing-menu-saveRemote-confirm {
+	background-image: url("icons/confirm.svg");
+}

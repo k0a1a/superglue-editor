@@ -1,0 +1,237 @@
+
+#sg-editing-textEditor-container {
+	
+	position: absolute;
+	top: 0px;
+	left: 0px;
+
+}
+
+
+#sg-editing-textEditor {
+	
+	position: absolute;
+
+}
+
+/***********************
+* Text Editing Toolbar
+***********************/
+
+#textShapeToolbar {
+	position: absolute;
+	/*
+	top: -74px;
+	right: 0px;
+	*/
+	width: 300px;
+	/*
+	background: background: rgb(255,255,255);
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(239,239,239,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(239,239,239,1)));
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(239,239,239,1) 100%);
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(239,239,239,1) 100%);
+	border: 2px solid rgb(255, 41, 61);
+	*/
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/*padding: 0 0 5px 5px;*/
+	padding: 0;
+}
+
+#textShapeToolbar .btn-group {
+	float: right;
+	position: relative;
+	height: 30px;
+	margin: 5px 0 0 5px;
+}
+
+#textShapeToolbar .dropdown-toggle {
+	padding-right: 10px;
+}
+
+#textShapeToolbar .dropdown-toggle.open {
+	background: #B10A1B;
+}
+
+#textShapeToolbar .dropdown-toggle.open:not(.right):after {
+	position: absolute;
+	left: 0;
+	bottom: -5px;
+	height: 6px;
+	width: 100%;
+	background: #B10A1B;
+	content: "";
+}
+
+#textShapeToolbar .dropdown-toggle .caret {
+	position: absolute;
+	right: 3px;
+	top: 12px;
+	border-right: 6px solid transparent;
+	border-left: 6px solid transparent;
+	border-top: 6px solid #fff;
+}
+
+#textShapeToolbar .dropdown-toggle .caretRight {
+	position: absolute;
+	right: 3px;
+	top: 9px;
+	border-bottom: 6px solid transparent;
+	border-left: 6px solid #fff;
+	border-top: 6px solid transparent;
+}
+
+#textShapeToolbar .dropdown-menu {
+	position: absolute;
+	top: 32px;
+	left: -20px;
+	width: 200px;
+	max-height: 200px;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	background: #B10A1B;
+	z-index: 1;
+	border: 2px solid #B10A1B;
+	list-style: none;
+	display: none;
+}
+
+#textShapeToolbar .dropdown-menu.small {
+	width: 84px;
+}
+
+#textShapeToolbar .dropdown-menu.input-append {
+	display: block;
+	background: rgb(255, 95, 113);
+	color: #fff;
+	padding: 5px;
+}
+
+#textShapeToolbar .dropdown-menu.input-append input {
+	color: #000;
+}
+
+#textShapeToolbar .dropdown-menu.active {
+	display: block;
+}
+
+#textShapeToolbar .dropdown-menu li, #textShapeToolbar .dropdown-menu li a {
+	display: block;
+	color: #fff;
+	height: auto;
+}
+
+#textShapeToolbar .dropdown-menu li a {
+	padding: 3px 6px;
+	border-bottom: 1px solid #fff;
+	text-decoration: none;
+}
+
+#textShapeToolbar .dropdown-menu li a.wysihtml5-command-active {
+	background: rgb(255, 41, 61);
+}
+
+#textShapeToolbar .dropdown-menu li a.wysihtml5-command-active:hover {
+	background: #B10A1B;
+}
+
+#textShapeToolbar a {
+	display: inline-block;
+	background: rgb(255, 41, 61);
+	cursor: pointer;
+	height: 30px;
+}
+
+#textShapeToolbar a:hover {
+	background: #B10A1B;
+}
+
+#textShapeToolbar a.wysihtml5-command-active {
+	background: #B10A1B;
+}
+
+#textShapeToolbar a i {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#textShapeToolbar a i.icon-font {
+	background-image: url(./icons/font.face.svg);
+}
+
+#textShapeToolbar a i.icon-text-height {
+	background-image: url(./icons/font.size.svg);
+}
+
+#textShapeToolbar a i.icon-bold {
+	background-image: url(./icons/font.style.bold.svg);
+}
+
+#textShapeToolbar a i.icon-italic {
+	background-image: url(./icons/font.style.italic.svg);
+}
+
+#textShapeToolbar a i.icon-strikethrough {
+	background-image: url(./icons/font.style.strikeout.svg);
+}
+
+#textShapeToolbar a i.icon-underline {
+	background-image: url(./icons/font.style.underline.svg);
+}
+
+#textShapeToolbar a i.icon-list-ul {
+	background-image: url(./icons/list.unordered.svg);
+}
+
+#textShapeToolbar a i.icon-list-ol {
+	background-image: url(./icons/list.ordered.svg);
+}
+
+#textShapeToolbar a i.icon-align-left {
+	background-image: url(./icons/align.left.svg);
+}
+
+#textShapeToolbar a i.icon-align-center {
+	background-image: url(./icons/align.center.svg);
+}
+
+#textShapeToolbar a i.icon-align-right {
+	background-image: url(./icons/align.right.svg);
+}
+
+#textShapeToolbar a i.icon-align-justify {
+	background-image: url(./icons/align.justify.svg);
+}
+
+#textShapeToolbar a i.icon-indent-right {
+	background-image: url(./icons/indent.right.svg);
+}
+
+#textShapeToolbar a i.icon-indent-left {
+	background-image: url(./icons/indent.left.svg);
+}
+
+#textShapeToolbar a.hyperlink i.icon-link {
+	background-image: url(./icons/link.svg);
+}
+
+#textShapeToolbar a.hyperlink.wysihtml5-command-active i.icon-link {
+	background-image: url(./icons/unlink.svg);
+}
+/*
+#textShapeToolbar a i.icon-remove-link {
+	background-image: url(./icons/unlink.svg);
+}
+*/
+
+#textShapeToolbar a i.icon-color {
+	background-image: url(./icons/font.color.svg);
+}

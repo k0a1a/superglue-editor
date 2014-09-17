@@ -1,0 +1,36 @@
+
+#sg-editing-grid-container {
+
+	pointer-events: 	none;
+	position: 			absolute;
+	top: 				0px;
+	background-repeat:  repeat;	
+
+}
+
+#sg-editing-grid-control {
+	pointer-events: all;
+	cursor: 		col-resize;
+
+	position: 		absolute;
+	z-index: 		300;
+	top:			0px;
+
+	width: 			0px;
+	height: 		0px;
+	border-style: 	solid;
+	border-width: 	20px 20px 0px 20px;
+	border-color: 	#ff2b40 transparent transparent transparent;
+}
+
+#sg-editing-grid-control.sg-editing-grid-control-hidden {
+
+	opacity: 0;
+
+}
+
+#sg-editing-grid-control.sg-editing-grid-control-hidden:hover {
+
+	opacity: 1;
+
+}

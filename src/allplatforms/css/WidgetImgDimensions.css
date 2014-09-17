@@ -1,0 +1,70 @@
+#sg-editing-widget-imgDimensions {
+	background-image: url("icons/imgDimensions.svg");
+}
+
+#sg-editing-widget-imgDimensions-panel {
+	position: 			absolute;
+	top: 				30px;
+	left: 				0px;
+	width: 				66px;
+	height: 			98px;
+}
+
+#sg-editing-widget-imgDimensions-panel > .sg-editing-widget-panel {
+	height: 			98px;
+}
+
+
+
+.sg-editing-widget-panel > .sg-widget-triangle-up {
+	top:  		-15px;;
+	left: 		0px;
+}
+
+
+
+
+#sg-editing-widget-imgDimensions-panel .sg-editing-widget-button {
+	background-color: rgb(255, 41, 61);
+}
+
+#sg-editing-widget-imgDimensions-panel .sg-editing-widget-button:hover {
+	background-color: rgb(183, 12, 29);
+}
+
+
+#sg-editing-widget-imgDimensions-tile {
+	top: 2px;
+	left: 2px;
+	background-image: url("icons/tile.svg");
+}
+
+#sg-editing-widget-imgDimensions-tileX {
+	top: 34px;
+	left: 2px;
+	background-image: url("icons/tileX.svg");
+}
+
+#sg-editing-widget-imgDimensions-tileY {
+	top: 66px;
+	left: 2px;
+	background-image: url("icons/tileY.svg");
+}
+
+#sg-editing-widget-imgDimensions-stretch {
+	top: 2px;
+	left: 34px;
+	background-image: url("icons/stretch.svg");
+}
+
+#sg-editing-widget-imgDimensions-stretchAspectRatio {
+	top: 34px;
+	left: 34px;
+	background-image: url("icons/stretchAspectRatio.svg");
+}
+
+#sg-editing-widget-imgDimensions-aspectRatio {
+	top: 66px;
+	left: 34px;
+	background-image: url("icons/aspectRatio.svg");
+}
