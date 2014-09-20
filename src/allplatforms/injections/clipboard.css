@@ -1,0 +1,16 @@
+
+#sg-editing-clipboard-copy {
+	position: 	fixed;
+	top:		-100px;
+	left:		0px;
+	width:		10px;
+	height: 	10px;
+}
+
+#sg-editing-clipboard-paste {
+	position: 	fixed;
+	top:		-80px;
+	left:		0px;
+	width:		10px;
+	height: 	10px;
+}

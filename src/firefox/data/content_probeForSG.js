@@ -140,6 +140,41 @@
 
     var activateSuperGlue = function(){
 
+
+        var clipboardCss = document.createElement("link");
+        clipboardCss.setAttribute("data-superglue", "editing-interface");
+        clipboardCss.setAttribute("rel", "stylesheet");
+        clipboardCss.setAttribute("href", self.options.dataPath + "injections/clipboard.css" );
+        document.head.appendChild(clipboardCss);
+
+        var clipboardCopy = document.createElement("textarea");
+        clipboardCopy.setAttribute("data-superglue", "editing-interface");
+        clipboardCopy.setAttribute("id", "sg-editing-clipboard-copy");
+        clipboardCopy.addEventListener('click', function(){
+            self.port.emit('SuperGlueClipboard', { 
+                action: 'copy',
+                value:  this.value
+            });
+        }, false);
+        document.body.insertBefore(clipboardCopy, document.body.firstElementChild);
+
+        var clipboardPaste = document.createElement("textarea");
+        clipboardPaste.setAttribute("data-superglue", "editing-interface");
+        clipboardPaste.setAttribute("id", "sg-editing-clipboard-paste");
+        clipboardPaste.addEventListener('click', function(){
+            self.port.emit('SuperGlueClipboard', { action: 'paste' });
+        }, false);
+        document.body.insertBefore(clipboardPaste, document.body.firstElementChild);
+        self.port.on('SuperGlueClipboard', function(message){
+            if(message.action === 'pasteResponse'){
+                clipboardPaste.value = message.value;
+                clipboardPaste.click()
+            }
+        });
+
+        
+
+
         for (var i = 0; i < scriptsToInject.length; i++) {
             var script = document.createElement("script");
             script.setAttribute("data-superglue", "editing-interface");

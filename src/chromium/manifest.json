@@ -7,7 +7,7 @@
     "author": "The SuperGlue Team (2014). www.superglue.it",
     "version": "1.0",
 
-    "permissions": [ "tabs", "activeTab", "<all_urls>" ],
+    "permissions": [ "tabs", "activeTab", "<all_urls>", "clipboardRead", "clipboardWrite" ],
 
     "web_accessible_resources": [ "*" ],
 

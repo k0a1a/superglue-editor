@@ -20,6 +20,21 @@ SC.loadPackage({ 'WidgetCopy': {
                 this.set({ isActionButton: true });
 
 
+                this.get('widgetButton').addEventListener('mouseup', function(){
+
+                    var elements   = theSelection.get('elements'),
+                        copyString = '';
+
+                    for(var i = 0, l = elements.length; i < l; i++){
+
+                        copyString += elements[i].do('renderYourself', { indent: 1 }) + '\n';
+
+                    }
+
+                    SuperGlue.get('clipboard').do('copy', copyString);
+
+
+                }, false)
 
 
     		}

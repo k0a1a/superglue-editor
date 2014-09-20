@@ -3,6 +3,7 @@ var buttons     = require('sdk/ui/button/action'),
     tabs        = require('sdk/tabs'),
     self        = require('sdk/self'),
     pageMod     = require('sdk/page-mod'),
+    clipboard   = require('sdk/clipboard'),
     iconsOn     =   {
                         '16': './icon-16-powerOn.png',
                         '32': './icon-32-powerOn.png',
@@ -38,6 +39,21 @@ pageMod.PageMod({
             if(request.contentProbeForSG === 'isPowerOn?'){
                 worker.port.emit('SuperGlue', { powerOn: powerSwitch })
             }
+        });
+
+        worker.port.on('SuperGlueClipboard', function(message){
+
+            if(message.action === 'copy'){
+                clipboard.set(message.value);
+            }
+
+            if(message.action === 'paste'){
+                worker.port.emit('SuperGlueClipboard', {
+                    action: 'pasteResponse',
+                    value:  clipboard.get()
+                })
+            }
+
         });
 
         worker.on('detach', function () {
