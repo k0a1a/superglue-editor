@@ -126,26 +126,35 @@ SC.loadPackage({ 'MenuItemBackgroundColor': {
                     var colorpickerInputContainer = document.createElement('div');
                         colorpickerInputContainer.classList.add('sg-colorpicker-input-container');
 
+                    var colorPickerInputRContainer = document.createElement('div');
+                        colorPickerInputRContainer.setAttribute('data-label', 'R:');
                     colorpickerInputR = document.createElement('input');
                         colorpickerInputR.setAttribute('type', 'number');
                         colorpickerInputR.addEventListener('change', function() {
                             updatePicker(ColorPicker.rgb2hex({ r: this.value, g: colorpickerInputG.value, b: colorpickerInputB.value }));
                         });
-                    colorpickerInputContainer.appendChild(colorpickerInputR);
+                    colorPickerInputRContainer.appendChild(colorpickerInputR);
+                    colorpickerInputContainer.appendChild(colorPickerInputRContainer);
 
+                    var colorPickerInputGContainer = document.createElement('div');
+                        colorPickerInputGContainer.setAttribute('data-label', 'G:');
                     colorpickerInputG = document.createElement('input');
                         colorpickerInputG.setAttribute('type', 'number');
                         colorpickerInputG.addEventListener('change', function() {
                             updatePicker(ColorPicker.rgb2hex({ r: colorpickerInputR.value, g: this.value, b: colorpickerInputB.value }));
                         });
-                    colorpickerInputContainer.appendChild(colorpickerInputG);
+                    colorPickerInputGContainer.appendChild(colorpickerInputG);
+                    colorpickerInputContainer.appendChild(colorPickerInputGContainer);
 
+                    var colorPickerInputBContainer = document.createElement('div');
+                        colorPickerInputBContainer.setAttribute('data-label', 'B:');
                     colorpickerInputB = document.createElement('input');
                         colorpickerInputB.setAttribute('type', 'number');
                         colorpickerInputB.addEventListener('change', function() {
                             updatePicker(ColorPicker.rgb2hex({ r: colorpickerInputR.value, g: colorpickerInputG.value, b: this.value }));
                         });
-                    colorpickerInputContainer.appendChild(colorpickerInputB);
+                    colorPickerInputBContainer.appendChild(colorpickerInputB);
+                    colorpickerInputContainer.appendChild(colorPickerInputBContainer);
 
                     colorpickerInputHex = document.createElement('input');
                         colorpickerInputHex.setAttribute('type', 'text');

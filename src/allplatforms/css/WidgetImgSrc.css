@@ -4,36 +4,27 @@
 
 #sg-editing-widget-imgSrc-panel {
 	position: 			absolute;
-	top: 				30px;
-	left: 				0px;
+	top: 				26px;
+	left: 				-20px;
 	width: 				246px;
-	height: 			32px;
 }
 
 
-
-
-.sg-editing-widget-panel > .sg-widget-triangle-up {
-	top:  		-15px;;
-	left: 		0px;
+#sg-editing-widget-imgSrc-panel .sg-widget-triangle-up {
+	left: 		18px;
 }
 
 #sg-editing-widget-imgSrc-input {
-	position: absolute;
-	top:		2px;
-	left:		2px;
-	width:		170px;
+	width:		166px;
 
 }
 
 #sg-editing-widget-imgSrc-chooseFile {
-	top:		2px;
-	left:		182px;
+	
 }
 
 #sg-editing-widget-imgSrc-clear {
-	top:		2px;
-	left:		214px;
+	
 }
 
 #sg-editing-widget-imgSrc-chooseFile {

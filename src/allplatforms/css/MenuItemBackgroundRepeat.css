@@ -8,7 +8,7 @@
 	position: 			absolute;
 	top: 				0px;
 	left: 				30px;
-	width: 				98px;
+	width: 				102px;
 	height: 			32px;
 }
 
@@ -16,8 +16,8 @@
 
 
 .sg-editing-menu-panel > .sg-menu-triangle-right {
-	top:  		0px;;
-	left: 		-15px;
+	top:  		-1px;
+	left: 		-12px;
 }
 
 
@@ -32,19 +32,13 @@
 
 
 #sg-editing-menu-backgroundRepeat-tile {
-	top: 	2px;
-	left: 	2px;
 	background-image: url("icons/tile.svg");
 }
 
 #sg-editing-menu-backgroundRepeat-tileX {
-	top:	2px;
-	left: 	34px;
 	background-image: url("icons/tileX.svg");
 }
 
 #sg-editing-menu-backgroundRepeat-tileY {
-	top:	2px;
-	left: 	66px;
 	background-image: url("icons/tileY.svg");
 }

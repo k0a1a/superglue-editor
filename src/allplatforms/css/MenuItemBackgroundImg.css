@@ -1,39 +1,33 @@
 #sg-editing-menu-backgroundImg {
-	background-image: url("icons/backgroundImg.svg");;
+	background-image: url("icons/backgroundImg.svg");
 }
 
 #sg-editing-menu-backgroundImg-panel {
 	position: 			absolute;
 	top: 				0px;
 	left: 				30px;
-	width: 				246px;
-	height: 			32px;
+	width: 				250px;
 }
 
 
 
 
 .sg-editing-menu-panel > .sg-menu-triangle-right {
-	top:  		0px;;
+	top:  		0px;
 	left: 		-15px;
 }
 
 #sg-editing-menu-backgroundImg-input {
-	position: absolute;
-	top:		2px;
-	left:		2px;
 	width:		170px;
 
 }
 
 #sg-editing-menu-backgroundImg-chooseFile {
-	top:		2px;
-	left:		183px;
+
 }
 
 #sg-editing-menu-backgroundImg-clear {
-	top:		2px;
-	left:		214px;
+	
 }
 
 #sg-editing-menu-backgroundImg-chooseFile {

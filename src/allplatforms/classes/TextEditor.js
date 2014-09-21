@@ -7,11 +7,11 @@ SC.loadPackage({ 'TextEditor': {
         editGroupFontFamily:    { initValue: '<a class="btn dropdown-toggle" title="Font"><i class="icon-font"></i><b class="caret"></b></a><ul class="dropdown-menu"></ul>' },
         editGroupFontSize:      { initValue: '<a class="btn dropdown-toggle" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a><ul class="dropdown-menu small"></ul>' },
         editGroupFontStyle:     { initValue: '<a class="btn" data-wysihtml5-command="bold" title="Bold"><i class="icon-bold"></i></a><a class="btn" data-wysihtml5-command="italic" title="Italic"><i class="icon-italic"></i></a><a class="btn" data-wysihtml5-command="underline" title="Underline"><i class="icon-underline"></i></a>' },
-        editGroupFontColor:     { initValue: '<a class="btn dropdown-toggle right" title="Font Color"><i class="icon-color">&nbsp;<b class="caretRight"></i></a><div class="colorpicker2"></div>' },
+        editGroupFontColor:     { initValue: '<a class="btn dropdown-toggle right" title="Font Color"><i class="icon-color">&nbsp;<b class="caret"></i></a><div class="sg-colorpicker-container-text"><div class="sg-colorpicker-container"></div></div>' },
         editGroupLists:         { initValue: '<a class="btn" data-wysihtml5-command="insertUnorderedList" title="Bullet list"><i class="icon-list-ul"></i></a><a class="btn" data-wysihtml5-command="insertOrderedList" title="Number list"><i class="icon-list-ol"></i></a>' },
         editGroupIndention:     { initValue: '<a class="btn" data-wysihtml5-command="outdent" title="Reduce indent"><i class="icon-indent-right"></i></a><a class="btn" data-wysihtml5-command="indent" title="Indent"><i class="icon-indent-left"></i></a>' },
         editGroupAlignment:     { initValue: '<a class="btn" data-wysihtml5-command="alignLeftStyle" title="Align Left"><i class="icon-align-left"></i></a><a class="btn" data-wysihtml5-command="alignCenterStyle" title="Center"><i class="icon-align-center"></i></a><a class="btn" data-wysihtml5-command="alignRightStyle" title="Align Right"><i class="icon-align-right"></i></a><a class="btn" data-wysihtml5-command="alignJustifyStyle" title="Justify"><i class="icon-align-justify"></i></a>' },
-        editGroupHyperlink:     { initValue: '<a class="btn dropdown-toggle hyperlink" title="Hyperlink" data-wysihtml5-command="createLink"><i class="icon-link"></i>&nbsp;<b class="caret"></b></a><div class="dropdown-menu input-append" data-wysihtml5-dialog="createLink" style="display: none;"><label>Link:<input data-wysihtml5-dialog-field="href" value="http://" class="text"></label><a data-wysihtml5-dialog-action="save">OK</a> <a data-wysihtml5-dialog-action="cancel">Cancel</a> <a data-wysihtml5-command="removeLink">Remove</a></div>' },
+        editGroupHyperlink:     { initValue: '<a class="btn dropdown-toggle hyperlink" title="Hyperlink" data-wysihtml5-command="createLink"><i class="icon-link"></i>&nbsp;<b class="caret"></b></a><div class="dropdown-menu input-append" data-wysihtml5-dialog="createLink" style="display: none;"><input data-wysihtml5-dialog-field="href" value="http://" class="text"><a data-wysihtml5-dialog-action="save">OK</a><a data-wysihtml5-command="removeLink">RM</a></div>' },
         activeEditGroups:       { initValue: ['editGroupIndention', 'editGroupAlignment', 'editGroupFontSize', 'editGroupFontFamily', 'editGroupFontColor', 'editGroupHyperlink', 'editGroupFontStyle', 'editGroupLists'] },
         activeFonts:            { initValue: ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 'Courier New', 'Comic Sans MS','Dosis', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Montserrat', 'Tahoma', 'Times', 'Times New Roman', 'TitilliumWeb', 'Verdana'] },
         activeFontSizes:        { initValue: ['8px', '9px', '10px', '11px', '12px', '13px', '14px', '15px', '16px', '17px', '18px', '20px', '22px', '26px', '28px', '30px', '32px', '34px', '36px', '38px', '40px', '46px', '50px', '60px', '70px'] }
@@ -24,7 +24,9 @@ SC.loadPackage({ 'TextEditor': {
         originalElementNode:    { comment: 'I store the original TextElement\'s DOM node.' },
         originalSelection:      { comment: 'I store the selection to restore it on unloading of the editor.' },
         textEditor:             { comment: 'I store the TextEditor\'s DOM node.' },
-        textEditorContainer:    { comment: 'I store the textEditorContainer\'s DOM node.' }
+        textEditorContainer:    { comment: 'I store the textEditorContainer\'s DOM node.' },
+        textEditorToolbar:      { comment: 'I store the textEditorToolbar\'s DOM node.' },
+        colorpicker:            { comment: 'I store a reference to my colorpicker' }
 
     },
 
@@ -69,6 +71,7 @@ SC.loadPackage({ 'TextEditor': {
                 textEditor.style.backgroundImage    = originalElementNode.style.backgroundImage;
                 textEditor.style.padding            = originalElementNode.style.padding;
                 textEditor.style.boxSizing          = 'border-box';
+                textEditor.style.borderStyle        = 'solid';
 
                 textEditor.style.position   = 'absolute';
                 textEditor.style.width      = this.get('originalElementNode').offsetWidth + 'px';
@@ -163,6 +166,8 @@ SC.loadPackage({ 'TextEditor': {
 
                 this.get('textEditorContainer').appendChild(textShapeToolbar);
 
+                this.set({ textEditorToolbar: textShapeToolbar });
+
                 this.do('initToolbarBindings');
 
                 textEditor.style.display = 'none';
@@ -175,11 +180,20 @@ SC.loadPackage({ 'TextEditor': {
                   useLineBreaks: false,
                   parserRules:  wysihtml5ParserRules, // defined in parser rules set
                   cleanUp:      true, 
-                  stylesheets:  ["../resources/default/css/normalize.css", "../resources/default/css/style.css"]
+                  stylesheets:  ["../resources/css/SuperGlue.css"]
                 }).on('load', function() {
                     
                     document.querySelector('.wysihtml5-sandbox').classList.add('shapeContent');
                     editor.focus();
+
+                    self.do('initColorpicker', {
+
+                        initialColor: undefined,
+                        setCallback: function(colorCode){
+                            editor.composer.commands.exec('fontColorStyle', colorCode );
+                        }
+
+                    });
                     
                 }).on('blur', function() {
                     
@@ -211,7 +225,7 @@ SC.loadPackage({ 'TextEditor': {
                         sandbox.style.display = 'block';
                     
                 });
-                /*                        
+                              
                 self.get('textEditor').addEventListener('click', function(evt){
 
                     if (editor) {
@@ -221,7 +235,7 @@ SC.loadPackage({ 'TextEditor': {
                     evt.stopPropagation();
                     return;
                 });
-                */
+                
 
                 var self = this;
                 var tmpTextColor;
@@ -242,6 +256,7 @@ SC.loadPackage({ 'TextEditor': {
                                 
                                 var currentFontColor = undefined;
 
+                                /*
                                 var sel = editor.composer.selection.getSelection();
                                 if (sel.rangeCount > 0) {
                                     var range = sel.getRangeAt(0);
@@ -253,9 +268,16 @@ SC.loadPackage({ 'TextEditor': {
                                         currentFontColor = parentElement.style.color;
                                     }
                                 }
+                                */
 
-                                // TODO: INIT COLORPICKER
-                                //self.do('initPicker', { initColor: currentFontColor });
+                                self.do('initColorpicker', {
+
+                                    initialColor: currentFontColor,
+                                    setCallback: function(colorCode){
+                                        editor.composer.commands.exec('fontColorStyle', colorCode );
+                                    }
+
+                                });
                                 
                             }
 
@@ -373,17 +395,8 @@ SC.loadPackage({ 'TextEditor': {
                 
                 for (var d=0; d<dropdownMenus.length; d++) {
                     dropdownMenus[d].addEventListener('click', function() {
-
-                        /*
-                        var dropdownClass;
-                        if ( this.nextElementSibling && this.nextElementSibling.classList.contains('colorpicker2') ) {
-                            dropdownClass = 'colorpicker2';
-                        } else {
-                            dropdownClass = 'dropdown-menu';
-                        }
-                        */
                         
-                        var dropdownClass = 'dropdown-menu'
+                        var dropdownClass = 'dropdown-menu';
 
                         if ( this.classList.contains('open') ) {
                             this.nextElementSibling.classList.remove('active');
@@ -394,6 +407,8 @@ SC.loadPackage({ 'TextEditor': {
                             for (var i=0; i<dropdownMenuContainers.length; i++) {
                                 dropdownMenuContainers[i].classList.remove('active')
                             }
+
+                            document.querySelector('.sg-colorpicker-container-text').classList.remove('active');
                             
                             this.nextElementSibling.classList.add('active');
                             
@@ -421,16 +436,199 @@ SC.loadPackage({ 'TextEditor': {
             }
         },
 
-        initPicker: {
-            comment: 'I init my colorpicker. Params: initColor',
-            code: function(){
+        initColorpicker: { 
+            comment:    'I init my colorpicker. Params: initialColor, setCallback()',
+            code:       function(colorPickerConfig){
 
-                // TODO: INIT COLORPICKER HERE
-                // with arg.initColor
+                var self = this;
+                
+                // From flexicolorPicker
 
+                var colorpickerContainer = this.get('textEditorToolbar').querySelector('.sg-colorpicker-container');
+                var colorpicker;
+
+                // Inputs
+
+                var colorpickerInputR,
+                    colorpickerInputB,
+                    colorpickerInputB,
+                    colorpickerInputHex;
+
+                var start = function() {
+                    
+                    var colorpickerElement = document.createElement('div');
+                    colorpickerElement.classList.add('sg-colorpicker');
+                    colorpickerContainer.appendChild(colorpickerElement);
+
+                    var colorpickerInputContainer = document.createElement('div');
+                        colorpickerInputContainer.classList.add('sg-colorpicker-input-container');
+
+                    var colorPickerInputRContainer = document.createElement('div');
+                        colorPickerInputRContainer.setAttribute('data-label', 'R:');
+                    colorpickerInputR = document.createElement('input');
+                        colorpickerInputR.setAttribute('type', 'number');
+                        colorpickerInputR.addEventListener('change', function() {
+                            updatePicker(ColorPicker.rgb2hex({ r: this.value, g: colorpickerInputG.value, b: colorpickerInputB.value }));
+                        });
+                    colorPickerInputRContainer.appendChild(colorpickerInputR);
+                    colorpickerInputContainer.appendChild(colorPickerInputRContainer);
+
+                    var colorPickerInputGContainer = document.createElement('div');
+                        colorPickerInputGContainer.setAttribute('data-label', 'G:');
+                    colorpickerInputG = document.createElement('input');
+                        colorpickerInputG.setAttribute('type', 'number');
+                        colorpickerInputG.addEventListener('change', function() {
+                            updatePicker(ColorPicker.rgb2hex({ r: colorpickerInputR.value, g: this.value, b: colorpickerInputB.value }));
+                        });
+                    colorPickerInputGContainer.appendChild(colorpickerInputG);
+                    colorpickerInputContainer.appendChild(colorPickerInputGContainer);
+
+                    var colorPickerInputBContainer = document.createElement('div');
+                        colorPickerInputBContainer.setAttribute('data-label', 'B:');
+                    colorpickerInputB = document.createElement('input');
+                        colorpickerInputB.setAttribute('type', 'number');
+                        colorpickerInputB.addEventListener('change', function() {
+                            updatePicker(ColorPicker.rgb2hex({ r: colorpickerInputR.value, g: colorpickerInputG.value, b: this.value }));
+                        });
+                    colorPickerInputBContainer.appendChild(colorpickerInputB);
+                    colorpickerInputContainer.appendChild(colorPickerInputBContainer);
+
+                    colorpickerInputHex = document.createElement('input');
+                        colorpickerInputHex.setAttribute('type', 'text');
+                        colorpickerInputHex.addEventListener('change', function() {
+                            updatePicker(this.value);
+                        });
+                    colorpickerInputContainer.appendChild(colorpickerInputHex);
+
+                    colorpickerContainer.appendChild(colorpickerInputContainer);
+
+
+                    colorpicker = ColorPicker(colorpickerElement, updateColor);
+                    self.set({ colorpicker: colorpicker });
+
+                    //updatePicker(initialColor);
+
+                    var topColors = getMostUsedColors();
+                    var topColorsContainer = document.createElement('div');
+                        topColorsContainer.classList.add('sg-colorpicker-top-colors');
+
+                    for (var i=0; i<topColors.length; i++) {
+                        var topColorElement = document.createElement('span');
+                            topColorElement.style.backgroundColor = topColors[i].color;
+                            topColorElement.addEventListener('mousedown', function() {
+                                updatePicker(rgbString2Hex(this.style.backgroundColor));
+                            });
+                        topColorsContainer.appendChild(topColorElement);
+                    }
+
+                    colorpickerContainer.appendChild(topColorsContainer);
+
+                    var transparentElement = document.createElement('div');
+                        transparentElement.classList.add('sg-colorpicker-transparent');
+                        transparentElement.addEventListener('mousedown', function() {
+                            colorPickerConfig.setCallback.call(this, '');
+                        });
+                    colorpickerContainer.appendChild(transparentElement);
+                    
+                }
+
+
+                var updateColor = function(hex) {
+                    
+                    if ( hex ) {
+                        var rgb = ColorPicker.hex2rgb(hex);
+
+                        colorpickerInputHex.value = hex;
+                        
+                        colorpickerInputR.value = rgb.r;
+                        colorpickerInputG.value = rgb.g;
+                        colorpickerInputB.value = rgb.b;
+                        
+                        
+                        colorPickerConfig.setCallback.call(this, 'rgb('+rgb.r+', '+rgb.g+', '+rgb.b+')');
+                    }
+
+                }
+                
+
+                var updatePicker = function(hex) {
+                    
+                    self.get('colorpicker').setHex(hex);
+                }
+
+                var rgbString2Hex = function(rgbString) {
+                     if(rgbString === ''){
+                        return '';
+                     }
+                     if (  rgbString.search("rgb") == -1 ) {
+                          return rgbString;
+                     } else {
+                          rgbString = rgbString.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+                          function hex(x) {
+                               return ("0" + parseInt(x).toString(16)).slice(-2);
+                          }
+                          return "#" + hex(rgbString[1]) + hex(rgbString[2]) + hex(rgbString[3]); 
+                     }
+                };
+
+                var getMostUsedColors = function() {
+                    
+                    var elements = SuperGlue.get('document').get('children');
+                    var colorArray = [];
+
+                    for (var i=0; i<elements.length; i++) {
+                        if ( elements[i].get('node').style.backgroundColor.length ) {
+                            colorArray.push(elements[i].get('node').style.backgroundColor);
+                        }
+                        if ( elements[i].get('node').style.borderColor.length ) {
+                            colorArray.push(elements[i].get('node').style.borderColor);
+                        }
+                    }
+
+                    var frequencyObject = {};
+                    for( var v in colorArray ) {
+                        frequencyObject[colorArray[v]]=(frequencyObject[colorArray[v]] || 0)+1;
+                    }
+
+                    var frequencyArray = [];
+                    for ( var f in frequencyObject ) {
+                        var newObj = {};
+                        newObj["color"] = f;
+                        newObj["count"] = frequencyObject[f]
+                        frequencyArray.push(newObj);
+                    }
+
+                    function compare(a,b) {
+                        if (a.count < b.count)
+                            return 1;
+                        if (a.count > b.count)
+                            return -1;
+                        return 0;
+                    }
+
+                    frequencyArray.sort(compare);
+
+                    if ( frequencyArray.length > 5 ) {
+                        frequencyArray.slice(0, 5);
+                    }
+
+                    return frequencyArray;
+
+                }
+                
+                if ( !colorpickerContainer.querySelector('.sg-colorpicker') ) {
+                    var initialColor = undefined;
+                    start();
+                } else if ( colorPickerConfig.initialColor ) {
+                    var initialColor = rgbString2Hex(colorPickerConfig.initialColor);
+                    updatePicker(initialColor);
+                }
+
+                // End from flexicolorPicker
 
             }
-        },
+
+        }
 
 
 

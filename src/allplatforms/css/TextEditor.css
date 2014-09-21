@@ -1,9 +1,10 @@
 
 #sg-editing-textEditor-container {
-	
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	font-family: 		Dosis, sans-serif;
+	letter-spacing: 	1px;
 
 }
 
@@ -57,13 +58,20 @@
 }
 
 #textShapeToolbar .dropdown-toggle.open:not(.right):after {
-	position: absolute;
-	left: 0;
-	bottom: -5px;
-	height: 6px;
-	width: 100%;
-	background: #B10A1B;
-	content: "";
+	position: 		absolute;
+	left: 			0;
+	bottom: 		-11px;
+	content: 		"";
+	width: 			0;
+	height: 		0;
+	border-style: 	solid;
+	border-width: 	0 15px 10px 15px;
+	border-color: 	transparent transparent rgb(183, 12, 29) transparent;
+	z-index: 		2;
+}
+
+#textShapeToolbar .dropdown-toggle.right {
+	padding-right: 18px;
 }
 
 #textShapeToolbar .dropdown-toggle .caret {
@@ -86,7 +94,7 @@
 
 #textShapeToolbar .dropdown-menu {
 	position: absolute;
-	top: 32px;
+	top: 41px;
 	left: -20px;
 	width: 200px;
 	max-height: 200px;
@@ -105,10 +113,10 @@
 }
 
 #textShapeToolbar .dropdown-menu.input-append {
-	display: block;
-	background: rgb(255, 95, 113);
+	display: none !important;
 	color: #fff;
-	padding: 5px;
+	background-color: rgb(255, 41, 61);
+	padding: 4px;
 }
 
 #textShapeToolbar .dropdown-menu.input-append input {
@@ -116,7 +124,7 @@
 }
 
 #textShapeToolbar .dropdown-menu.active {
-	display: block;
+	display: block !important;
 }
 
 #textShapeToolbar .dropdown-menu li, #textShapeToolbar .dropdown-menu li a {
@@ -127,7 +135,6 @@
 
 #textShapeToolbar .dropdown-menu li a {
 	padding: 3px 6px;
-	border-bottom: 1px solid #fff;
 	text-decoration: none;
 }
 
@@ -235,3 +242,32 @@
 #textShapeToolbar a i.icon-color {
 	background-image: url(./icons/font.color.svg);
 }
+
+#textShapeToolbar .sg-colorpicker-container-text {
+	position: absolute;
+	background-color: 	rgb(255, 41, 61);
+	border:				2px solid rgb(183, 12, 29);
+	padding: 			5px;
+	-moz-box-sizing: 	border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: 		border-box;
+	top: 				41px;
+	left: 				-20px;
+	display: 			none;
+}
+
+#textShapeToolbar .sg-colorpicker-container-text.active {
+	display: block;
+}
+
+#textShapeToolbar .sg-colorpicker-container-text.active:after {
+	content:		'';
+	position: 		absolute;
+	top: 			-12px;
+	left: 			18px;
+	width: 			0;
+	height: 		0;
+	border-style: 	solid;
+	border-width: 	0 15px 10px 15px;
+	border-color: 	transparent transparent rgb(183, 12, 29) transparent;
+};

@@ -28,6 +28,7 @@ SC.loadPackage({ 'Compiler': {
                             +'\n\t\t\t#sg-page.sg-page-centered { margin: 0px auto; }'
                             +'\n\t\t\t.sg-element { position: absolute; overflow: hidden; }'
                             +'\n\t\t</style>'
+                            +'\n\t\t<link rel="stylesheet" href="/resources/css/SuperGlue.css" data-superglue="text-css">'
                             +'\n\t</head>';
                 
                 thePage += '\n\t<body style="'+ document.body.getAttribute('style')

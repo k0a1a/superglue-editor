@@ -1,10 +1,6 @@
-
-
-
-
 .sg-editing-widget-slider-panel {
 	position: 			absolute;
-	top: 				30px;
+	top: 				26px;
 	left: 				0px;
 	width: 				30px;
 	height: 			120px;
@@ -16,29 +12,23 @@
 	height: 	100%;
 }
 
-
-.sg-editing-widget-panel > .sg-widget-triangle-up {
-	top:  		-15px;;
-	left: 		0px;
-}
-
 .sg-editing-widget-slider-range {
 	position: 	absolute;
-	top:		0px;
+	top:		4px;
 	left:		0px;
 	width: 		2px;
-	height: 	120px;
-
-	border-left: 14px solid rgb(183, 12, 29);
-	border-right: 14px solid rgb(183, 12, 29);
-	background-color: rgb(255,255,255);
+	height: 	108px;
+	border-color: rgb(255, 41, 61);
+	border-width: 0 12px 0 12px;
+	border-style: solid;
+	background-color: rgb(183, 12, 29);
 }
 
 .sg-editing-widget-slider-handle {
 	position: 	absolute;
-	left:  		-12px;
-	width: 		26px;
+	left:  		-10px;
+	width: 		22px;
 	height: 	8px;
 	
-	background-color: rgb(255,255,255);
+	background-color: rgb(183, 12, 29);
 }

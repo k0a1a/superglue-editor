@@ -1,10 +1,10 @@
 .sg-colorpicker-container {
-    position:               absolute;
+    position:               relative;
     top:                    0px;
     left:                   0px;
-    width:                  200px;
-    height:                 130px;
-    background-color:       rgb(183, 12, 29);
+    width:                  183px;
+    height:                 120px;
+    background-color:       rgb(255, 41, 61);
 }
 
 .sg-colorpicker .picker-wrapper, 
@@ -25,16 +25,16 @@
 .sg-colorpicker .slide {
     cursor:                 crosshair;
     float:                  left;
-    outline:                1px solid #fff;
+    outline:                1px solid rgb(183, 12, 29);
     -moz-user-select:       none;
     -webkit-user-select:    none;
     user-select:            none;
 }
 
 .sg-colorpicker {
-    padding:                5px;
+    padding:                0px;
     background-color:       transparent;
-    float:                  left;
+    position:               relative;
 }
 
 .sg-colorpicker .picker {
@@ -67,46 +67,51 @@
 
 .sg-colorpicker-input-container {
     position:               absolute;
-    top:                    5px;
-    right:                  5px;
-    width:                  65px;
+    top:                    0px;
+    right:                  0px;
+    width:                  58px;
     height:                 100px;
 }
 
 .sg-colorpicker-input-container input {
     position:               relative;
     display:                block;
-    
-    /*width:                  65px;
-    height:                 22px;*/
-    width:                  35px;
-    height:                 16px;
+    width:                  34px;
+    height:                 14.5px !important;
+    padding:                4px;
     margin-bottom:          2px;
+    border:                 none;
+    margin:                 none;
+    /*outline:                1px solid rgb(183, 12, 29);*/
 }
 
 .sg-colorpicker-input-container input[type="number"] {
     padding-left:           20px;
 }
 
-.sg-colorpicker-input-container input[type="number"]:after {
+.sg-colorpicker-input-container > div {
+    position:               relative;
+}
+
+.sg-colorpicker-input-container > div:after {
     content:                attr(data-label);
     position:               absolute;
-    top:                    3px;
-    left:                   3px;
+    top:                    4.1px;
+    left:                   4px;
     width:                  10px;
     height:                 10px;
-    background-color:       #000;
+    font-size:              12px;
 }
 
 .sg-colorpicker-input-container input[type="text"] {
-    /*margin-top:             13px;*/
-    width:                  51px;
+    margin-top:             3.5px !important;
+    width:                  50px !important;
 }
 
 .sg-colorpicker-top-colors {
     position:               absolute;
-    bottom:                 5px;
-    left:                   5px;
+    bottom:                 0px;
+    left:                   0px;
     width:                  150px;
     height:                 15px;
 }
@@ -117,18 +122,19 @@
     height:                 15px;
     margin-right:           4px;
     cursor:                 crosshair;
-    outline:                1px solid #fff;
+    outline:                1px solid rgb(183, 12, 29);
 }
 
 .sg-colorpicker-transparent {
     position:               absolute;
-    bottom:                 5px;
-    right:                  5px;
+    bottom:                 0px;
+    right:                  0px;
     width:                  15px;
     height:                 15px;
-    background-image:       url(icons/colorpicker-transparent.png);
+    background-image:       url(colorpickerTransparent.png);
     background-repeat:      no-repeat;
     background-size:        15px 15px;
     background-color:       #cfcfcf;
-    outline:                1px solid #fff;
+    cursor:                 pointer;
+    outline:                1px solid rgb(183, 12, 29);
 }

@@ -63,7 +63,7 @@ SC.loadPackage({ 'SliderWidget': {
                 
 
                 var startY,
-                    maxY = 110,
+                    maxY = 100,
                     clickOffset,
                     currentY,
 

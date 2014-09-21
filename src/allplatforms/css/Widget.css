@@ -17,7 +17,7 @@
 	width: 				30px;
 	height: 			30px;
 	margin: 			0;
-	padding: 			1px 6px; /* icon files are 18x28 */
+	/*padding: 			1px 6px;*/ /* icon files are 18x28 */
 	border: 			none;
 	outline: 			none;
 	overflow: 			visible;
@@ -51,24 +51,34 @@
 
 
 .sg-editing-widget-panel {
-	position: 			absolute;
+	position: 			relative;
 	top: 				15px;
 	left: 				0px;
-	width: 				100%;
-	height: 			34px;
-	background-color: 	rgb(183, 12, 29);
+	background-color: 	rgb(255, 41, 61);
+	border:				2px solid rgb(183, 12, 29);
+	padding: 			4px;
+	-moz-box-sizing: 	border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: 		border-box;
 }
 
 .sg-editing-widget-panel .sg-editing-widget-button {
+	position:				relative;
+	background-color: 		rgb(255, 41, 61);
+}
+
+.sg-editing-widget-panel .sg-editing-widget-button:hover, .sg-editing-widget-panel .sg-editing-widget-button.active {
 	background-color: 		rgb(183, 12, 29);
 }
 
 .sg-widget-triangle-up {
 	position: 		absolute;
+	top: 			-12px;
+	left: 			-2px;
 	width: 			0;
 	height: 		0;
 	border-style: 	solid;
-	border-width: 	0 15px 15px 15px;
+	border-width: 	0 15px 10px 15px;
 	border-color: 	transparent transparent rgb(183, 12, 29) transparent;
 }
 
@@ -82,7 +92,7 @@
 }
 
 .sg-editing-widget-container input[type="text"] {
-	position: 		absolute;
+	float: 			left;
 	border:			none;
 	margin: 		0px;
 	padding:		4px;
