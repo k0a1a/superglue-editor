@@ -61,19 +61,11 @@ SC.loadPackage({ 'DocumentMenu': {
             comment: 'Show me at { x: anInt, y: anInt }',
             code: function(myCoordinates){
 
-                var self = this,
-                    myNode        = this.get('myNode'),
-                    topContainer  = this.get('topContainer'),
-                    leftContainer = this.get('leftContainer');
+                var myNode        = this.get('myNode');
 
                 if(myNode.parentNode === document.body){
                     return this.do('close');
                 }
-
-                topContainer.style.top   = (myCoordinates.y - 42 > 0 ? myCoordinates.y - 42 : 2 ) + 'px';
-                topContainer.style.left  = (myCoordinates.x - 42 > 0 ? myCoordinates.x      : 42) + 'px';
-                leftContainer.style.top  = (myCoordinates.y - 42 > 0 ? myCoordinates.y      : 42) + 'px';
-                leftContainer.style.left = (myCoordinates.x - 42 > 0 ? myCoordinates.x - 42 : 2 ) + 'px';
 
 
                 document.body.insertBefore(myNode, SuperGlue.get('windowManager').get('windowsContainer'));

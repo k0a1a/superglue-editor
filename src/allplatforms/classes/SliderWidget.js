@@ -77,18 +77,13 @@ SC.loadPackage({ 'SliderWidget': {
                             yPosition = 0,
                             newY;
                         
+                        while(currentElement){
+                            yPosition += (currentElement.offsetTop - currentElement.scrollTop + currentElement.clientTop);
+                            currentElement = currentElement.offsetParent;
+                        }
+                        
                         if(navigator.userAgent.indexOf('Firefox') > 0){
-                            while(currentElement){
-                                console.log('yes')
-                                yPosition += (currentElement.offsetTop + currentElement.clientTop);
-                                currentElement = currentElement.offsetParent;
-                            }
                             yPosition -= document.documentElement.scrollTop;
-                        }else{
-                            while(currentElement){
-                                yPosition += (currentElement.offsetTop - currentElement.scrollTop + currentElement.clientTop);
-                                currentElement = currentElement.offsetParent;
-                            }
                         }
 
                         newY = evt.clientY - yPosition;
