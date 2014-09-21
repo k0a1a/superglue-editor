@@ -170,6 +170,7 @@ SC.loadPackage({ 'Document': {
 
                 this.do('afterLayoutHasChanged');
 
+                return newChild;
 
             }
         },
