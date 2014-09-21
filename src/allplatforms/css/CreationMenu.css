@@ -15,23 +15,23 @@
 }
 
 #sg-editing-creation-menu-items.sg-editing-creation-menu-nw  {
-	top: 	-45px;
-	left: 	0px;
+	top: 	15px;
+	left: 	15px;
 }
 
 #sg-editing-creation-menu-items.sg-editing-creation-menu-ne  {
-	top: 	-45px;
-	right: 	0px;
+	top: 	15px;
+	right: 	15px;
 }
 
 #sg-editing-creation-menu-items.sg-editing-creation-menu-sw  {
-	bottom:	-45px;
-	left: 	0px;
+	bottom:	15px;
+	left: 	15px;
 }
 
 #sg-editing-creation-menu-items.sg-editing-creation-menu-se  {
-	bottom:	-45px;
-	right:	0px;
+	bottom:	15px;
+	right:	15px;
 }
 
 
