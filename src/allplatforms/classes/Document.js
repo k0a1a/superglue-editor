@@ -371,19 +371,21 @@ SC.loadPackage({ 'Document': {
                                 ||  evt.pageY < startY - 10
                                 ||  evt.pageY > startY + 10 )
                         ){
+
                             dragging = true;
+
+                            self.set({ interactionInProgress: true });
+
+                            var widthMarkers = SuperGlue.get('document').get('widthMarkers');
+                                grid         = SuperGlue.get('document').get('grid');
+                            widthMarkersVisible = widthMarkers.get('visible');
+                            gridVisible         = grid.get('visible');
+                            widthMarkers.set({ visible: true });
+                            grid.set({ visible: true });
 
                             if(!outOfBounds){
 
                                 SuperGlue.get('selection').do('clearAll')
-                                self.set({ interactionInProgress: true });
-
-                                var widthMarkers = SuperGlue.get('document').get('widthMarkers');
-                                    grid         = SuperGlue.get('document').get('grid');
-                                widthMarkersVisible = widthMarkers.get('visible');
-                                gridVisible         = grid.get('visible');
-                                widthMarkers.set({ visible: true });
-                                grid.set({ visible: true });
                                 
                                 creationMenu.do('trigger', { 
                                     startX: startX - pageLeft,
@@ -431,10 +433,10 @@ SC.loadPackage({ 'Document': {
 
                             self.set({ interactionInProgress: false });
 
-                            if(!outOfBounds){
-                                SuperGlue.get('document').get('widthMarkers').set({ visible: widthMarkersVisible });
-                                SuperGlue.get('document').get('grid').set({ visible: gridVisible });
-                            }
+                            
+                            SuperGlue.get('document').get('widthMarkers').set({ visible: widthMarkersVisible });
+                            SuperGlue.get('document').get('grid').set({ visible: gridVisible });
+                        
                             
                             if( !outOfBounds
                                 &&(evt.pageX < startX - 50
