@@ -45,6 +45,8 @@ SC.loadPackage({ 'MenuItemPaste': {
 
                             newNode = domNodes[i];
 
+                            newNode.removeAttribute('data-superglue-group')
+
                             try{
 
                                 SuperGlue.get('document').get('pageContainer').appendChild(newNode);
