@@ -20,7 +20,8 @@ SC.loadPackage({ 'MenuItemSaveAs': {
 
                 this.get('menuContainer').firstChild.addEventListener('mouseup', function(evt){
 
-
+                    theDocumentMenu.do('close');
+                    
                     SuperGlue.get('fileManager').do('saveAs', function(filePath){
 
                         SuperGlue.do('savePage', {

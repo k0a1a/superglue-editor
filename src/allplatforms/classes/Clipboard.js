@@ -45,7 +45,7 @@ SC.loadPackage({ 'Clipboard': {
                 var self = this;
                 window.setTimeout(function(){
                     callback.call(self, self.get('pasteField').value)
-                }, 500)
+                }, 300)
 
             }
         }

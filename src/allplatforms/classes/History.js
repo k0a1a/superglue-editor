@@ -15,6 +15,8 @@ SC.loadPackage({ 'History': {
     		comment: 	'method comment',
     		code: 		function(){
 
+                
+
     		}
     	}
 

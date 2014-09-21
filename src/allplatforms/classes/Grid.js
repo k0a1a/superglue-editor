@@ -13,16 +13,10 @@ SC.loadPackage({ 'Grid': {
         active:     { comment: 'Wether the grid is active.',
                       transform: function(aBoolean){
 
-                            var gridContainer = this.get('gridContainer');
-
                             if(aBoolean){
-                                if(gridContainer.parentNode !== document.body){
-                                    document.body.insertBefore(gridContainer, this.get('myDocument').get('pageContainer'));
-                                }
+                                this.get('gridContainer').style.opacity = 1;
                             }else{
-                                if(gridContainer.parentNode === document.body){
-                                    document.body.removeChild(gridContainer);
-                                }
+                                this.get('gridContainer').style.opacity = 0;
                             }
                             
                             return aBoolean;
@@ -64,10 +58,14 @@ SC.loadPackage({ 'Grid': {
         visible:    { comment: 'Wether I am visible or not.',
                       transform: function(aBoolean){
                             if(aBoolean){
-                                this.get('gridContainer').style.display = 'block';
+                                if(this.get('active')){
+                                    this.get('gridContainer').style.opacity = 1;
+                                }else{
+                                    this.get('gridContainer').style.opacity = 0;
+                                }
                                 this.get('gridControl').classList.remove('sg-editing-grid-control-hidden');
                             }else{
-                                this.get('gridContainer').style.display = 'none';
+                                this.get('gridContainer').style.opacity = 0;
                                 this.get('gridControl').classList.add('sg-editing-grid-control-hidden');
                             }
                             return aBoolean;
@@ -107,6 +105,7 @@ SC.loadPackage({ 'Grid': {
                                                     }).call(this)
                                     });
 
+                document.body.insertBefore(gridContainer, this.get('myDocument').get('pageContainer'));
 
                 window.addEventListener('resize', function(){
                     self.do('updateDimensions');

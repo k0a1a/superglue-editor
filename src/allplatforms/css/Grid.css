@@ -1,10 +1,10 @@
 
 #sg-editing-grid-container {
 
-	pointer-events: 	none;
+	cursor: 			crosshair;
 	position: 			absolute;
 	top: 				0px;
-	background-repeat:  repeat;	
+	background-repeat:  repeat;
 
 }
 

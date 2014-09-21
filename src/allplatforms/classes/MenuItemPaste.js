@@ -37,21 +37,37 @@ SC.loadPackage({ 'MenuItemPaste': {
                                     ? SuperGlue.get('document').get('grid').get('gridSize')
                                     : 10;
 
+                        SC.setHandlerForMessageNotUnderstood(function(message, reason, params){
+                            throw new Error('SC: Message not understood: ' + message + '; ' + reason);
+                        });
+
                         for(var i = 0, l = domNodes.length; i < l; i++){
 
-                            newNode = domNodes[i]
-                            SuperGlue.get('document').get('pageContainer').appendChild(newNode);
+                            newNode = domNodes[i];
 
-                            newChild = SC.do('Element', 'awakeFromDOM', newNode)
-                            newChild.set({
-                                top:    newChild.get('top')  + offset,
-                                left:   newChild.get('left') + offset
-                            })
+                            try{
+
+                                SuperGlue.get('document').get('pageContainer').appendChild(newNode);
+
+                                newChild = SC.do('Element', 'awakeFromDOM', newNode)
+                                newChild.set({
+                                    top:    newChild.get('top')  + offset,
+                                    left:   newChild.get('left') + offset
+                                })
+
+                            }catch(e){
+                                SuperGlue.get('document').get('pageContainer').removeChild(newNode);
+                                continue;
+                            }
 
                             SuperGlue.get('document').get('children').push(newChild);
                             SuperGlue.get('document').do('afterLayoutHasChanged');
 
                         }
+
+                        SC.setHandlerForMessageNotUnderstood();
+
+                        theDocumentMenu.do('close');
 
 
                     });
