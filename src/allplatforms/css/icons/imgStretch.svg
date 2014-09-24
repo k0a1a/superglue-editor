@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g>
+	<path fill="none" d="M11.747,17.302l8.162-3.352L25,16.041V11H5v6.176l3.484-1.356L11.747,17.302z M12.6,12.1
+		c1.768,0,3.2,0.758,3.2,1.69s-1.433,1.689-3.2,1.689s-3.2-0.757-3.2-1.689S10.832,12.1,12.6,12.1z"/>
+	<polygon fill="none" points="19.909,16.112 12.876,19 25,19 25,18.155 24.983,18.195 	"/>
+	<polygon fill="none" points="5.828,19 10.651,19 8.424,17.989 	"/>
+	<g>
+		<path fill="#FFFFFF" d="M3,21h24V9H3V21z M5.828,19l2.596-1.011L10.651,19H5.828z M25,19H12.876l7.033-2.888l5.074,2.083
+			L25,18.155V19z M5,11h20v5.041l-5.091-2.091l-8.162,3.352l-3.263-1.482L5,17.176V11z"/>
+		<ellipse fill="#FFFFFF" cx="12.6" cy="13.79" rx="3.2" ry="1.69"/>
+	</g>
+</g>
+</svg>

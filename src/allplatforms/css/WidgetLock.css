@@ -1,7 +1,7 @@
 #sg-editing-widget-lock {
-	background-image: url("icons/locked.svg");
+	background-image: url("icons/group.svg");
 }
 
 #sg-editing-widget-lock.unlocked {
-	background-image: url("icons/unlocked.svg");
+	background-image: url("icons/ungroup.svg");
 }

@@ -31,9 +31,9 @@
 	left: 				0;
 	width:				68px;
 	height:				38px;
-	-moz-box-shadow:	0 0 2px 3px #555;
-	-webkit-box-shadow:	0 0 2px 3px #555;
-	box-shadow:			0 0 2px 3px #555;
+	-moz-box-shadow:	0 0 2px 3px #444;
+	-webkit-box-shadow:	0 0 2px 3px #444;
+	box-shadow:			0 0 2px 3px #444;
 }
 
 .sg-editing-superuser-modal-container button {
@@ -54,9 +54,9 @@
 }
 
 .sg-editing-superuser-modal-container button.confirm {
-	background-image:	url(./icons/copy.svg);
+	background-image:	url(./icons/confirm.svg);
 }
 
 .sg-editing-superuser-modal-container button.cancel {
-	background-image:	url(./icons/copy.svg);
+	background-image:	url(./icons/close.svg);
 }

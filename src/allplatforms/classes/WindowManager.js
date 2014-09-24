@@ -78,8 +78,12 @@ SC.loadPackage({ 'WindowManager': {
             code: function(aWindow){
 
                 var windows = this.get('windows');
-                windows.splice(windows.indexOf(aWindow), 1);
 
+                if('function' === typeof aWindow.get('onClose')){
+                    aWindow.get('onClose').call(aWindow)
+                }
+
+                windows.splice(windows.indexOf(aWindow), 1);
                 this.get('windowsContainer').removeChild(aWindow.get('node'));
 
 

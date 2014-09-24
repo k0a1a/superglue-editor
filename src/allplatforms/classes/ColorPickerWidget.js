@@ -19,7 +19,10 @@ SC.loadPackage({ 'ColorPickerWidget': {
                                     }
                                     this.get('widgetMenu').classList.add('active');
 
-                                    // update Value
+                                    // prepare undo
+                                    this.set({ aColorWasChoosen:   false });
+                                    SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
+                                    
 
                                 }else{
 
@@ -27,11 +30,19 @@ SC.loadPackage({ 'ColorPickerWidget': {
                                         this.get('widgetMenu').removeChild(this.get('widgetPanel'));
                                     }
                                     this.get('widgetMenu').classList.remove('active');
+
+                                    // finish undo
+                                    if(this.get('aColorWasChoosen')){
+                                        SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
+                                    }
+                                    this.set({ aColorWasChoosen: false })
                                 
                                 }
                                 return aBoolean
                           }
-                        }
+                        },
+
+        aColorWasChoosen:       { comment: 'Wether a color was choosen or not.' }
 
     },
 
@@ -41,7 +52,7 @@ SC.loadPackage({ 'ColorPickerWidget': {
             comment:    'I init the widget as a ColorPickerWidget.',
             code:       function(colorPickerConfig){
 
-                var widgetPanel = '<div class="sg-editing-widget-colorPicker-panel">'
+                var widgetPanelCode = '<div class="sg-editing-widget-colorPicker-panel">'
                                         +'<div class="sg-editing-widget-panel">'
                                             +'<div class="sg-widget-triangle-up"></div>'
                                             +'<div class="sg-colorpicker-container"></div>'
@@ -50,7 +61,7 @@ SC.loadPackage({ 'ColorPickerWidget': {
 
 
                     self        = this,
-                    widgetPanel = (new DOMParser()).parseFromString(widgetPanel, 'text/html').body.firstChild;
+                    widgetPanel = (new DOMParser()).parseFromString(widgetPanelCode, 'text/html').body.firstChild;
                 
                 widgetPanel.querySelector('.sg-editing-widget-panel').addEventListener('mouseup', function(evt){
                     colorPickerConfig.theSelection.set({ activeWidget: self });
@@ -58,7 +69,8 @@ SC.loadPackage({ 'ColorPickerWidget': {
                 }, false);
 
                 this.set({ 
-                    widgetPanel: widgetPanel
+                    widgetPanel:      widgetPanel,
+                    aColorWasChoosen: false
                 });
 
 

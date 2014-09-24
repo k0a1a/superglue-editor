@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g>
+	<polygon fill="none" points="18,12 18,11 7,11 7,19 18,19 18,18 18,15 	"/>
+	<polygon fill="none" points="23,17.289 23,12.951 20,14.181 20,15.916 	"/>
+	<g>
+		<path fill="#FFFFFF" d="M20,18l5,2V10l-5,2V9H5v12h15V18z M23,12.951v4.337l-3-1.373v-1.735L23,12.951z M18,19H7v-8h11v1v3v3V19z"
+			/>
+	</g>
+</g>
+</svg>

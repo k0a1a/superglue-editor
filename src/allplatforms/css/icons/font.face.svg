@@ -1,74 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   x="0px"
-   y="0px"
-   width="30px"
-   height="30px"
-   viewBox="0 0 30 30"
-   enable-background="new 0 0 30 30"
-   xml:space="preserve"
-   id="svg5079"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="icon_font_face.svg"><metadata
-     id="metadata5096">
-         
-           <rdf:RDF><cc:Work
-         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title>SuperGlue icon set</dc:title><cc:license
-           rdf:resource="http://superglue.it" /><dc:date>10.05.2014</dc:date><dc:creator><cc:Agent><dc:title>VERBALVISU.AL</dc:title></cc:Agent></dc:creator><dc:rights><cc:Agent><dc:title>SuperGlue project</dc:title></cc:Agent></dc:rights><dc:publisher><cc:Agent><dc:title>SuperGlue</dc:title></cc:Agent></dc:publisher><dc:identifier>SG</dc:identifier><dc:source>Original</dc:source><dc:subject><rdf:Bag><rdf:li>UI</rdf:li><rdf:li>visual tool</rdf:li></rdf:Bag></dc:subject><dc:coverage>Web, UI</dc:coverage></cc:Work><cc:License
-         rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/"><cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" /><cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" /><cc:requires
-           rdf:resource="http://creativecommons.org/ns#Notice" /><cc:requires
-           rdf:resource="http://creativecommons.org/ns#Attribution" /><cc:prohibits
-           rdf:resource="http://creativecommons.org/ns#CommercialUse" /><cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" /><cc:requires
-           rdf:resource="http://creativecommons.org/ns#ShareAlike" /></cc:License></rdf:RDF></metadata><defs
-     id="defs5094" /><sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="918"
-     inkscape:window-height="595"
-     id="namedview5092"
-     showgrid="false"
-     inkscape:zoom="11.033333"
-     inkscape:cx="4.6676737"
-     inkscape:cy="15"
-     inkscape:window-x="62"
-     inkscape:window-y="141"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg5079" /><g
-     id="inspiration"
-     display="none" /><g
-     id="labels" /><g
-     transform="translate(0.14745545,-0.5)"
-     id="icons"><g
-       transform="translate(17.4463,22)"
-       style="font-size:17px;fill:#ffffff;font-family:OpenSans-Semibold"
-       id="text5067"><path
-         inkscape:connector-curvature="0"
-         d="m 3.112793,-11.936523 0,2.639648 3.1459961,0 0,1.1870117 -3.1459961,0 0,5.046875 c -3.1e-6,0.7581403 0.1023731,1.245119 0.3071289,1.4609375 0.2102828,0.2158217 0.6336222,0.3237318 1.2700195,0.3237305 l 1.5688477,0 0,1.2783203 -1.5688477,0 C 3.511227,0 2.6977512,-0.21858702 2.2495117,-0.65576172 1.8012677,-1.098469 1.5771469,-1.900877 1.5771484,-3.0629883 l 0,-5.046875 -1.12060543,0 0,-1.1870117 1.12060543,0 0,-2.639648 1.5356446,0"
-         style="font-size:17px;fill:#ffffff;font-family:OpenSans-Semibold"
-         id="path3891" /></g><path
-       inkscape:connector-curvature="0"
-       style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linejoin:bevel;stroke-miterlimit:10"
-       d="M 7,9 17,9"
-       id="line5069" /><path
-       inkscape:connector-curvature="0"
-       style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linejoin:bevel;stroke-miterlimit:10"
-       d="m 12,9 0,13"
-       id="line5071" /></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g>
+	<g>
+		<path fill="#FFFFFF" d="M21.107,22.166c0.365,0,0.718-0.032,1.059-0.096c0.34-0.063,0.618-0.143,0.834-0.236v-1.469
+			c-0.476,0.148-0.952,0.224-1.428,0.224c-0.382,0-0.69-0.112-0.926-0.336c-0.235-0.225-0.353-0.571-0.353-1.042v-4.914h2.615
+			v-1.478h-2.615v-2.042H19.09l-0.664,1.942l-1.345,0.714v0.863h1.253v4.947C18.335,21.192,19.259,22.166,21.107,22.166z"/>
+		<polygon fill="#FFFFFF" points="12.312,22 12.312,10 16.312,10 16.312,8 6.312,8 6.312,10 10.312,10 10.312,22 		"/>
+	</g>
+</g>
+</svg>

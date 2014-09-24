@@ -32,25 +32,25 @@
 
 
 #sg-editing-widget-imgDimensions-tile {
-	background-image: url("icons/tile.svg");
+	background-image: url("icons/imgRepeat.svg");
 }
 
 #sg-editing-widget-imgDimensions-tileX {
-	background-image: url("icons/tileX.svg");
+	background-image: url("icons/imgRepeatX.svg");
 }
 
 #sg-editing-widget-imgDimensions-tileY {
-	background-image: url("icons/tileY.svg");
+	background-image: url("icons/imgRepeatY.svg");
 }
 
 #sg-editing-widget-imgDimensions-stretch {
-	background-image: url("icons/stretch.svg");
+	background-image: url("icons/imgStretch.svg");
 }
 
 #sg-editing-widget-imgDimensions-stretchAspectRatio {
-	background-image: url("icons/stretchAspectRatio.svg");
+	background-image: url("icons/imgStretchAspectRatio.svg");
 }
 
 #sg-editing-widget-imgDimensions-aspectRatio {
-	background-image: url("icons/aspectRatio.svg");
+	background-image: url("icons/imageAspectRatio.svg");
 }

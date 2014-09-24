@@ -1,3 +1,7 @@
 #sg-editing-menu-outlines {
-	background-image: url("icons/outlines.svg");
+	background-image: url("icons/showOutlines.svg");
+}
+
+#sg-editing-menu-outlines.hideOutlines {
+	background-image: url("icons/hideOutlines.svg");
 }

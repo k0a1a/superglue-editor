@@ -19,7 +19,9 @@ SC.loadPackage({ 'MenuItemUndo': {
                 this.delegate('MenuItem', 'init', theDocumentMenu);
                 this.set({ isActionButton: true });
 
-
+                this.get('menuButton').addEventListener('mouseup', function(){
+                    SuperGlue.get('history').do('undo');
+                }, false);
 
     		}
 

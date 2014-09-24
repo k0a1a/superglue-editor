@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g>
+	<polygon fill="none" points="20.618,13.706 19,12.391 19,21 14,18 11,18 11,13 14,13 18.981,10.011 19.016,9.855 19.325,9.225 
+		19.511,9 7,9 7,22 23,22 23,12.515 22.631,12.796 	"/>
+	<polygon fill="none" points="13,15 13,16 14,16 15.029,16.285 17,17.468 17,14 17,13.766 15.029,14.715 14,15 	"/>
+	<g>
+		<polygon fill="#FFFFFF" points="23,12.515 23,22 7,22 7,9 19.511,9 21.168,7 5,7 5,24 25,24 25,10.176 23.169,12.386 		"/>
+		<polygon fill="#FFFFFF" points="25.158,4.535 23.116,7 21.459,9 20.48,10.182 20,12.339 22.014,11.429 23,10.238 25,7.824 
+			26.691,5.783 27.941,4.247 26.404,3 		"/>
+		<path fill="#FFFFFF" d="M11,13v5h3l5,3v-8.609V10l-0.019,0.011L14,13H11z M17,13.766V14v3.468l-1.971-1.183L14,16h-1v-1h1
+			l1.029-0.285L17,13.766z"/>
+	</g>
+</g>
+</svg>

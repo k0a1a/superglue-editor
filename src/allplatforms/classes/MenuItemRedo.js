@@ -19,7 +19,9 @@ SC.loadPackage({ 'MenuItemRedo': {
                 this.delegate('MenuItem', 'init', theDocumentMenu);
                 this.set({ isActionButton: true });
 
-
+                this.get('menuButton').addEventListener('mouseup', function(){
+                    SuperGlue.get('history').do('redo');
+                }, false);
 
 
     		}

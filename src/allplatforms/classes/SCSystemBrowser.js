@@ -3,12 +3,12 @@ SC.loadPackage({ 'SCSystemBrowser': {
 
     comment: 'I am the SmallClasses.js System Browser, and part of the SmallClasses.js project',
 
-    mixins: [ 'SCGUI' ],
+    traits: [ 'SCGUI' ],
 
     sharedProperties: {
 
         windowFile:   { comment:   'This file contains the html for the SCSystemBrowser\'s GUI. It needs to be available under the same domain, with a path relative to the embbeding html file.',
-                        initValue: '/resources/dev/SCSystemBrowser.html' },
+                        initValue: '/devTools/SCSystemBrowser.html' },
         windowConfig: { comment:   'This is the configuration for the window.open() function.',
                         initValue: 'height=750, width=1024, titlebar=no, location=no, menubar=no, resizable=yes, status=no, toolbar=no' }
 
@@ -39,7 +39,7 @@ SC.loadPackage({ 'SCSystemBrowser': {
     methods: {
 
 
-        openSystemBrowser: {
+        open: {
             comment: 'I open a window for a new SCSystemBrowser. Static Method!',
             code:    function(){
 
@@ -70,8 +70,6 @@ SC.loadPackage({ 'SCSystemBrowser': {
                 this.do('updateClassListView');
 
                 
-                this.do('initTraitsView');
-                this.do('initMixinsView');
                 this.do('initSharedPropertiesView');
                 this.do('initPropertiesView');
                 this.do('initMethodsView');

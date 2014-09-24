@@ -67,6 +67,9 @@
 	-webkit-appearance: 	button;
 }
 
+.sg-editing-creation-menu-button:hover {
+	background-color: 		rgb(183, 12, 29);
+}
 
 
 .sg-editing-creation-menu-nw > .sg-editing-creation-menu-container {

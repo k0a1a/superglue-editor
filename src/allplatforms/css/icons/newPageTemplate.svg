@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g>
+	<rect x="17" y="17" fill="none" width="3" height="2"/>
+	<path fill="none" d="M24,7H6v4h18V7z M9,10H7V8h2V10z M12,10h-2V8h2V10z M13,10V8h2v2H13z"/>
+	<path fill="none" d="M6,23h18V13H6V23z M15,15h7v6h-7V15z M8,15h5v2H8V15z M13,19v2H8v-2H13z"/>
+	<g>
+		<rect x="13" y="8" fill="#FFFFFF" width="2" height="2"/>
+		<rect x="10" y="8" fill="#FFFFFF" width="2" height="2"/>
+		<rect x="7" y="8" fill="#FFFFFF" width="2" height="2"/>
+		<path fill="#FFFFFF" d="M26,5H4v20h22V5z M6,7h18v4H6V7z M24,23H6V13h18V23z"/>
+		<rect x="8" y="19" fill="#FFFFFF" width="5" height="2"/>
+		<rect x="8" y="15" fill="#FFFFFF" width="5" height="2"/>
+		<path fill="#FFFFFF" d="M22,15h-7v6h7V15z M20,19h-3v-2h3V19z"/>
+	</g>
+</g>
+</svg>

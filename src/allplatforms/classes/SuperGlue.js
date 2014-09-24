@@ -105,6 +105,19 @@ SC.loadPackage({ 'SuperGlue': {
 
                     // Reset SmallClasses's error handling to normal
                     SC.setHandlerForMessageNotUnderstood();
+
+
+                    // Print console.log
+                    console.log([
+                        '************************************************',
+                        '   SuperGlue editor has successfully started!',
+                        '',
+                        '   To access the running system for live',
+                        '   development, enter',
+                        '   > SC.do(\'SCSystemBrowser\', \'open\')',
+                        '************************************************'
+                    ].join('\n'))
+
                     
                 } catch(error) {
                     // Catch any initialization error

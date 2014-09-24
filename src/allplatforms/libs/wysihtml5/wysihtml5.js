@@ -13391,8 +13391,9 @@ wysihtml5.views.View = Base.extend(
 						callbackWrapper(event);
 					}
 					if (keyCode === wysihtml5.ESCAPE_KEY) {
-						that.fire("cancel");
-						that.hide();
+						// SUPERGLUE: Disable escape key
+						//that.fire("cancel");
+						//that.hide();
 					}
 				});
 

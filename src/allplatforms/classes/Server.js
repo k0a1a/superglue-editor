@@ -215,6 +215,26 @@ SC.loadPackage({ 'Server': {
             }
         },
 
+        copyDirectory: {
+            comment: 'I copy a directory, params = { sourcePath: aString, targetPath: aString, onsuccess: aFunction, onerror: aFunction, onprogress: aFunction }',
+            code: function(params){
+
+                var sourcePath = '.' + params.sourcePath.split(' ').join('\\ '),
+                    targetPath = '.' + params.targetPath.split(' ').join();
+
+                this.do('cmdRequest', {
+
+                    cmd: 'cp -r ' + sourcePath + ' ' + targetPath,
+
+                    onerror:    params.onerror,
+                    onprogress: params.onprogress,
+                    onresponse: params.onsuccess
+
+                });
+
+            }
+        },
+
 
         moveFile: {
             comment: 'I move a file, params = { sourcePath: aString, targetPath: aString, onsuccess: aFunction, onerror: aFunction, onprogress: aFunction }',

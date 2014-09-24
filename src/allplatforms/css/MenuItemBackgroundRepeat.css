@@ -1,5 +1,5 @@
 #sg-editing-menu-backgroundRepeat {
-	background-image: url("icons/backgroundRepeat.svg");;
+	background-image: url("icons/imgRepeat.svg");;
 }
 
 
@@ -32,13 +32,13 @@
 
 
 #sg-editing-menu-backgroundRepeat-tile {
-	background-image: url("icons/tile.svg");
+	background-image: url("icons/imgRepeat.svg");
 }
 
 #sg-editing-menu-backgroundRepeat-tileX {
-	background-image: url("icons/tileX.svg");
+	background-image: url("icons/imgRepeatX.svg");
 }
 
 #sg-editing-menu-backgroundRepeat-tileY {
-	background-image: url("icons/tileY.svg");
+	background-image: url("icons/imgRepeatY.svg");
 }

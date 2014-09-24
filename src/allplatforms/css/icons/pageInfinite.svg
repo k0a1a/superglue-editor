@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g>
+	<polygon fill="none" points="22.586,23 24,21.586 24,19.414 20.414,23 	"/>
+	<path fill="none" d="M24,7H6v4h18V7z M9,10H7V8h2V10z M12,10h-2V8h2V10z M13,10V8h2v2H13z"/>
+	<rect x="6" y="13" fill="none" width="10" height="10"/>
+	<polygon fill="none" points="18,20.414 18,22.586 24,16.586 24,14.414 	"/>
+	<polygon fill="none" points="20.414,13 18,15.414 18,17.586 22.586,13 	"/>
+	<g>
+		<rect x="13" y="8" fill="#FFFFFF" width="2" height="2"/>
+		<rect x="10" y="8" fill="#FFFFFF" width="2" height="2"/>
+		<rect x="7" y="8" fill="#FFFFFF" width="2" height="2"/>
+		<path fill="#FFFFFF" d="M26,5H4v20h22V5z M24,16.586l-6,6v-2.172l6-6V16.586z M18,15.414L20.414,13h2.172L18,17.586V15.414z M6,7
+			h18v4H6V7z M6,13h10v10H6V13z M24,19.414v2.172L22.586,23h-2.172L24,19.414z"/>
+	</g>
+</g>
+</svg>

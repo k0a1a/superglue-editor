@@ -74,8 +74,12 @@ SC.loadPackage({ 'Selection': {
                     widget = null;
 
 
-                while(currentWidgetsContainer.firstChild){
-                    currentWidgetsContainer.removeChild(currentWidgetsContainer.firstChild);
+                
+                for(var widgetsBottom = this.get('widgetsBottom'), i = 0, l = widgetsBottom.length;
+                    i < l; i++){
+
+                    widgetsBottom[i].set({ isWidgetActive: false });
+                    currentWidgetsContainer.removeChild(widgetsBottom[i].get('widgetMenu'));
                 }
 
                 if(elements.length > 0){
@@ -296,6 +300,11 @@ SC.loadPackage({ 'Selection': {
                 for(var i = 0, l = elements.length; i < l; i++){
                     elements[i].get('resizeHandles').set({ selected: false, mouseOnElement: false });
                     elements[i].get('resizeHandles').do('hideResizeHandles', true)
+                }
+
+                var widgetsBottom = this.get('widgetsBottom');
+                for(var i = 0, l = widgetsBottom.length; i < l; i++){
+                    widgetsBottom[i].set({ isWidgetActive: false });
                 }
 
                 var editingContainer = SuperGlue.get('document').get('editingContainer');

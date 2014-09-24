@@ -72,7 +72,11 @@ SC.loadPackage({ 'Window': {
                         this.get('node').style.height = val + 'px';
                         return val;
                     }
-                }
+                },
+
+        onClose: {
+            comment: 'I can store a callback when window is about to close.'
+        }
 
     },
 

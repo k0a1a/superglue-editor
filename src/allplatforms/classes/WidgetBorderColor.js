@@ -21,7 +21,8 @@ SC.loadPackage({ 'WidgetBorderColor': {
                 this.delegate('Widget', 'init', theSelection);
 
                 var initialColor = theSelection.get('elements')[0].get('borderColor'),
-                    pickerLoad   = true;
+                    pickerLoad   = true,
+                    self = this;
 
 
                 this.do('initColorPickerWidget', {
@@ -36,13 +37,15 @@ SC.loadPackage({ 'WidgetBorderColor': {
                             return pickerLoad = false;
                         }
 
-                        var elements = theSelection.get('elements')
+                        var elements = theSelection.get('elements');
 
                         for(var i = 0, l = elements.length; i < l; i++){
 
                             elements[i].set({ borderColor: colorCode });
 
                         }
+
+                        self.set({ aColorWasChoosen: true });
 
                     }
 
@@ -52,7 +55,29 @@ SC.loadPackage({ 'WidgetBorderColor': {
 
     		}
 
-    	}
+    	},
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedColors = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedColors.push(elements[i].get('borderColor'));
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].set({ borderColor: savedColors[i] });
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
+        }
+
 
 
     }

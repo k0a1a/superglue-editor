@@ -20,7 +20,8 @@ SC.loadPackage({ 'WidgetBackgroundColor': {
 
 
                 var initialColor = theSelection.get('elements')[0].get('node').style.backgroundColor,
-                    pickerLoad   = true;
+                    pickerLoad   = true,
+                    self = this;
 
                 this.do('initColorPickerWidget', {
 
@@ -34,7 +35,7 @@ SC.loadPackage({ 'WidgetBackgroundColor': {
                             return pickerLoad = false;
                         }
 
-                        var elements = theSelection.get('elements')
+                        var elements = theSelection.get('elements');
 
                         for(var i = 0, l = elements.length; i < l; i++){
 
@@ -42,17 +43,39 @@ SC.loadPackage({ 'WidgetBackgroundColor': {
 
                         }
 
+                        self.set({ aColorWasChoosen: true });
+
                     }
 
 
                 });
 
 
-
-
     		}
 
-    	}
+    	},
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedColors = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedColors.push(elements[i].get('node').style.backgroundColor)
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].get('node').style.backgroundColor = savedColors[i]
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
+        }
+
 
 
     }

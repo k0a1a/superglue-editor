@@ -53,11 +53,11 @@
 	padding-right: 10px;
 }
 
-#textShapeToolbar .dropdown-toggle.open {
+#textShapeToolbar .dropdown-toggle.open, #textShapeToolbar .hyperlink.wysihtml5-command-dialog-opened {
 	background: #B10A1B;
 }
 
-#textShapeToolbar .dropdown-toggle.open:not(.right):after {
+#textShapeToolbar .dropdown-toggle.open:not(.right):after, #textShapeToolbar .hyperlink.wysihtml5-command-dialog-opened:after {
 	position: 		absolute;
 	left: 			0;
 	bottom: 		-11px;
@@ -92,7 +92,7 @@
 	border-top: 6px solid transparent;
 }
 
-#textShapeToolbar .dropdown-menu {
+#textShapeToolbar .dropdown-menu, #textShapeToolbar .hyperlink-dropdown {
 	position: absolute;
 	top: 41px;
 	left: -20px;
@@ -108,19 +108,75 @@
 	display: none;
 }
 
+#textShapeToolbar .hyperlink-dropdown {
+	display: block;
+}
+
 #textShapeToolbar .dropdown-menu.small {
 	width: 84px;
 }
 
-#textShapeToolbar .dropdown-menu.input-append {
-	display: none !important;
+#textShapeToolbar .dropdown-menu.input-append, #textShapeToolbar .hyperlink-dropdown.input-append {
+	width: 185px;
 	color: #fff;
 	background-color: rgb(255, 41, 61);
 	padding: 4px;
 }
 
-#textShapeToolbar .dropdown-menu.input-append input {
+#textShapeToolbar .dropdown-menu.input-append input, #textShapeToolbar .hyperlink-dropdown.input-append input {
+	float: left;
 	color: #000;
+	border: none;
+	margin: 0px;
+	padding: 4px;
+	height: 22px;
+}
+
+#textShapeToolbar .dropdown-menu.input-append a, #textShapeToolbar .hyperlink-dropdown.input-append a {
+	position: 			relative;
+	cursor: 			pointer;
+	width: 				30px;
+	height: 			30px;
+	margin: 			0;
+	border: 			none;
+	outline: 			none;
+	overflow: 			visible;
+
+	background-color: 		rgb(255, 41, 61);
+	background-repeat: 		no-repeat;
+	background-size: 		30px auto;
+	background-position:	center;
+}
+
+#textShapeToolbar .dropdown-menu.input-append a:hover, #textShapeToolbar .hyperlink-dropdown.input-append a:hover {
+	background-color: 	rgb(183, 12, 29);
+}
+
+#textShapeToolbar .hyperlink-dropdown.input-append a[data-wysihtml5-dialog-action="save"] {
+	background-image: 	url(./icons/confirm.svg);
+}
+
+#textShapeToolbar .hyperlink-dropdown.input-append a[data-wysihtml5-command="removeLink"] {
+	background-image: 	url(./icons/unlink.svg);
+	opacity:			.6;
+}
+
+#textShapeToolbar .hyperlink-dropdown.input-append a[data-wysihtml5-command="removeLink"]:hover {
+	background-color: 	rgb(255, 41, 61);
+	cursor: 			default;
+}
+
+#textShapeToolbar .hyperlink-dropdown.input-append a[data-wysihtml5-command="removeLink"].wysihtml5-command-active {
+	opacity:			1;
+}
+
+#textShapeToolbar .hyperlink-dropdown.input-append a[data-wysihtml5-command="removeLink"].wysihtml5-command-active:hover {
+	background-color: 	rgb(183, 12, 29);
+	cursor:				pointer;
+}
+
+#textShapeToolbar .hyperlink-dropdown.input-append a[data-wysihtml5-dialog-action="cancel"] {
+	display: 			none;
 }
 
 #textShapeToolbar .dropdown-menu.active {
@@ -159,6 +215,10 @@
 
 #textShapeToolbar a.wysihtml5-command-active {
 	background: #B10A1B;
+}
+
+#textShapeToolbar a.hyperlink.wysihtml5-command-active:not(.wysihtml5-command-dialog-opened) {
+	background: rgb(255, 41, 61);
 }
 
 #textShapeToolbar a i {
@@ -230,9 +290,6 @@
 	background-image: url(./icons/link.svg);
 }
 
-#textShapeToolbar a.hyperlink.wysihtml5-command-active i.icon-link {
-	background-image: url(./icons/unlink.svg);
-}
 /*
 #textShapeToolbar a i.icon-remove-link {
 	background-image: url(./icons/unlink.svg);

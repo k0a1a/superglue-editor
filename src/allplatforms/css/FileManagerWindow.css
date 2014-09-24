@@ -24,7 +24,7 @@
 	height: 			30px;
 	background-color: 	rgb(255, 41, 61);
 	background-repeat: 	no-repeat;
-	background-size: 	auto 26px;
+	background-size: 	30px auto;
 	background-position: center;
 	opacity:			.6;
 }
@@ -43,15 +43,15 @@
 }
 
 .sg-filemanager-operations .sg-filemanager-operation.file-upload {
-	background-image:	url(./icons/uploadFile.png);
+	background-image:	url(./icons/uploadFile.svg);
 }
 
 .sg-filemanager-operations .sg-filemanager-operation.directory-new {
-	background-image:	url(./icons/newDirectory.png);
+	background-image:	url(./icons/newDirectory.svg);
 }
 
 .sg-filemanager-operations .sg-filemanager-operation.rename {
-	background-image:	url(./icons/copy.svg);
+	background-image:	url(./icons/rename.svg);
 }
 
 .sg-filemanager-operations .sg-filemanager-operation.copy {
@@ -59,7 +59,7 @@
 }
 
 .sg-filemanager-operations .sg-filemanager-operation.paste {
-	background-image:	url(./icons/uploadFile.png);
+	background-image:	url(./icons/paste.svg);
 }
 
 .sg-filemanager-operations .sg-filemanager-operation.delete {
@@ -121,7 +121,7 @@
 	color:				#fff;
 	padding:			6px 6px 6px 31px;
 	background-repeat:	no-repeat;
-	background-size:	auto 20px;
+	background-size:	auto 22px;
 	background-position: 4px center;
 	opacity: 			.88;
 }
@@ -201,11 +201,11 @@
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-directory {
-	background-image:	url(./icons/resourceDirectory.png);
+	background-image:	url(./icons/resourceDirectory.svg);
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-file {
-	background-image:	url(./icons/resourceFile.png);
+	background-image:	url(./icons/resourceFile.svg);
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li.new, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.edit {
@@ -244,7 +244,7 @@
 	top:				0;
 	left:				0;
 	z-index:			1;
-	background-image:	url(./icons/levelUp.png);
+	background-image:	url(./icons/levelUp.svg);
 }
 
 .sg-filemanager-directory-controls .sg-filemanager-current-path {
@@ -353,9 +353,9 @@
 	left: 				0;
 	width:				68px;
 	height:				38px;
-	-moz-box-shadow:	0 0 2px 3px #555;
-	-webkit-box-shadow:	0 0 2px 3px #555;
-	box-shadow:			0 0 2px 3px #555;
+	-moz-box-shadow:	0 0 2px 3px #444;
+	-webkit-box-shadow:	0 0 2px 3px #444;
+	box-shadow:			0 0 2px 3px #444;
 }
 
 .sg-editing-filemanager-modal-container button {
@@ -381,9 +381,9 @@
 }
 
 .sg-editing-filemanager-modal-container button.confirm {
-	background-image:	url(./icons/copy.svg);
+	background-image:	url(./icons/confirm.svg);
 }
 
 .sg-editing-filemanager-modal-container button.cancel {
-	background-image:	url(./icons/copy.svg);
+	background-image:	url(./icons/close.svg);
 }

@@ -24,6 +24,9 @@ SC.loadPackage({ 'HTMLEditor': {
                 
                 self.delegate('Window', 'init', startConfig);
 
+                // Hide Closebtn as window is always modal
+                self.get('content').parentNode.querySelector('.sg-editing-window-closebutton').style.display = 'none';
+
                 self.set({ 
                     callback: startConfig.callback,
                     html:     startConfig.html

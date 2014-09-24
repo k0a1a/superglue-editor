@@ -2,9 +2,7 @@ SC.loadPackage({ 'FileManagerWindow': {
 
     comment: 'I am a FileManagerWindow.',
 
-
     traits: ['Window'],
-
 
     properties: {
         
@@ -92,6 +90,25 @@ SC.loadPackage({ 'FileManagerWindow': {
         callback: { comment: 'I hold the callback when the context is "saveAs" or "chooseFile".' },
         
         basePath: { comment: 'I hold the current base path which strips of "/" when currentPath is the root directory.' },
+
+        selectPath: { 
+            comment: 'I hold the path that was given to me to auto-select a file / directory.',
+            transform: function(path) {
+
+                console.log(path);
+                
+                if ( path ) {
+                    var fullPath = path;
+                    var fullPathArray = fullPath.split('/');
+                        fullPathArray.pop();
+                    var parentDirectory = fullPathArray.join('/');
+                    this.do('listDirectory', { path: parentDirectory, selectPath: path });
+                }
+
+                return path;
+
+            }
+        },
 		
 		confirmPath: { comment: 'I hold the path that is given to the callback on confirmation.' },
 
@@ -234,7 +251,7 @@ SC.loadPackage({ 'FileManagerWindow': {
             transform: function(aBoolean){
 
                 if (aBoolean) {
-                    if ( !this.get('content').querySelector('sg-editing-filemanager-modal-container') ) {
+                    if ( !this.get('content').querySelector('.sg-editing-filemanager-modal-container') ) {
                         var self = this;
 
                         var modalButtonContainer = document.createElement('div');
@@ -244,10 +261,12 @@ SC.loadPackage({ 'FileManagerWindow': {
                             modalButtonConfirm.classList.add('confirm');
                             modalButtonConfirm.addEventListener('click', function() {
                                 
-                                // Send Callback Path and Close
-                                // TODO: Close only if not opened before
-                                self.get('callback').call({ path: self.get('confirmPath') });
-                                SuperGlue.get('windowManager').do('closeWindow', self);
+                                if ( this.classList.contains('active') ) {
+                                    // Send Callback Path and Close
+                                    // TODO: Close only if not opened before
+                                    self.get('callback').call({ path: self.get('confirmPath') });
+                                    SuperGlue.get('windowManager').do('closeWindow', self);
+                                }
 
                             });
 
@@ -264,10 +283,14 @@ SC.loadPackage({ 'FileManagerWindow': {
                         modalButtonContainer.appendChild(modalButtonConfirm);
                         modalButtonContainer.appendChild(modalButtonCancel);
                         this.get('content').appendChild(modalButtonContainer);
+
+                        this.get('content').parentNode.querySelector('.sg-editing-window-closebutton').style.display = 'none';
+
                     }
                 } else {
-                    if ( this.get('content').querySelector('sg-editing-filemanager-modal-container') ) {
-                        this.get('content').querySelector('sg-editing-filemanager-modal-container').remove();
+                    if ( this.get('content').querySelector('.sg-editing-filemanager-modal-container') ) {
+                        this.get('content').querySelector('.sg-editing-filemanager-modal-container').remove();
+                        this.get('content').parentNode.querySelector('.sg-editing-window-closebutton').style.display = 'block';
                     }
                 }
                 
@@ -292,17 +315,17 @@ SC.loadPackage({ 'FileManagerWindow': {
                         '{ top: anInt, left: anInt, width: anInt, height: anInt }.',
             code:       function(startConfig){
                 
-                this.delegate('Window', 'init', startConfig);
-                this.set({ hasOKandCancelButton: startConfig.hasOKandCancelButton });
-                if ( startConfig.context == 'saveAs' ) {
-                	this.set({ originalFileName: startConfig.originalFileName });
-                }
-
-                if ( startConfig.callback ) {
-                	this.set({ callback: startConfig.callback });
-                }
-
                 var self = this;
+
+                SuperGlue.get('fileManager').set({ activeFileManagerWindow: self });
+                
+                self.set({ onClose: function() {
+
+                    SuperGlue.get('fileManager').set({ activeFileManagerWindow: null })
+
+                } });
+                
+                self.delegate('Window', 'init', startConfig);
 
                 // Directory Listing
 
@@ -312,25 +335,14 @@ SC.loadPackage({ 'FileManagerWindow': {
                 var directoryListingElement = document.createElement('ul');
                     directoryListingElement.setAttribute('class', 'sg-filemanager-directory-listing');
                     directoryListingElement.addEventListener('mouseup', function(evt) {
-                    	self.set({ isFileSelected: false });
-                    	evt.stopPropagation();
+                        self.set({ isFileSelected: false });
+                        evt.stopPropagation();
                     });
 
                 self.set({ directoryListing: directoryListingElement });
 
                 directoryContainerElement.appendChild(directoryListingElement);
                 self.get('content').appendChild(directoryContainerElement);
-
-                if ( startConfig.selectPath ) {
-                	var fullPath = startConfig.selectPath;
-                	var fullPathArray = fullPath.split('/');
-                		fullPathArray.pop();
-                	var parentDirectory = fullPathArray.join('/');
-                	self.do('listDirectory', { path: parentDirectory, selectPath: startConfig.selectPath });
-                } else {
-                	self.do('listDirectory', { path: '/' });
-                }
-                
 
                 // Directory Controls
 
@@ -393,7 +405,7 @@ SC.loadPackage({ 'FileManagerWindow': {
 
                         fileInput.addEventListener('change', function(){
 
-                        	self.do('uploadWithAvailableFilename', { name: fileInput.files[0].name, data: fileInput.files[0] });	
+                            self.do('uploadWithAvailableFilename', { name: fileInput.files[0].name, data: fileInput.files[0] });    
 
                         });
                         
@@ -411,26 +423,26 @@ SC.loadPackage({ 'FileManagerWindow': {
                         
                         var selectedFiles = self.get('directoryListing').querySelectorAll('.active');
                         for (var i = 0; i < selectedFiles.length; i++) {
-                        	selectedFiles[i].classList.remove('active');
+                            selectedFiles[i].classList.remove('active');
                         }
 
                         var directoryNameInputContainer = document.createElement('li');
-                        	directoryNameInputContainer.classList.add('sg-resource-directory', 'new');
+                            directoryNameInputContainer.classList.add('sg-resource-directory', 'new');
 
                         var alreadyFired;
                         var directoryNameInput = document.createElement('input');
-                        	directoryNameInput.setAttribute('type', 'text');
-                        	directoryNameInput.setAttribute('value', 'NewFolder');
-                        	directoryNameInput.addEventListener('blur', function(evt) {
-                        		setDirectoryName(evt);
-                        		alreadyFired = true;
-                        	});
-                        	directoryNameInput.addEventListener('keydown', function(evt) {
-                        		if ( evt.keyCode == 13 ) {
-                        			setDirectoryName(evt);
-                        			alreadyFired = true;
-                        		}
-                        	});
+                            directoryNameInput.setAttribute('type', 'text');
+                            directoryNameInput.setAttribute('value', 'NewFolder');
+                            directoryNameInput.addEventListener('blur', function(evt) {
+                                setDirectoryName(evt);
+                                alreadyFired = true;
+                            });
+                            directoryNameInput.addEventListener('keydown', function(evt) {
+                                if ( evt.keyCode == 13 ) {
+                                    setDirectoryName(evt);
+                                    alreadyFired = true;
+                                }
+                            });
 
                         directoryNameInputContainer.appendChild(directoryNameInput);
                         self.get('directoryListing').insertBefore(directoryNameInputContainer, self.get('directoryListing').firstChild);
@@ -439,27 +451,27 @@ SC.loadPackage({ 'FileManagerWindow': {
                         directoryNameInput.select();
                         
                         var setDirectoryName = function(evt) {
-                        	
-                        	if (evt.target.value != '' && !alreadyFired) {
-                            	
-	                            self.set({ isWorking: true });
-	                            
-	                            var path;
-	                            if (self.get('currentPath') == '/' ) {
-		                            path = '';
-		                        } else {
-		                            path = self.get('currentPath');
-		                        }
-		                        
-		                        self.do('createAvailableDirectory', { name: evt.target.value });
+                            
+                            if (evt.target.value != '' && !alreadyFired) {
+                                
+                                self.set({ isWorking: true });
+                                
+                                var path;
+                                if (self.get('currentPath') == '/' ) {
+                                    path = '';
+                                } else {
+                                    path = self.get('currentPath');
+                                }
+                                
+                                self.do('createAvailableDirectory', { name: evt.target.value });
 
-	                        }
+                            }
 
                         }
                         
                     });
                 
-				// Rename button (file or folder)
+                // Rename button (file or folder)
                 var optionRename = document.createElement('div');
                     optionRename.classList.add('sg-filemanager-operation', 'rename');
                     optionRename.addEventListener('click', function(evt) {
@@ -473,7 +485,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                         
                         var selectedFiles = self.get('directoryListing').querySelectorAll('.active');
                         for (var i = 0; i < selectedFiles.length; i++) {
-                        	selectedFiles[i].classList.remove('active');
+                            selectedFiles[i].classList.remove('active');
                         }
 
                         var oldName = self.get('selectedName');
@@ -484,18 +496,18 @@ SC.loadPackage({ 'FileManagerWindow': {
 
                         var alreadyFired;
                         var renameInput = document.createElement('input');
-                        	renameInput.setAttribute('type', 'text');
-                        	renameInput.setAttribute('value', oldName);
-                        	renameInput.addEventListener('blur', function(evt) {
-                        		setNewName(evt);
-                        		alreadyFired = true;
-                        	});
-                        	renameInput.addEventListener('keydown', function(evt) {
-                        		if ( evt.keyCode == 13 ) {
-                        			setNewName(evt);
-                        			alreadyFired = true;
-                        		}
-                        	});
+                            renameInput.setAttribute('type', 'text');
+                            renameInput.setAttribute('value', oldName);
+                            renameInput.addEventListener('blur', function(evt) {
+                                setNewName(evt);
+                                alreadyFired = true;
+                            });
+                            renameInput.addEventListener('keydown', function(evt) {
+                                if ( evt.keyCode == 13 ) {
+                                    setNewName(evt);
+                                    alreadyFired = true;
+                                }
+                            });
 
                         selectedElement.appendChild(renameInput);
 
@@ -503,19 +515,19 @@ SC.loadPackage({ 'FileManagerWindow': {
                         renameInput.select();
                         
                         var setNewName = function(evt) {
-                        	
-                        	if (evt.target.value != '' && !alreadyFired) {
-                            	
-	                            self.set({ isWorking: true });
-		                        self.do('renameToAvailableFilename', { name: evt.target.value, origin: self.get('basePath') +'/'+ oldName, type: self.get('selectedType') });
+                            
+                            if (evt.target.value != '' && !alreadyFired) {
+                                
+                                self.set({ isWorking: true });
+                                self.do('renameToAvailableFilename', { name: evt.target.value, origin: self.get('basePath') +'/'+ oldName, type: self.get('selectedType') });
 
-	                        }
+                            }
 
                         }
                         
                     });
 
-				// Copy button (file or folder)
+                // Copy button (file or folder)
                 var optionCopy = document.createElement('div');
                     optionCopy.classList.add('sg-filemanager-operation', 'copy');
                     optionCopy.addEventListener('click', function(evt) {
@@ -539,15 +551,15 @@ SC.loadPackage({ 'FileManagerWindow': {
                         
                         var selectedFiles = self.get('directoryListing').querySelectorAll('.active');
                         for (var i = 0; i < selectedFiles.length; i++) {
-                        	selectedFiles[i].classList.remove('active');
+                            selectedFiles[i].classList.remove('active');
                         }
 
                         self.set({ isWorking: true });
-		                self.do('pasteToAvailableLocation', { originPath: self.get('copiedFilePath') });
+                        self.do('pasteToAvailableLocation', { originPath: self.get('copiedFilePath') });
                         
                     });
 
-				// Delete button (file or folder)
+                // Delete button (file or folder)
                 var optionDelete = document.createElement('div');
                     optionDelete.classList.add('sg-filemanager-operation', 'delete');
                     optionDelete.addEventListener('click', function(evt) {
@@ -555,47 +567,51 @@ SC.loadPackage({ 'FileManagerWindow': {
                         if ( !this.classList.contains('active') ) {
                             return false;
                         }
-                      	
+                        
                         var fullPath = self.get('basePath') +'/'+ self.get('selectedName');
 
                         if ( self.get('selectedType') == 'file' ) {
-                        	var deleteFileConfirmation = confirm('Are you sure you want to delete the file:\n\n ' + fullPath + ' ?\n\nThis action is irreversible!');
+                            var deleteFileConfirmation = confirm('Are you sure you want to delete the file:\n\n ' + fullPath + ' ?\n\nThis action is irreversible!');
                         
-	                        if ( deleteFileConfirmation == true ) {
+                            if ( deleteFileConfirmation == true ) {
 
-	                            self.set({ isWorking: true });
+                                self.set({ isWorking: true });
 
-	                            SuperGlue.get('server').do('removeFile', {
-	                                path: fullPath,
-	                                onerror: function(){ console.log(arguments) },
-	                                onsuccess: function() {
-	                                    
-	                                    self.set({ isWorking: false });
-	                                    self.do('listDirectory', { path: self.get('currentPath') });
+                                SuperGlue.get('server').do('removeFile', {
+                                    path: fullPath,
+                                    onerror: function() {
+                                        alert('File could not be removed.\nError Message:\n\n' + arguments);
+                                    },
+                                    onsuccess: function() {
+                                        
+                                        self.set({ isWorking: false });
+                                        self.do('listDirectory', { path: self.get('currentPath') });
 
-	                                }
-	                            });
+                                    }
+                                });
 
-	                        }
+                            }
                         } else {
-                        	var deleteDirectoryConfirmation = confirm('Are you sure you want to delete the folder:\n\n ' + fullPath + ' \n\nand all of its contents?\nThis action is irreversible!');
+                            var deleteDirectoryConfirmation = confirm('Are you sure you want to delete the folder:\n\n ' + fullPath + ' \n\nand all of its contents?\nThis action is irreversible!');
                         
-	                        if ( deleteDirectoryConfirmation == true ) {
+                            if ( deleteDirectoryConfirmation == true ) {
 
-	                            self.set({ isWorking: true });
+                                self.set({ isWorking: true });
 
-	                            SuperGlue.get('server').do('removeDirectory', {
-	                                path: fullPath,
-	                                onerror: function(){ console.log(arguments) },
-	                                onsuccess: function() {
-	                                    
-	                                    self.set({ isWorking: false });
-	                                    self.do('listDirectory', { path: self.get('currentPath') });
+                                SuperGlue.get('server').do('removeDirectory', {
+                                    path: fullPath,
+                                    onerror: function() {
+                                        alert('Directory could not be removed.\nError Message:\n\n' + arguments);
+                                    },
+                                    onsuccess: function() {
+                                        
+                                        self.set({ isWorking: false });
+                                        self.do('listDirectory', { path: self.get('currentPath') });
 
-	                                }
-	                            });
+                                    }
+                                });
 
-	                        }
+                            }
                         }
                         
                     });
@@ -609,10 +625,26 @@ SC.loadPackage({ 'FileManagerWindow': {
 
 
                 var previewContainer = document.createElement('div');
-                	previewContainer.classList.add('sg-filemanager-preview');
+                    previewContainer.classList.add('sg-filemanager-preview');
 
                 self.get('content').appendChild(previewContainer);
                 self.set({ previewContainer: previewContainer });
+                
+                self.set({ hasOKandCancelButton: startConfig.hasOKandCancelButton });
+                
+                if ( startConfig.context == 'saveAs' ) {
+                    self.set({ originalFileName: startConfig.originalFileName });
+                }
+
+                if ( startConfig.callback ) {
+                    self.set({ callback: startConfig.callback });
+                }
+
+                if ( startConfig.selectPath ) {
+                    self.set({ selectPath: startConfig.selectPath });
+                } else {
+                    self.do('listDirectory', { path: '/' });
+                }
 
                 self.set({ context: startConfig.context });
 
@@ -630,7 +662,9 @@ SC.loadPackage({ 'FileManagerWindow': {
 
                 SuperGlue.get('server').do('directoryListing', {
                     path: arg.path,
-                    onerror: function(){ console.log(this) },
+                    onerror: function() {
+                        alert('Directory Listing failed.\nError Message:\n\n' + this);
+                    },
                     onsuccess: function() { 
 
                         self.get('directoryListing').innerHTML = '';
@@ -831,7 +865,9 @@ SC.loadPackage({ 'FileManagerWindow': {
         		}
             	SuperGlue.get('server').do('doesDirectoryExist', {
                     path: destination,
-                    onerror: function(){ console.log(this) },
+                    onerror: function() {
+                        alert('Checking if directory exists threw an error.\nError Message:\n\n' + this);
+                    },
                     onsuccess: function(aBoolean) {
                     	
                     	if (aBoolean) {
@@ -848,7 +884,9 @@ SC.loadPackage({ 'FileManagerWindow': {
 
                             SuperGlue.get('server').do('makeDirectory', {
                                 path: destination,
-                                onerror: function(){ console.log(arguments) },
+                                onerror: function() {
+                                    alert('Directory could not be created.\nError Message:\n\n' + this);
+                                },
                                 onsuccess: function() {
                                     
                                     self.set({ isWorking: false });
@@ -892,7 +930,9 @@ SC.loadPackage({ 'FileManagerWindow': {
 
             	SuperGlue.get('server').do('doesFileExist', {
                     path: destination,
-                    onerror: function(){ console.log(this) },
+                    onerror: function() {
+                        alert('Checking if file exists threw an error.\nError Message:\n\n' + this);
+                    },
                     onsuccess: function(aBoolean) {
                     	
                     	if (aBoolean) {
@@ -927,7 +967,9 @@ SC.loadPackage({ 'FileManagerWindow': {
                             SuperGlue.get('server').do('upload', {
                                 data:   uploadForm,
                                 path:   destination,
-                                onerror: function() { },
+                                onerror: function() {
+                                    alert('Upload failed.\nError Message:\n\n' + this);
+                                },
                                 onprogress: function(evt){
 
                                     if(evt.lengthComputable){
@@ -1001,7 +1043,9 @@ SC.loadPackage({ 'FileManagerWindow': {
 
             	SuperGlue.get('server').do(checkFunctionName, {
                     path: destination,
-                    onerror: function(){ console.log(this) },
+                    onerror: function() {
+                        alert('Checking if path already exists threw an error.\nError Message:\n\n' + this);
+                    },
                     onsuccess: function(aBoolean) {
 
                     	if (aBoolean /*&& checkPath +'/'+ cleanedName != arg.origin*/) {
@@ -1024,7 +1068,9 @@ SC.loadPackage({ 'FileManagerWindow': {
                             SuperGlue.get('server').do('moveFile', {
                                 sourcePath:   arg.origin,
                                 targetPath:   destination,
-                                onerror: function() { },
+                                onerror: function() {
+                                    alert('File could not be copied to new location.\nError Message:\n\n' + this);
+                                },
                                 onprogress: function(evt){
                                     //
                                 },
@@ -1082,7 +1128,9 @@ SC.loadPackage({ 'FileManagerWindow': {
 
             	SuperGlue.get('server').do(checkFunctionName, {
                     path: destination,
-                    onerror: function(){ console.log(this) },
+                    onerror: function() {
+                        alert('Checking if path already exists threw an error.\nError Message:\n\n' + this);
+                    },
                     onsuccess: function(aBoolean) {
 
                     	if (aBoolean /*&& checkPath +'/'+ cleanedName != arg.origin*/) {
@@ -1113,7 +1161,9 @@ SC.loadPackage({ 'FileManagerWindow': {
                             SuperGlue.get('server').do(copyFunctionName, {
                                 sourcePath:   arg.originPath,
                                 targetPath:   destination,
-                                onerror: function() { },
+                                onerror: function() {
+                                    alert('File / Directory could not be copied.\nError Message:\n\n' + this);
+                                },
                                 onprogress: function(evt){
                                     //
                                 },

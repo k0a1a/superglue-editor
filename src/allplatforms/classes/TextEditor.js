@@ -11,7 +11,8 @@ SC.loadPackage({ 'TextEditor': {
         editGroupLists:         { initValue: '<a class="btn" data-wysihtml5-command="insertUnorderedList" title="Bullet list"><i class="icon-list-ul"></i></a><a class="btn" data-wysihtml5-command="insertOrderedList" title="Number list"><i class="icon-list-ol"></i></a>' },
         editGroupIndention:     { initValue: '<a class="btn" data-wysihtml5-command="outdent" title="Reduce indent"><i class="icon-indent-right"></i></a><a class="btn" data-wysihtml5-command="indent" title="Indent"><i class="icon-indent-left"></i></a>' },
         editGroupAlignment:     { initValue: '<a class="btn" data-wysihtml5-command="alignLeftStyle" title="Align Left"><i class="icon-align-left"></i></a><a class="btn" data-wysihtml5-command="alignCenterStyle" title="Center"><i class="icon-align-center"></i></a><a class="btn" data-wysihtml5-command="alignRightStyle" title="Align Right"><i class="icon-align-right"></i></a><a class="btn" data-wysihtml5-command="alignJustifyStyle" title="Justify"><i class="icon-align-justify"></i></a>' },
-        editGroupHyperlink:     { initValue: '<a class="btn dropdown-toggle hyperlink" title="Hyperlink" data-wysihtml5-command="createLink"><i class="icon-link"></i>&nbsp;<b class="caret"></b></a><div class="dropdown-menu input-append" data-wysihtml5-dialog="createLink" style="display: none;"><input data-wysihtml5-dialog-field="href" value="http://" class="text"><a data-wysihtml5-dialog-action="save">OK</a><a data-wysihtml5-command="removeLink">RM</a></div>' },
+        editGroupHyperlink:     { initValue: '<a class="btn hyperlink" title="Hyperlink" data-wysihtml5-command="createLink"><i class="icon-link"></i></a><div class="hyperlink-dropdown input-append" data-wysihtml5-dialog="createLink" style="display: none;"><input data-wysihtml5-dialog-field="href" value="http://" class="text"><a data-wysihtml5-dialog-action="save"></a><a data-wysihtml5-command="removeLink"></a><a data-wysihtml5-dialog-action="cancel"></a></div>' },
+        //editGroupHyperlink:     { initValue: '<a class="btn dropdown-toggle hyperlink" title="Hyperlink"><i class="icon-link"></i>&nbsp;<b class="caret"></b></a><div class="dropdown-menu input-append" style="display: none;"><input value="http://" class="text"><a data-wysihtml5-command="createLink" data-wysihtml5-command-value=""></a><a data-wysihtml5-command="removeLink"></a><a data-wysihtml5-dialog-action="cancel"></a></div>' },
         activeEditGroups:       { initValue: ['editGroupIndention', 'editGroupAlignment', 'editGroupFontSize', 'editGroupFontFamily', 'editGroupFontColor', 'editGroupHyperlink', 'editGroupFontStyle', 'editGroupLists'] },
         activeFonts:            { initValue: ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 'Courier New', 'Comic Sans MS','Dosis', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Montserrat', 'Tahoma', 'Times', 'Times New Roman', 'TitilliumWeb', 'Verdana'] },
         activeFontSizes:        { initValue: ['8px', '9px', '10px', '11px', '12px', '13px', '14px', '15px', '16px', '17px', '18px', '20px', '22px', '26px', '28px', '30px', '32px', '34px', '36px', '38px', '40px', '46px', '50px', '60px', '70px'] }
@@ -183,7 +184,22 @@ SC.loadPackage({ 'TextEditor': {
                   stylesheets:  ["../resources/css/SuperGlue.css"]
                 }).on('load', function() {
                     
-                    document.querySelector('.wysihtml5-sandbox').classList.add('shapeContent');
+                    document.querySelector('.wysihtml5-sandbox').addEventListener('mouseenter', function() {
+                        // Hide open dropdown menus
+                        var dropdownMenuContainers = document.querySelectorAll('.dropdown-menu');
+                        var dropdownMenus = document.querySelectorAll('.dropdown-toggle');
+                        
+                        for (var i=0; i<dropdownMenuContainers.length; i++) {
+                            dropdownMenuContainers[i].classList.remove('active')
+                        }
+
+                        document.querySelector('.sg-colorpicker-container-text').classList.remove('active');
+                        
+                        for (var d=0; d<dropdownMenus.length; d++) {
+                            dropdownMenus[d].classList.remove('open');
+                        }
+                    });
+
                     editor.focus();
 
                     self.do('initColorpicker', {
@@ -194,6 +210,7 @@ SC.loadPackage({ 'TextEditor': {
                         }
 
                     });
+
                     
                 }).on('blur', function() {
                     
@@ -214,6 +231,7 @@ SC.loadPackage({ 'TextEditor': {
                         sandbox.style.padding = self.get('textEditor').style.padding;
                         sandbox.style.boxSizing = self.get('textEditor').style.boxSizing;
                         sandbox.style.outline = self.get('textEditor').style.outline;
+                        sandbox.style.borderStyle = self.get('textEditor').style.borderStyle;
 
                         sandbox.style.position = 'absolute';
                         //this.do('updateEditorDimensions', sandbox);
@@ -356,6 +374,8 @@ SC.loadPackage({ 'TextEditor': {
             params:   {},
             code:     function() {
 
+                var self = this;
+
                 var fonts = this.class.get('activeFonts');
                 var fontTarget = document.querySelector('[title="Font"]').parentNode.querySelector('.dropdown-menu');
                 
@@ -375,54 +395,115 @@ SC.loadPackage({ 'TextEditor': {
                         fontSizeBtn.innerHTML = '<a data-wysihtml5-command="fontSizeStyle" data-wysihtml5-command-value="' + fontSize +'">'+ fontSize + '</a>';
                     fontSizeTarget.appendChild(fontSizeBtn);
                 }
-
-                
-                document.querySelector('.dropdown-menu input').addEventListener('click', function() {return false;});
-                /*
-                document.querySelector('.dropdown-menu input').addEventListener('change', function() {
-                    this.parentNode.parentNode.querySelector('.dropdown-toggle').dropdown('toggle');
-                });
-                */
                    
-                document.querySelector('.dropdown-menu input').addEventListener('keydown', function (evt) {
-                    if (evt.keyCode == 27) {
-                        this.value='';
-                    }
+                document.querySelector('.hyperlink-dropdown input.text').addEventListener('keyup', function (evt) {
+                    evt.stopPropagation();
+                    evt.preventDefault();
                 });
                 
 
-                var dropdownMenus = document.querySelectorAll('.dropdown-toggle');
+                self.get('textEditorToolbar').querySelector('.hyperlink').addEventListener('click', function() {
+
+                    var dropdownToggleBtns = self.get('textEditorToolbar').querySelectorAll('.dropdown-toggle');
+
+                    for (var i=0; i<dropdownToggleBtns.length; i++) {
+                        dropdownToggleBtns[i].classList.remove('active')
+                    }
+
+                    var dropdownMenuContainers = self.get('textEditorToolbar').querySelectorAll('.dropdown-menu');
+
+                    for (var i=0; i<dropdownMenuContainers.length; i++) {
+                        dropdownMenuContainers[i].classList.remove('active')
+                    }
+
+                    document.querySelector('.sg-colorpicker-container-text').classList.remove('active');
+                    
+                    for (var d=0; d<dropdownMenus.length; d++) {
+                        dropdownMenus[d].classList.remove('open');
+                    }
+
+                    if ( this.classList.contains('wysihtml5-command-dialog-opened') ) {
+                        this.nextElementSibling.querySelector('[data-wysihtml5-dialog-action="cancel"]').click();
+                    }
+
+                });
+
+                var dropdownMenus = self.get('textEditorToolbar').querySelectorAll('.btn');
                 
                 for (var d=0; d<dropdownMenus.length; d++) {
-                    dropdownMenus[d].addEventListener('click', function() {
+                    
+                    if ( dropdownMenus[d].classList.contains('dropdown-menu') ) {
+                        dropdownMenus[d].addEventListener('click', function() {
                         
-                        var dropdownClass = 'dropdown-menu';
+                            var dropdownClass = 'dropdown-menu';
 
-                        if ( this.classList.contains('open') ) {
-                            this.nextElementSibling.classList.remove('active');
-                            this.classList.remove('open');
-                        } else {
-                            var dropdownMenuContainers = document.querySelectorAll('.dropdown-menu');
+                            if ( this.classList.contains('open') ) {
+                                this.nextElementSibling.classList.remove('active');
+                                this.classList.remove('open');
+                            } else {
+                                var dropdownMenuContainers = document.querySelectorAll('.dropdown-menu');
 
-                            for (var i=0; i<dropdownMenuContainers.length; i++) {
-                                dropdownMenuContainers[i].classList.remove('active')
+                                for (var i=0; i<dropdownMenuContainers.length; i++) {
+                                    dropdownMenuContainers[i].classList.remove('active')
+                                }
+
+                                document.querySelector('.sg-colorpicker-container-text').classList.remove('active');
+                                
+                                this.nextElementSibling.classList.add('active');
+                                
+                                for (var d=0; d<dropdownMenus.length; d++) {
+                                    dropdownMenus[d].classList.remove('open');
+                                }
+
+                                this.classList.add('open');
                             }
 
-                            document.querySelector('.sg-colorpicker-container-text').classList.remove('active');
+                        });
+                    }
+
+
+                    dropdownMenus[d].addEventListener('mouseenter', function() {
+                        
+                        var dropdownMenuContainers = self.get('textEditorToolbar').querySelectorAll('.dropdown-menu');
+
+                        for (var i=0; i<dropdownMenuContainers.length; i++) {
+                            dropdownMenuContainers[i].classList.remove('active')
+                        }
+
+                        document.querySelector('.sg-colorpicker-container-text').classList.remove('active');
+                        
+                        for (var d=0; d<dropdownMenus.length; d++) {
+                            dropdownMenus[d].classList.remove('open');
                             
+                            if ( dropdownMenus[d].classList.contains('wysihtml5-command-dialog-opened') ) {
+                                dropdownMenus[d].nextElementSibling.querySelector('[data-wysihtml5-dialog-action="cancel"]').click();
+                            }
+
+                        }
+
+                        if ( this.classList.contains('dropdown-toggle') ) {
                             this.nextElementSibling.classList.add('active');
-                            
-                            for (var d=0; d<dropdownMenus.length; d++) {
-                                dropdownMenus[d].classList.remove('open');
-                            }
-
                             this.classList.add('open');
                         }
 
+                        /*
+                        if ( this.classList.contains('hyperlink') ) {
+                            if ( !this.classList.contains('open') ) {
+                                this.click();
+                            } else {
+                                //
+                            }
+                            
+                        } else {
+                            this.nextElementSibling.querySelector('a[data-wysihtml5-dialog-action="cancel"]').click();
+                        }
+                        */
+
+                        
                     });
                 }
 
-                var buttons = document.querySelectorAll('.dropdown-menu li, .dropdown-menu button, .dropdown-menu a[data-wysihtml5-dialog-action]');
+                var buttons = document.querySelectorAll('.dropdown-menu li, .dropdown-menu button, .dropdown-menu.input-append a');
 
                 for (var b=0; b<buttons.length; b++) {
                     buttons[b].addEventListener('click', function() {

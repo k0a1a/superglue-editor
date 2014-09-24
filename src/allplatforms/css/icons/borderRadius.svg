@@ -1,69 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   x="0px"
-   y="0px"
-   width="30px"
-   height="30px"
-   viewBox="0 0 30 30"
-   enable-background="new 0 0 30 30"
-   xml:space="preserve"
-   id="svg2"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="borderRadius.svg"><metadata
-     id="metadata27"><rdf:RDF><cc:Work
-         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title><cc:license
-           rdf:resource="http://superglue.it" /><dc:date>10.05.2014</dc:date><dc:creator><cc:Agent><dc:title>VERBALVISU.AL</dc:title></cc:Agent></dc:creator><dc:rights><cc:Agent><dc:title>SuperGlue project</dc:title></cc:Agent></dc:rights><dc:publisher><cc:Agent><dc:title>SuperGlue</dc:title></cc:Agent></dc:publisher><dc:identifier>SG</dc:identifier><dc:source>Original</dc:source><dc:subject><rdf:Bag><rdf:li>UI</rdf:li><rdf:li>visual tool</rdf:li></rdf:Bag></dc:subject><dc:coverage>Web, UI</dc:coverage></cc:Work><cc:License
-         rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/"><cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" /><cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" /><cc:requires
-           rdf:resource="http://creativecommons.org/ns#Notice" /><cc:requires
-           rdf:resource="http://creativecommons.org/ns#Attribution" /><cc:prohibits
-           rdf:resource="http://creativecommons.org/ns#CommercialUse" /><cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" /><cc:requires
-           rdf:resource="http://creativecommons.org/ns#ShareAlike" /></cc:License></rdf:RDF></metadata><defs
-     id="defs25" /><sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1092"
-     inkscape:window-height="796"
-     id="namedview23"
-     showgrid="false"
-     inkscape:zoom="7.8333333"
-     inkscape:cx="-9.6506728"
-     inkscape:cy="15.978516"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" /><g
-     id="inspiration"
-     display="none" /><g
-     id="labels" /><g
-     id="icons"
-     transform="matrix(-0.96880127,0,0,0.74208963,27.888498,4.4181674)"
-     style="stroke-width:2.35876386;stroke-miterlimit:4;stroke-dasharray:none"><path
-       sodipodi:type="arc"
-       style="fill:none;stroke:#ffffff;stroke-opacity:1;stroke-width:1.74384104;stroke-miterlimit:4;stroke-dasharray:none"
-       id="path2996"
-       sodipodi:cx="19.212767"
-       sodipodi:cy="20.617022"
-       sodipodi:rx="13.468085"
-       sodipodi:ry="15.12766"
-       d="M 5.7465992,20.872305 C 5.6210774,12.518719 11.54833,5.6325049 18.985489,5.4915159 c 0.04463,-8.461e-4 0.08926,-0.00144 0.133899,-0.00179 l 0.09338,15.1272966 z"
-       transform="matrix(-1.2946008,0,0,1.4132509,27.580779,-1.7449391)"
-       sodipodi:start="3.1247166"
-       sodipodi:end="4.7054556" /></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" inkscape:version="0.48.4 r9939" sodipodi:docname="borderRadius.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px"
+	 viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<sodipodi:namedview  inkscape:cx="-9.6506728" inkscape:cy="15.978516" inkscape:window-x="0" inkscape:window-y="24" inkscape:window-maximized="0" inkscape:current-layer="svg2" borderopacity="1" id="namedview23" inkscape:pageshadow="2" objecttolerance="10" bordercolor="#666666" gridtolerance="10" inkscape:window-height="796" guidetolerance="10" showgrid="false" inkscape:pageopacity="0" inkscape:zoom="7.8333333" inkscape:window-width="1092" pagecolor="#ffffff">
+	</sodipodi:namedview>
+<g id="inspiration" display="none">
+</g>
+<g id="labels">
+</g>
+<g id="icons" transform="matrix(-0.96880127,0,0,0.74208963,27.888498,4.4181674)">
+	
+		<path id="path2996" sodipodi:type="arc" sodipodi:cx="19.212767" sodipodi:cy="20.617022" sodipodi:rx="13.468085" sodipodi:ry="15.12766" sodipodi:start="3.1247166" sodipodi:end="4.7054556" fill="none" stroke="#FFFFFF" stroke-width="2.5" d="
+		M22.206,25.564C22.37,13.619,14.607,3.774,4.867,3.573C4.808,3.572,4.75,3.57,4.691,3.57L4.568,25.199L22.206,25.564z"/>
+</g>
+</svg>
