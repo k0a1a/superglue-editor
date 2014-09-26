@@ -20,6 +20,9 @@ case "$1" in
         cp -R ./src/firefox/* ./build/firefox
         cp -R ./src/chromium/* ./build/chromium
 
+        mkdir -p ./build/firefox/data/superglue-client
+        mkdir -p ./build/chromium/superglue-client
+
         cp -R ./src/allplatforms/* ./build/firefox/data/superglue-client
         cp -R ./src/allplatforms/* ./build/chromium/superglue-client
         ;;
