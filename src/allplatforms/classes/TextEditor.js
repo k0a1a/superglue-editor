@@ -222,6 +222,7 @@ SC.loadPackage({ 'TextEditor': {
                     
                     self.get('textEditor').style.display = 'none';
                     var sandbox = document.querySelector('.wysihtml5-sandbox');
+                        sandbox.contentWindow.document.body.style.overflow = 'hidden';
                         sandbox.style.borderWidth = self.get('textEditor').style.borderWidth;
                         sandbox.style.borderColor = self.get('textEditor').style.borderColor;
                         sandbox.style.borderRadius = self.get('textEditor').style.borderRadius;

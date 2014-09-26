@@ -21,7 +21,7 @@
 	border-color: rgb(255, 41, 61);
 	border-width: 0 12px 0 12px;
 	border-style: solid;
-	background-color: rgb(183, 12, 29);
+	background-color: #fff;
 }
 
 .sg-editing-widget-slider-handle {
@@ -29,6 +29,7 @@
 	left:  		-10px;
 	width: 		22px;
 	height: 	8px;
+	cursor: 	pointer;
 	
-	background-color: rgb(183, 12, 29);
+	background-color: #fff;
 }
