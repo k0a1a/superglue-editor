@@ -10266,6 +10266,8 @@ wysihtml5.Commands = Base.extend(
 			size = (typeof(size) == "object") ? size.size : size;
 			if (!(/^\s*$/).test(size)) {
 				wysihtml5.commands.formatInline.execWithToggle(composer, command, "span", false, false, "font-size:" + size+";", REG_EXP);
+				// SUPERGLUE HACK clean up to avoid wrong line heights
+				composer.cleanUp();
 			}
 		},
 
