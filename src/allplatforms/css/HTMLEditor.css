@@ -40,7 +40,10 @@
 	display:			inline-block;
 	width: 				30px;
 	height: 			30px;
-	border:				none;
+	border:				3px solid transparent;
+	-moz-box-sizing:	border-box;
+	-webkit-box-sizing:	border-box;
+	box-sizing:			border-box;
 	outline:			none;
 	background-color: 	rgb(255, 41, 61);
 	background-repeat: 	no-repeat;
@@ -49,7 +52,7 @@
 }
 
 .sg-editing-superuser-modal-container button:hover {
-	background-color: 	rgb(183, 12, 29);
+	border:				3px solid rgb(183, 12, 29);
 	cursor:				pointer;
 }
 

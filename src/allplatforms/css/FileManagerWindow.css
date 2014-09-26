@@ -122,8 +122,7 @@
 	padding:			6px 6px 6px 31px;
 	background-repeat:	no-repeat;
 	background-size:	auto 22px;
-	background-position: 4px center;
-	opacity: 			.88;
+	background-position: 3px center;
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li span.size {
@@ -158,10 +157,6 @@
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li:hover, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active {
 	background-color:	rgb(183, 12, 29);
 	cursor:				pointer;
-}
-
-.sg-filemanager-directory-container .sg-filemanager-directory-listing li.active {
-	opacity: 			1;
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li:hover:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.new:after {
@@ -202,6 +197,7 @@
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-directory {
 	background-image:	url(./icons/resourceDirectory.svg);
+	background-size: 	auto 23px;
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-file {
@@ -362,7 +358,10 @@
 	display:			inline-block;
 	width: 				30px;
 	height: 			30px;
-	border:				none;
+	border:				3px solid transparent;
+	-moz-box-sizing:	border-box;
+	-webkit-box-sizing:	border-box;
+	box-sizing:			border-box;
 	outline:			none;
 	background-color: 	rgb(255, 41, 61);
 	background-repeat: 	no-repeat;
@@ -376,7 +375,7 @@
 }
 
 .sg-editing-filemanager-modal-container button.active:hover {
-	background-color: 	rgb(183, 12, 29);
+	border:				3px solid rgb(183, 12, 29);
 	cursor:				pointer;
 }
 
