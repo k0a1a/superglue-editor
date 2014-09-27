@@ -65,7 +65,7 @@ SC.loadPackage({ 'WidgetPadding': {
                                             
                                         }
 
-                                    
+                                        this.set({ aValueWasChoosen: true });
 
                                     }
                 });
@@ -73,7 +73,32 @@ SC.loadPackage({ 'WidgetPadding': {
 
     		}
 
-    	}
+    	},
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedPaddings = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedPaddings.push(elements[i].get('padding'))
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].set({ padding: savedPaddings[i] });
+                                    elements[i].set({ 
+                                        width:  elements[i].get('width'),
+                                        height: elements[i].get('height')
+                                    });
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
+        }
 
 
     }

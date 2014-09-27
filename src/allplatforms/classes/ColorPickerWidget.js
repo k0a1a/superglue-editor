@@ -20,7 +20,7 @@ SC.loadPackage({ 'ColorPickerWidget': {
                                     this.get('widgetMenu').classList.add('active');
 
                                     // prepare undo
-                                    this.set({ aColorWasChoosen:   false });
+                                    this.set({ aColorWasChoosen: false });
                                     SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
                                     
 
@@ -42,7 +42,7 @@ SC.loadPackage({ 'ColorPickerWidget': {
                           }
                         },
 
-        aColorWasChoosen:       { comment: 'Wether a color was choosen or not.' }
+        aColorWasChoosen: { comment: 'Wether a color was choosen or not.' }
 
     },
 

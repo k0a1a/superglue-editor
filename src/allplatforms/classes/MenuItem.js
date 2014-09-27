@@ -73,7 +73,7 @@ SC.loadPackage({ 'MenuItem': {
                 menuContainer.addEventListener('mouseup', function(evt){
                     if(self.get('isActionButton')){
                         theDocumentMenu.set({ activeMenuItem:   null  });
-                                   self.set({ isMenuItemActive: false });
+                                   self.set({ isMenuItemActive: true  });
                     }
                 }, false);
 

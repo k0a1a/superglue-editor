@@ -189,6 +189,30 @@ SC.loadPackage({ 'Document': {
             }
         },
 
+        insertElement: {
+            comment: 'I insert an Element.',
+            code: function(indexOfAndElement){
+
+                if(indexOfAndElement.index >= 0){
+
+                    if(this.get('children')[indexOfAndElement.index]){
+                        this.get('pageContainer').insertBefore(
+                            indexOfAndElement.element.get('node'),
+                            this.get('children')[indexOfAndElement.index].get('node')
+                        );
+                    }else{
+                        this.get('pageContainer').appendChild(
+                            indexOfAndElement.element.get('node')
+                        );
+                    }
+                    this.get('children').splice(indexOfAndElement.index, 0, indexOfAndElement.element);
+                    
+                }
+                this.do('afterLayoutHasChanged');
+
+            }
+        },
+
 
         layerUp: {
             comment: 'I move an Element upwards in the layer order.',

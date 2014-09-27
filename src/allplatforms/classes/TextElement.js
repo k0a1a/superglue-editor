@@ -7,7 +7,7 @@ SC.loadPackage({ 'TextElement': {
     
     sharedProperties: {
         protoHTML:          { initValue: '<div class="sg-element" data-superglue-type="TextElement" style="left: 0px; top: 0px; width: 0px; height: 0px;">'
-                                        +'\t<p style="font-family: Helvetica; font-size: 18px; color: rgb(255, 255, 255);">Hello friend, I am SuperGlue.</p>'
+                                        +'\t<p style="font-family: \'Sans\'; font-size: 40px;">Text</p>'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity' ] },
         creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-textElement" class="sg-editing-creation-menu-button" data-tooltip="Text"></button></div>' }

@@ -35,6 +35,8 @@ SC.loadPackage({ 'WidgetLock': {
                 var self = this,
                     onMouseUp = function(evt){
 
+                        SuperGlue.get('history').do('actionHasStarted', self.do('createState'))
+
                         if(self.get('locked')){
 
                             for(var myElements = self.get('selection').get('elements'),
@@ -58,6 +60,8 @@ SC.loadPackage({ 'WidgetLock': {
 
                         self.get('selection').do('updateLockGroup');
 
+                        SuperGlue.get('history').do('actionHasSucceeded', self.do('createState'))
+
                     };
 
                 this.get('widgetButton').addEventListener('mouseup', onMouseUp, false)
@@ -65,7 +69,30 @@ SC.loadPackage({ 'WidgetLock': {
 
     		}
 
-    	}
+    	},
+
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedGroupState = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedGroupState.push(elements[i].get('group'))
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].set({ group: savedGroupState[i] }) 
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
+
+        }
 
 
     }

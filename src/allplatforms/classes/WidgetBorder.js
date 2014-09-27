@@ -32,31 +32,7 @@ SC.loadPackage({ 'WidgetBorder': {
                     setCallback:    function(sliderVal){
                                         
                                         var borderVal = Math.round(sliderVal * 24),
-                                            elements  = theSelection.get('elements'),
-                                            
-                                            borderRecorder = function(elements){
-                                                                var savedBorders = []
-                                                                for(var i = 0, l = elements.length; i < l; i++){
-                                                                    savedBorders.push({
-                                                                        color: elements[i].get('borderColor'),
-                                                                        width: elements[i].get('borderWidth')
-                                                                    })
-                                                                }
-                                                                return function(){
-                                                                    for(var i = 0, l = elements.length; i < l; i++){
-                                                                        elements[i].set({
-                                                                            borderColor: savedBorders[i].color,
-                                                                            borderWidth: savedBorders[i].width
-                                                                        });
-                                                                        elements[i].set({ 
-                                                                            width:  elements[i].get('width'),
-                                                                            height: elements[i].get('height')
-                                                                        });
-                                                                    }
-                                                                }
-                                                            };
-
-                                        SuperGlue.get('history').do('actionHasStarted', borderRecorder.call(this, elements));
+                                            elements  = theSelection.get('elements');
                                     
                                         for(var i = 0, l = elements.length; i < l; i++){
 
@@ -71,8 +47,7 @@ SC.loadPackage({ 'WidgetBorder': {
                                             
                                         }
 
-                                        SuperGlue.get('history').do('actionHasSucceeded', borderRecorder.call(this, elements));
-                                    
+                                        this.set({ aValueWasChoosen: true });
 
                                     }
                 });
@@ -80,6 +55,37 @@ SC.loadPackage({ 'WidgetBorder': {
 
             }
 
+        },
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedBorders = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedBorders.push({
+                                    borderColor: elements[i].get('borderColor'),
+                                    borderWidth: elements[i].get('borderWidth')
+                                })
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].set({
+                                        borderColor: savedBorders[i].borderColor,
+                                        borderWidth: savedBorders[i].borderWidth
+                                    });
+                                    elements[i].set({ 
+                                        width:  elements[i].get('width'),
+                                        height: elements[i].get('height')
+                                    });
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
         }
 
 

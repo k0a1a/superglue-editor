@@ -7,7 +7,7 @@ SC.loadPackage({ 'ImageElement': {
 
     sharedProperties: {
         protoHTML:          { initValue: '<div class="sg-element" data-superglue-type="ImageElement" style="left: 0px; top: 0px; width: 0px; height: 0px;">'
-                                        +'\t<div style="width: 100%; height: 100%; background-image: url(\'/resources/default/img/placeholder.png\'); background-repeat: repeat;"></div>'
+                                        +'\t<img src="/resources/img/defaultImg.svg" style="min-width: 100%; min-height: 100%;">'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity', 'WidgetImgLink', 'WidgetImgDimensions', 'WidgetImgSrc' ] },
         creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-imageElement" class="sg-editing-creation-menu-button" data-tooltip="Image"></button></div>' }

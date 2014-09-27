@@ -24,7 +24,10 @@ SC.loadPackage({ 'MenuItemBackgroundColor': {
                                     }
                                     this.get('menuContainer').classList.add('active');
 
-                                    // update Value
+                                    // prepare undo
+                                    this.set({ aColorWasChoosen: false });
+                                    SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
+
 
                                 }else{
 
@@ -32,11 +35,19 @@ SC.loadPackage({ 'MenuItemBackgroundColor': {
                                         this.get('menuContainer').removeChild(this.get('menuPanel'));
                                     }
                                     this.get('menuContainer').classList.remove('active');
+
+                                    // finish undo
+                                    if(this.get('aColorWasChoosen')){
+                                        SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
+                                    }
+                                    this.set({ aColorWasChoosen: false });
                                 
                                 }
                                 return aBoolean
                             }
-                          }
+                          },
+
+        aColorWasChoosen: { comment: 'Wether a color was choosen or not.' }
 
     },
 
@@ -64,6 +75,8 @@ SC.loadPackage({ 'MenuItemBackgroundColor': {
                         }
 
                         document.body.style.backgroundColor = colorCode;
+
+                        self.set({ aColorWasChoosen: true });
 
                     }
 
@@ -246,6 +259,22 @@ SC.loadPackage({ 'MenuItemBackgroundColor': {
 
             }
 
+        },
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(){
+                            var savedColor = document.body.style.backgroundColor
+                            return function(){
+                                document.body.style.backgroundColor = savedColor
+                            }
+                        }).call(this);
+
+
+            }
         }
 
 

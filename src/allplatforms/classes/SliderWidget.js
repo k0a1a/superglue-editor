@@ -19,7 +19,9 @@ SC.loadPackage({ 'SliderWidget': {
                                     }
                                     this.get('widgetMenu').classList.add('active');
 
-                                    // update Value
+                                    // prepare undo
+                                    this.set({ aValueWasChoosen: false });
+                                    SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
 
                                 }else{
 
@@ -27,11 +29,19 @@ SC.loadPackage({ 'SliderWidget': {
                                         this.get('widgetMenu').removeChild(this.get('widgetPanel'));
                                     }
                                     this.get('widgetMenu').classList.remove('active');
+
+                                    // finish undo
+                                    if(this.get('aValueWasChoosen')){
+                                        SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
+                                    }
+                                    this.set({ aValueWasChoosen: false })
                                 
                                 }
                                 return aBoolean
                           }
-                        }
+                        },
+
+        aValueWasChoosen: { comment: 'Wether a slider value was choosen or not.' }
 
     },
 
@@ -153,7 +163,8 @@ SC.loadPackage({ 'SliderWidget': {
                 handle.style.top = sliderConfig.startValue * maxY + 'px';
                 
                 this.set({ 
-                    widgetPanel: widgetPanel
+                    widgetPanel: widgetPanel,
+                    aValueWasChoosen: false
                 });
 
             }

@@ -35,6 +35,7 @@ SC.loadPackage({ 'WidgetLayerTop': {
                             return;
                         }
 
+                        SuperGlue.get('history').do('actionHasStarted', self.do('createState'));
 
                         if(elements.length === 1){
 
@@ -118,8 +119,9 @@ SC.loadPackage({ 'WidgetLayerTop': {
                             }
 
 
-
                         }
+
+                        SuperGlue.get('history').do('actionHasSucceeded', self.do('createState'));
 
                         
 
@@ -132,7 +134,38 @@ SC.loadPackage({ 'WidgetLayerTop': {
 
     		}
 
-    	}
+    	},
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(){
+
+                            var savedElements = SuperGlue.get('document').get('children').slice();
+                            
+                            return function(){
+
+                                SuperGlue.get('document').set({ children: savedElements });
+
+                                var pageContainer = SuperGlue.get('document').get('pageContainer');
+
+                                while(pageContainer.firstChild){
+                                    pageContainer.removeChild(pageContainer.firstChild);
+                                }
+
+                                for(var i = 0, l = savedElements.length; i < l; i++){
+                                    pageContainer.appendChild(savedElements[i].get('node'));
+                                }
+                                
+                            }
+                        }).call(this);
+
+
+            }
+
+        }
 
 
     }

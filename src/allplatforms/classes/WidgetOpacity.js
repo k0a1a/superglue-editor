@@ -47,9 +47,8 @@ SC.loadPackage({ 'WidgetOpacity': {
                                             }
 
                                         }
-                                        
 
-                                    
+                                        this.set({ aValueWasChoosen: true });
 
                                     }
                 });
@@ -57,7 +56,28 @@ SC.loadPackage({ 'WidgetOpacity': {
 
     		}
 
-    	}
+    	},
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedOpacities = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedOpacities.push(elements[i].get('node').style.opacity)
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].get('node').style.opacity = savedOpacities[i]
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
+        }
 
 
     }

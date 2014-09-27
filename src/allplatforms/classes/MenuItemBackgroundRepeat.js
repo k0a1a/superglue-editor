@@ -35,6 +35,10 @@ SC.loadPackage({ 'MenuItemBackgroundRepeat': {
                                     }
                                     this.get('menuContainer').classList.add('active');
 
+                                    // prepare undo
+                                    this.set({ aValueWasChoosen: false });
+                                    SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
+
 
                                 }else{
 
@@ -42,11 +46,19 @@ SC.loadPackage({ 'MenuItemBackgroundRepeat': {
                                         this.get('menuContainer').removeChild(this.get('menuPanel'));
                                     }
                                     this.get('menuContainer').classList.remove('active');
+
+                                    // finish undo
+                                    if(this.get('aValueWasChoosen')){
+                                        SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
+                                    }
+                                    this.set({ aValueWasChoosen: false })
                                 
                                 }
                                 return aBoolean
                           }
-                        }
+                        },
+
+        aValueWasChoosen: { comment: 'Wether a value was choosen or not.' }
 
     },
 
@@ -67,19 +79,21 @@ SC.loadPackage({ 'MenuItemBackgroundRepeat': {
                         
                         switch(newDim){
                             case 'tileX':
-                                document.body.style.backgroundRepeat = 'repeat-x'
+                                document.body.style.backgroundRepeat = 'repeat-x';
                                 break;
 
                             case 'tileY':
-                                document.body.style.backgroundRepeat = 'repeat-y'
+                                document.body.style.backgroundRepeat = 'repeat-y';
                                 break;
 
                             default:
-                                document.body.style.backgroundRepeat = 'repeat'
+                                document.body.style.backgroundRepeat = 'repeat';
                                 break;
                         }
 
-                        evt.stopPropagation()
+                        self.set({ aValueWasChoosen: true });
+
+                        evt.stopPropagation();
 
                     },
 
@@ -98,7 +112,23 @@ SC.loadPackage({ 'MenuItemBackgroundRepeat': {
 
     		}
 
-    	}
+    	},
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(){
+                            var savedValue = document.body.style.backgroundRepeat
+                            return function(){
+                                document.body.style.backgroundRepeat = savedValue
+                            }
+                        }).call(this);
+
+
+            }
+        }
 
 
     }

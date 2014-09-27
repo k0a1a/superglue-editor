@@ -66,7 +66,7 @@ SC.loadPackage({ 'Widget': {
                         if(activeWidget){ 
                             activeWidget.set({ isWidgetActive: false }) 
                         }
-                        self.set({ isWidgetActive: false });
+                        self.set({ isWidgetActive: true });
 
                     }else{
                         

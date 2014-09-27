@@ -32,20 +32,7 @@ SC.loadPackage({ 'WidgetBorderRadius': {
                     setCallback:    function(sliderVal){
                                         
                                         var borderRadiusVal = Math.round(sliderVal * 50),
-                                            elements  = theSelection.get('elements'),
-                                            borderRadiusRecorder = function(elements){
-                                                                var savedBorderRadii = []
-                                                                for(var i = 0, l = elements.length; i < l; i++){
-                                                                    savedBorderRadii.push(elements[i].get('node').style.borderRadius)
-                                                                }
-                                                                return function(){
-                                                                    for(var i = 0, l = elements.length; i < l; i++){
-                                                                        elements[i].get('node').style.borderRadius = savedBorderRadii[i]
-                                                                    }
-                                                                }
-                                                            };
-
-                                        SuperGlue.get('history').do('actionHasStarted', borderRadiusRecorder.call(this, elements));
+                                            elements  = theSelection.get('elements');
 
                                         if(borderRadiusVal === 0){
 
@@ -61,10 +48,7 @@ SC.loadPackage({ 'WidgetBorderRadius': {
 
                                         }
 
-                                        SuperGlue.get('history').do('actionHasSucceeded', borderRadiusRecorder.call(this, elements));
-                                        
-
-                                    
+                                        this.set({ aValueWasChoosen: true });
 
                                     }
                 });
@@ -72,8 +56,29 @@ SC.loadPackage({ 'WidgetBorderRadius': {
 
     		}
 
-    	}
+    	},
 
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedBorderRadii = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedBorderRadii.push(elements[i].get('node').style.borderRadius)
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].get('node').style.borderRadius = savedBorderRadii[i]
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
+
+        }
 
     }
 

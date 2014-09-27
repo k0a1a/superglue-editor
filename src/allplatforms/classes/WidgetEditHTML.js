@@ -38,9 +38,16 @@ SC.loadPackage({ 'WidgetEditHTML': {
                                 html:       rawHtml,
                                 
                                 callback:   (function(){
-                                                var contentNode = elements[i].get('contentNode');
+                                                var contentNode = elements[i].get('contentNode'),
+                                                    oldInnerHTML = contentNode.innerHTML;
                                                 return function(aHTMLString){
+                                                    SuperGlue.get('history').do('actionHasStarted', function(){
+                                                        contentNode.innerHTML = oldInnerHTML;
+                                                    });
                                                     contentNode.innerHTML = aHTMLString;
+                                                    SuperGlue.get('history').do('actionHasSucceeded', function(){
+                                                        contentNode.innerHTML = aHTMLString;
+                                                    })
                                                 }
                                             }).call(this),
 

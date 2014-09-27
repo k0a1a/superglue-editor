@@ -38,6 +38,9 @@ SC.loadPackage({ 'WidgetImgDimensions': {
                                     }
                                     this.get('widgetMenu').classList.add('active');
 
+                                    // prepare undo
+                                    this.set({ aValueWasChoosen: false });
+                                    SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
 
                                 }else{
 
@@ -45,11 +48,19 @@ SC.loadPackage({ 'WidgetImgDimensions': {
                                         this.get('widgetMenu').removeChild(this.get('widgetPanel'));
                                     }
                                     this.get('widgetMenu').classList.remove('active');
+
+                                    // finish undo
+                                    if(this.get('aValueWasChoosen')){
+                                        SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
+                                    }
+                                    this.set({ aValueWasChoosen: false })
                                 
                                 }
                                 return aBoolean
                           }
-                        }
+                        },
+
+        aValueWasChoosen: { comment: 'Wether a value was choosen (needed for undo).' }
 
     },
 
@@ -74,6 +85,8 @@ SC.loadPackage({ 'WidgetImgDimensions': {
                             elements[i].set({ dimensions: newDim });
                         }
 
+                        self.set({ aValueWasChoosen: true });
+
                         evt.stopPropagation()
 
                     },
@@ -94,7 +107,29 @@ SC.loadPackage({ 'WidgetImgDimensions': {
 
     		}
 
-    	}
+    	},
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(elements){
+                            var savedImgState = []
+                            for(var i = 0, l = elements.length; i < l; i++){
+                                savedImgState.push(elements[i].get('node').innerHTML)
+                            }
+                            return function(){
+                                for(var i = 0, l = elements.length; i < l; i++){
+                                    elements[i].get('node').innerHTML = savedImgState[i]
+                                }
+                            }
+                        }).call(this, this.get('selection').get('elements'));
+
+
+            }
+
+        }
 
 
     }

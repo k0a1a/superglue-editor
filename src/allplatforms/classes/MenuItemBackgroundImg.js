@@ -39,6 +39,10 @@ SC.loadPackage({ 'MenuItemBackgroundImg': {
                                                     .replace(document.location.origin, '');
                                     
                                     this.get('menuPanel').querySelector('#sg-editing-menu-backgroundImg-input').value = srcURL;
+
+                                    // prepare undo
+                                    this.set({ aImgWasChoosen: false });
+                                    SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
                                     
 
                                 }else{
@@ -47,11 +51,19 @@ SC.loadPackage({ 'MenuItemBackgroundImg': {
                                         this.get('menuContainer').removeChild(this.get('menuPanel'));
                                     }
                                     this.get('menuContainer').classList.remove('active');
+
+                                    // finish undo
+                                    if(this.get('aImgWasChoosen')){
+                                        SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
+                                    }
+                                    this.set({ aImgWasChoosen: false })
                                 
                                 }
                                 return aBoolean
                           }
-                        }
+                        },
+
+        aImgWasChoosen: { comment: 'Wether a color was choosen or not.' }
 
     },
 
@@ -117,6 +129,24 @@ SC.loadPackage({ 'MenuItemBackgroundImg': {
             code: function(srcURL){
 
                 document.body.style.backgroundImage = srcURL === '' ? '' : 'url("' + srcURL + '")';
+
+                this.set({ aImgWasChoosen: true });
+
+            }
+        },
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(){
+                            var savedImg = document.body.style.backgroundImage
+                            return function(){
+                                document.body.style.backgroundImage = savedImg
+                            }
+                        }).call(this);
+
 
             }
         }

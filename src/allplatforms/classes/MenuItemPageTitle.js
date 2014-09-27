@@ -35,6 +35,10 @@ SC.loadPackage({ 'MenuItemPageTitle': {
                                     this.get('menuPanel').querySelector('#sg-editing-menu-pageTitle-input').value = (
                                         document.getElementsByTagName('title')[0].innerHTML
                                     );
+
+                                    // prepare undo
+                                    this.set({ aValueWasChoosen: false });
+                                    SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
                                     
 
                                 }else{
@@ -43,11 +47,19 @@ SC.loadPackage({ 'MenuItemPageTitle': {
                                         this.get('menuContainer').removeChild(this.get('menuPanel'));
                                     }
                                     this.get('menuContainer').classList.remove('active');
+
+                                    // finish undo
+                                    if(this.get('aValueWasChoosen')){
+                                        SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
+                                    }
+                                    this.set({ aValueWasChoosen: false });
                                 
                                 }
                                 return aBoolean
                           }
-                        }
+                        },
+
+        aValueWasChoosen: { comment: 'Wether a value was choosen or not.' }
 
     },
 
@@ -96,6 +108,24 @@ SC.loadPackage({ 'MenuItemPageTitle': {
             code: function(titleString){
 
                 document.getElementsByTagName('title')[0].innerHTML = titleString;
+
+                this.set({ aValueWasChoosen: true });
+
+            }
+        },
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(){
+                            var savedTitle = document.getElementsByTagName('title')[0].innerHTML
+                            return function(){
+                                document.getElementsByTagName('title')[0].innerHTML = savedTitle
+                            }
+                        }).call(this);
+
 
             }
         }
