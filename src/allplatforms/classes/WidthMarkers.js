@@ -5,7 +5,7 @@ SC.loadPackage({ 'WidthMarkers': {
 
     sharedProperties: {
 
-        markerContainers:   { initValue: '<div id="sg-editing-width-marker-left"></div><div id="sg-editing-width-marker-right"></div>' }
+        markerContainers:   { initValue: '<div id="sg-editing-width-marker-left"><div class="sg-editing-width-marker-left-triangle"></div></div><div id="sg-editing-width-marker-right"><div class="sg-editing-width-marker-right-triangle"></div></div>' }
 
     },
 
@@ -72,6 +72,10 @@ SC.loadPackage({ 'WidthMarkers': {
                             self.get('markerLeft').classList.add('sg-editing-width-marker-left-visible');
                             self.get('markerRight').classList.add('sg-editing-width-marker-right-visible');
                         }
+
+                        self.get('markerLeft').querySelector('.sg-editing-width-marker-left-triangle').style.top = evt.pageY;
+                        self.get('markerRight').querySelector('.sg-editing-width-marker-right-triangle').style.top = evt.pageY;
+                        
                     },
                     onMouseOut = function(evt){
                         if(!self.get('visible')){
@@ -163,6 +167,9 @@ SC.loadPackage({ 'WidthMarkers': {
                                 width:    minWidth
                             }});
                         }
+
+                        self.get('markerLeft').querySelector('.sg-editing-width-marker-left-triangle').style.top = evt.pageY;
+                        self.get('markerRight').querySelector('.sg-editing-width-marker-right-triangle').style.top = evt.pageY;
 
                         evt.stopPropagation();
                         evt.preventDefault();
