@@ -134,6 +134,37 @@ SC.loadPackage({ 'FileManager': {
                 
             
             }
+        },
+
+
+        newPage: {
+            comment: 'I open myWindow as a newPage dialog.',
+            code: function(){
+                
+                if ( this.get('activeFileManagerWindow') ) {
+
+                    this.get('activeFileManagerWindow').set({
+                        context: 'newPage',
+                        hasOKandCancelButton: true
+                    });
+
+                } else {
+
+                    SuperGlue.get('windowManager').do('createWindow', {
+                        class: 'FileManagerWindow',
+                        context: 'newPage',
+                        top:    100,
+                        left:   100,
+                        width:  400,
+                        height: 410,
+                        hasOKandCancelButton: true
+                    });
+
+
+                }
+                
+            
+            }
         }
 
 

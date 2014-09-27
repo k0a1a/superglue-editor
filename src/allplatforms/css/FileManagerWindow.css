@@ -156,7 +156,6 @@
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li:hover, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active {
 	background-color:	rgb(183, 12, 29);
-	cursor:				pointer;
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li:hover:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.active:after, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.new:after {
@@ -202,6 +201,26 @@
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-file {
 	background-image:	url(./icons/resourceFile.svg);
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-file.html a {
+	position: 			absolute;
+	top: 				4px;
+	right: 				64px;
+	width: 				22px;
+	height:				22px;
+	background-size:	22px auto;
+	background-repeat:	no-repeat;
+	background-position: center;
+	background-image: 	url(./icons/resourceFileOpen.svg);
+	background-color:	rgb(183, 12, 29);
+	z-index:			1;
+	cursor:				pointer;
+	display: 			none;
+}
+
+.sg-filemanager-directory-container .sg-filemanager-directory-listing li.sg-resource-file.html.active a {
+	display: 			block;
 }
 
 .sg-filemanager-directory-container .sg-filemanager-directory-listing li.new, .sg-filemanager-directory-container .sg-filemanager-directory-listing li.edit {

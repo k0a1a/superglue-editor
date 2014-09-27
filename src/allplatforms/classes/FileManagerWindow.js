@@ -9,10 +9,10 @@ SC.loadPackage({ 'FileManagerWindow': {
         fileManager:  { comment: 'I hold the fileManager to which I am the window.' },
         
         context: { 
-        	comment: 'I hold the context from which I was called ("","saveAs","chooseFile")',
+        	comment: 'I hold the context from which I was called ("","saveAs","chooseFile", "newPage")',
         	transform: function(context) {
 
-        		if ( context == 'saveAs' ) {
+        		if ( context == 'saveAs' || context == 'newPage' ) {
         			
         			this.get('content').querySelector('.sg-filemanager-directory-container').classList.add('nameInput');
 
@@ -21,7 +21,13 @@ SC.loadPackage({ 'FileManagerWindow': {
         			var modalNameInput = document.createElement('input');
         				modalNameInput.setAttribute('type', 'text');
         				modalNameInput.classList.add('sg-modal-name-input');
-        				modalNameInput.setAttribute('value', self.get('originalFileName') );
+        				
+                        if ( context == 'saveAs' ) {
+                            modalNameInput.setAttribute('value', self.get('originalFileName') );
+                        } else if ( context == 'newPage' ) {
+                            modalNameInput.setAttribute('value', 'NewPage.html' );
+                        }
+
         				modalNameInput.addEventListener('keyup', function(evt) {
         					if ( evt.target.value.length >= 1 ) {
                         		self.set({ confirmPath: self.get('basePath') +'/'+ evt.target.value });
@@ -154,7 +160,7 @@ SC.loadPackage({ 'FileManagerWindow': {
 
                     if ( this.get('selectedType') == 'file' ) {
 
-                    	if ( this.get('hasOKandCancelButton') && this.get('context') != 'saveAs' ) {
+                    	if ( this.get('hasOKandCancelButton') && this.get('context') == 'chooseFile' ) {
 	                        this.get('content').querySelector('button.confirm').classList.add('active');
 	                        this.set({ confirmPath: this.get('basePath') +'/'+ this.get('selectedName') });
 	                    }
@@ -168,7 +174,7 @@ SC.loadPackage({ 'FileManagerWindow': {
 
                     } else {
                     	
-                    	if ( this.get('hasOKandCancelButton') && this.get('context') != 'saveAs' ) {
+                    	if ( this.get('hasOKandCancelButton') && this.get('context') == 'chooseFile' ) {
 	                        this.get('content').querySelector('button.confirm').classList.remove('active');
 	                    }
 
@@ -186,7 +192,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                     }
 
                     if ( this.get('selectedType') == 'file' ) {
-                    	if ( this.get('hasOKandCancelButton') && this.get('context') != 'saveAs' ) {
+                    	if ( this.get('hasOKandCancelButton') && this.get('context') == 'chooseFile' ) {
 	                        this.get('content').querySelector('button.confirm').classList.remove('active');
 	                    }
 	                }
@@ -221,7 +227,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                     	activeButtons[i].classList.remove('active');
                     }
                     
-                    if ( this.get('hasOKandCancelButton') && this.get('context') != 'saveAs' ) {
+                    if ( this.get('hasOKandCancelButton') && this.get('context') != 'saveAs' && this.get('context') != 'newPage' ) {
                         this.get('content').querySelector('button.confirm').classList.remove('active');
                     }
 
@@ -262,10 +268,22 @@ SC.loadPackage({ 'FileManagerWindow': {
                             modalButtonConfirm.addEventListener('click', function() {
                                 
                                 if ( this.classList.contains('active') ) {
-                                    // Send Callback Path and Close
-                                    // TODO: Close only if not opened before
-                                    self.get('callback').call({ path: self.get('confirmPath') });
-                                    SuperGlue.get('windowManager').do('closeWindow', self);
+                                    
+                                    if ( self.get('context') == 'newPage' ) {
+
+                                        self.do('createNewPageAtAvailableLocation', { name: self.get('content').querySelector('.sg-modal-name-input').value });
+                                        //SuperGlue.get('windowManager').do('closeWindow', self);
+
+                                    } else {
+
+                                        // Send Callback Path and Close
+                                        // TODO: Close only if not opened before
+                                        self.get('callback').call({ path: self.get('confirmPath') });
+                                        SuperGlue.get('windowManager').do('closeWindow', self);
+
+                                    }
+
+                                    
                                 }
 
                             });
@@ -749,6 +767,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                             var fileType;
                             if ( (/\.(gif|jpg|jpeg|tiff|png)$/i).test(files[f].name) ) {
                                 fileType = 'image';
+                            } else if ( (/\.(html)$/i).test(files[f].name) ) {
+                                fileType = 'html';
                             } else {
                             	fileType = undefined;
                             }
@@ -762,8 +782,13 @@ SC.loadPackage({ 'FileManagerWindow': {
 	                            resultElem.setAttribute('data-path', files[f].name);
 	                            resultElem.setAttribute('data-name', name);
 	                            resultElem.setAttribute('data-type', type);
-	                            resultElem.innerHTML = name + '<span class="size">'+ size +'</span>';
 
+                                if ( fileType == 'html' ) {
+                                    resultElem.innerHTML = name + '<a href="'+ files[f].name +'" target="_blank"></a><span class="size">'+ size +'</span>';
+                                } else {
+                                    resultElem.innerHTML = name + '<span class="size">'+ size +'</span>';
+                                }
+	                            
 	                            resultElem.addEventListener('click', function(evt) {
 	                                
 	                                var selectedFiles = self.get('directoryListing').querySelectorAll('.active');
@@ -1178,6 +1203,79 @@ SC.loadPackage({ 'FileManagerWindow': {
 							
                     	}
                     	
+
+                    }
+                });
+
+            }
+        },
+
+        createNewPageAtAvailableLocation: {
+            comment:    'I create a new file at an available and valid location in the current directory. Params: name, (increment)',
+            code:       function(arg) {
+
+                var self = this;
+
+                self.set({ isWorking: true });
+
+                var increment;
+                if (!arg.increment) {
+                    increment = 1;
+                } else {
+                    increment = parseInt(arg.increment)+1;
+                }
+                
+                var cleanedName = self.do('checkName', { name: arg.name });
+                
+                var destination;
+                if (increment == 1) {
+                    destination = self.get('basePath') +'/'+ cleanedName;
+                } else {
+                    destination = self.get('basePath') +'/'+ cleanedName.substr(0, (cleanedName.lastIndexOf('.')) || cleanedName) + '-' + increment + cleanedName.substring(cleanedName.lastIndexOf('.'));
+                }
+
+                SuperGlue.get('server').do('doesFileExist', {
+                    path: destination,
+                    onerror: function() {
+                        alert('Checking if path already exists threw an error.\nError Message:\n\n' + this);
+                    },
+                    onsuccess: function(aBoolean) {
+
+                        if (aBoolean) {
+                            var newIncrement = increment++;
+                            self.do('createNewPageAtAvailableLocation', { name: arg.name, increment: newIncrement });
+                        
+                        } else {
+                            
+                            var destination;
+                            if (increment == 1) {
+                                destination = self.get('basePath') +'/'+ cleanedName;
+                            } else {
+                                destination = self.get('basePath') +'/'+ cleanedName.substr(0, (cleanedName.lastIndexOf('.')) || cleanedName) + '-' + increment + cleanedName.substring(cleanedName.lastIndexOf('.'));
+                            }                            
+                            
+                            SuperGlue.get('server').do('copyFile', {
+                                sourcePath:   '/resources/empty.html',
+                                targetPath:   destination,
+                                onerror: function() {
+                                    alert('File / Directory could not be copied.\nError Message:\n\n' + this);
+                                },
+                                onprogress: function(evt){
+                                    //
+                                },
+                                onsuccess:   function(){
+
+                                    self.do('listDirectory', { path: self.get('currentPath'), selectPath: destination });                                    
+                                    self.set({ isWorking: false });
+
+                                    self.set({ context: undefined });
+                                    self.set({ hasOKandCancelButton: false });
+                                    
+                                }
+                            });
+                            
+                        }
+                        
 
                     }
                 });
