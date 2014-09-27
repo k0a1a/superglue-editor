@@ -92,7 +92,7 @@ console.log('start', this.get('stack'))
                     this.get('stack').splice(this.get('stackPointer'));
                 }
 
-                if(this.get('stack').length > 30){
+                if(this.get('stack').length > 40){
                     this.get('stack').splice(0, 1);
                     this.set({ stackPointer: (this.get('stackPointer') - 1) });
                 }

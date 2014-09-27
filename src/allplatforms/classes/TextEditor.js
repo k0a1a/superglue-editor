@@ -51,6 +51,13 @@ SC.loadPackage({ 'TextEditor': {
 
                 SuperGlue.get('selection').do('clearAll');
 
+                (function(elementNode){
+                    var textContent = elementNode.innerHTML;
+                    SuperGlue.get('history').do('actionHasStarted', function(){
+                        elementNode.innerHTML = textContent;
+                    })
+                }).call(this, this.get('originalElementNode'));
+
                 // Prepare textEditor's div
                 /*
                 textEditor.setAttribute('id', 'sg-editing-textEditor');
@@ -123,16 +130,16 @@ SC.loadPackage({ 'TextEditor': {
 
 
                 textEditorContainer.addEventListener('mouseup', function(evt){
-                    evt.stopPropagation();
-                }, false);
-
-                textEditorContainer.addEventListener('mousedown', function(evt){
-
+                    
                     self.do('closeTextEditor');
 
                     evt.stopPropagation();
+                }, true);
 
-                }, false);
+                textEditorContainer.addEventListener('mousedown', function(evt){
+                    evt.stopPropagation();
+
+                }, true);
 
 
                 document.body.insertBefore(
@@ -320,6 +327,14 @@ SC.loadPackage({ 'TextEditor': {
                 this.get('originalSelection').forEach(function(element){
                     SuperGlue.get('selection').do('addElement', element)
                 });
+
+
+                (function(elementNode){
+                    var textContent = elementNode.innerHTML;
+                    SuperGlue.get('history').do('actionHasSucceeded', function(){
+                        elementNode.innerHTML = textContent;
+                    })
+                }).call(this, this.get('originalElementNode'));
 
 
             }
