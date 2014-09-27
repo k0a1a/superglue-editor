@@ -211,13 +211,28 @@ SC.loadPackage({ 'CreationMenu': {
                 
                 var myNodeStyle = this.get('myNode').style;
                 
-                SuperGlue.get('document').do('createNewElement', {
+                var newElement = SuperGlue.get('document').do('createNewElement', {
                     classname:  classname,
                     top:        parseInt(myNodeStyle.top),
                     left:       parseInt(myNodeStyle.left),
                     width:      parseInt(myNodeStyle.width),
                     height:     parseInt(myNodeStyle.height)
                 });
+
+                (function(newElement){
+
+                    SuperGlue.get('history').do('actionHasStarted', function(){
+                        SuperGlue.get('document').do('removeElement', newElement)
+                    });
+
+                    SuperGlue.get('history').do('actionHasSucceeded', function(){
+                        SuperGlue.get('document').do('insertElement', {
+                            index:   SuperGlue.get('document').get('children').length,
+                            element: newElement
+                        })
+                    });
+
+                }).call(this, newElement)
 
 
             }

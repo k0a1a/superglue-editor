@@ -97,7 +97,7 @@ SC.loadPackage({ 'WidgetImgLink': {
                     pathParser.href = widgetPanel.querySelector('#sg-editing-widget-imgLink-input').value;
 
                     SuperGlue.get('fileManager').do('chooseFile', {
-                        oldPath:  pathParser.pathName,
+                        oldPath:  pathParser.pathname,
                         callback: function(linkPath){
                                         widgetPanel.querySelector('#sg-editing-widget-imgLink-input').value = linkPath;
                                         self.do('setImgLink', linkPath);

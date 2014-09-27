@@ -141,9 +141,9 @@ SC.loadPackage({ 'WidgetLayerTop': {
             comment: 'I create a reflection function to restore a state.',
             code: function(){
 
-                return  (function(){
+                return  (function(children){
 
-                            var savedElements = SuperGlue.get('document').get('children').slice();
+                            var savedElements = children.slice();
                             
                             return function(){
 
@@ -160,7 +160,7 @@ SC.loadPackage({ 'WidgetLayerTop': {
                                 }
                                 
                             }
-                        }).call(this);
+                        }).call(this, SuperGlue.get('document').get('children'));
 
 
             }

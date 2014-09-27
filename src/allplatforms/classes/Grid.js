@@ -202,10 +202,34 @@ SC.loadPackage({ 'Grid': {
                         pageWidth = self.get('myDocument').get('layout').width;
 
 
+                        // Undo
+                        (function(gridSize, active, allElements, allElementDimensions){
+
+                            SuperGlue.get('history').do('actionHasStarted', function(){
+                                self.set({ 
+                                    gridSize: gridSize,
+                                    active:   active
+                                });
+                                if(active){
+                                    self.get('gridControl').style.left = self.get('gridSize') * 2 + 'px';
+                                }else{
+                                    self.get('gridControl').style.left = '0px';
+                                }
+                                for(var i = 0, l = allElements.length; i < l; i++){
+                                    allElements[i].set({
+                                        top:    allElementDimensions[i].top,
+                                        left:   allElementDimensions[i].left,
+                                        width:  allElementDimensions[i].width,
+                                        height: allElementDimensions[i].height
+                                    })
+                                }
+                            })
+
+                        }).call(this, gridSize, self.get('active'), allElements, allElementDimensions)
+
+
                         document.addEventListener('mousemove', onMouseMove, true);
                         document.addEventListener('mouseup',   onMouseUp,   true);
-
-                        // UNDO
 
                         evt.stopPropagation();
                         evt.preventDefault();
@@ -220,14 +244,14 @@ SC.loadPackage({ 'Grid': {
                             if(self.get('active')){ 
                                 self.set({ active: false }); 
                             }
-                            gridControl.style.left = '-20px';
+                            gridControl.style.left = '0px';
 
                             newGridSize = 0;
 
                         }else if(newGridSize > 70){
 
                             self.set({ gridSize: 70 });
-                            gridControl.style.left = '120px';
+                            gridControl.style.left = '140px';
 
                         }else{
 
@@ -235,7 +259,7 @@ SC.loadPackage({ 'Grid': {
                                 self.set({ active: true }); 
                             }
                             self.set({ gridSize: newGridSize });
-                            gridControl.style.left = newGridSize * 2 - 20 + 'px';
+                            gridControl.style.left = newGridSize * 2 + 'px';
 
                         }
 
@@ -274,14 +298,47 @@ SC.loadPackage({ 'Grid': {
                         SuperGlue.get('document').set({ interactionInProgress: false });
                         self.set({ visible: wasVisible });
                         
-                        // UNDO
+                        // Redo
+                        (function(gridSize, active, allElements){
+
+                            var allElementDimensions = [];
+                            for(var i = 0, l = allElements.length; i < l; i++){
+                                allElementDimensions.push({
+                                    top:    allElements[i].get('top'),
+                                    left:   allElements[i].get('left'),
+                                    width:  allElements[i].get('width'),
+                                    height: allElements[i].get('height')
+                                })
+                            }
+
+                            SuperGlue.get('history').do('actionHasSucceeded', function(){
+                                self.set({ 
+                                    gridSize: gridSize,
+                                    active:   active
+                                });
+                                if(active){
+                                    self.get('gridControl').style.left = self.get('gridSize') * 2 + 'px';
+                                }else{
+                                    self.get('gridControl').style.left = '0px';
+                                }
+                                for(var i = 0, l = allElements.length; i < l; i++){
+                                    allElements[i].set({
+                                        top:    allElementDimensions[i].top,
+                                        left:   allElementDimensions[i].left,
+                                        width:  allElementDimensions[i].width,
+                                        height: allElementDimensions[i].height
+                                    })
+                                }
+                            })
+
+                        }).call(this, self.get('gridSize'), self.get('active'), SuperGlue.get('document').get('children') )
                         
                         evt.stopPropagation();
                         evt.preventDefault();
                         
                     };
 
-                gridControl.style.left = this.get('gridSize') * 2 - 20 + 'px';
+                gridControl.style.left = this.get('gridSize') * 2 + 'px';
 
                 gridControl.addEventListener('mousedown', onMouseDown, false);
 

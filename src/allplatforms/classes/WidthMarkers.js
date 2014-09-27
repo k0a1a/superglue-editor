@@ -99,10 +99,21 @@ SC.loadPackage({ 'WidthMarkers': {
                         gridVisible = SuperGlue.get('document').get('grid').get('visible');
                         SuperGlue.get('document').get('grid').set({ visible: true });
 
+                        
+                        (function(width){
+
+                            SuperGlue.get('history').do('actionHasStarted', function(){
+                                SuperGlue.get('document').set({ layout: {
+                                    width:    width,
+                                    centered: true
+                                }})
+                            })
+
+                        }).call(this, SuperGlue.get('document').get('layout').width)
+
+
                         document.addEventListener('mousemove', onMouseMove, true);
                         document.addEventListener('mouseup',   onMouseUp,   true);
-
-                        // UNDO
 
                         evt.stopPropagation();
                         evt.preventDefault();
@@ -121,9 +132,16 @@ SC.loadPackage({ 'WidthMarkers': {
 
                         SuperGlue.get('document').get('grid').set({ visible: gridVisible });
 
+                        (function(width){
 
+                            SuperGlue.get('history').do('actionHasSucceeded', function(){
+                                SuperGlue.get('document').set({ layout: {
+                                    width:    width,
+                                    centered: true
+                                }})
+                            })
 
-                        // UNDO
+                        }).call(this, SuperGlue.get('document').get('layout').width)
                         
                         evt.stopPropagation();
                         evt.preventDefault();

@@ -26,6 +26,8 @@ SC.loadPackage({ 'MenuItemPaste': {
 
                     SuperGlue.get('clipboard').do('paste', function(pasteData){
 
+                        SuperGlue.get('history').do('actionHasStarted', self.do('createState'));
+
                         if(pasteData.indexOf('class="sg-element"') > -1){
 
                             self.do('pasteSGElement', pasteData);
@@ -36,6 +38,9 @@ SC.loadPackage({ 'MenuItemPaste': {
 
                         }
 
+                        SuperGlue.get('history').do('actionHasSucceeded', self.do('createState'));
+
+                        self.set({ isMenuItemActive: false });
                         theDocumentMenu.do('close');
 
 
@@ -115,6 +120,41 @@ SC.loadPackage({ 'MenuItemPaste': {
                 }).get('node').innerHTML = pasteData;
 
             }
+        },
+
+
+
+        createState: {
+            comment: 'I create a reflection function to restore a state.',
+            code: function(){
+
+                return  (function(children){
+
+                            var savedElements = children.slice();
+                            
+                            return function(){
+
+                                SuperGlue.get('document').set({ children: savedElements });
+
+                                var pageContainer = SuperGlue.get('document').get('pageContainer');
+
+                                while(pageContainer.firstChild){
+                                    pageContainer.removeChild(pageContainer.firstChild);
+                                }
+
+                                for(var i = 0, l = savedElements.length; i < l; i++){
+                                    pageContainer.appendChild(savedElements[i].get('node'));
+                                }
+
+                                SuperGlue.get('document').do('afterLayoutHasChanged');
+                                
+                            }
+
+                        }).call(this, SuperGlue.get('document').get('children'));
+
+
+            }
+
         }
 
 

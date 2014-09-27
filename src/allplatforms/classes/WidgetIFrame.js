@@ -97,7 +97,7 @@ SC.loadPackage({ 'WidgetIFrame': {
                     pathParser.href = widgetPanel.querySelector('#sg-editing-widget-iframe-input').value;
 
                     SuperGlue.get('fileManager').do('chooseFile', {
-                        oldPath:  pathParser.pathName,
+                        oldPath:  pathParser.pathname,
                         callback: function(srcPath){
                                         widgetPanel.querySelector('#sg-editing-widget-iframe-input').value = srcPath;
                                         self.do('setIFrameSrc', srcPath);

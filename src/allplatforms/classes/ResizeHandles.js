@@ -204,13 +204,31 @@ SC.loadPackage({ 'ResizeHandles': {
                             }
                         }
                         
+
+                        (function(myElement){
+
+                            var savedDimensions = {
+                                top:    myElement.get('top'),
+                                left:   myElement.get('left'),
+                                width:  myElement.get('width'),
+                                height: myElement.get('height')
+                            }
+
+                            SuperGlue.get('history').do('actionHasStarted', function(){
+                                myElement.set({
+                                    top:    savedDimensions.top,
+                                    left:   savedDimensions.left,
+                                    width:  savedDimensions.width,
+                                    height: savedDimensions.height
+                                })
+                            })
+
+                        }).call(this, myElement)
                         
                         SuperGlue.get('document').set({ interactionInProgress: true });
                         self.set({ selected: true });
                         document.addEventListener('mousemove', onMouseMove, true);
                         document.addEventListener('mouseup',   onMouseUp,   true);
-
-                        // UNDO
 
                         evt.stopPropagation();
                         evt.preventDefault();
@@ -234,7 +252,26 @@ SC.loadPackage({ 'ResizeHandles': {
                         });
                         self.set({ selected: wasSelected });
 
-                        // UNDO
+                        
+                        (function(myElement){
+
+                            var savedDimensions = {
+                                top:    myElement.get('top'),
+                                left:   myElement.get('left'),
+                                width:  myElement.get('width'),
+                                height: myElement.get('height')
+                            }
+
+                            SuperGlue.get('history').do('actionHasSucceeded', function(){
+                                myElement.set({
+                                    top:    savedDimensions.top,
+                                    left:   savedDimensions.left,
+                                    width:  savedDimensions.width,
+                                    height: savedDimensions.height
+                                })
+                            })
+
+                        }).call(this, myElement)
                         
 
                         evt.stopPropagation();

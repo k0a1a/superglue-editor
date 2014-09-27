@@ -21,14 +21,21 @@ SC.loadPackage({ 'MenuItemCenter': {
                 
                 this.get('menuContainer').firstChild.addEventListener('mouseup', function(evt){
 
-                    var myDocument = SuperGlue.get('document');
+                    var myDocument  = SuperGlue.get('document'),
+                        createState = function(myDocument){
+                                            var savedLayout = myDocument.get('layout');
+                                            return function(){
+                                                myDocument.set({ layout: savedLayout });
+                                            }
+                                        };
+
+                    SuperGlue.get('history').do('actionHasStarted', createState(myDocument));
 
                     myDocument.set({ layout: {
-                        
                         centered: !myDocument.get('layout').centered
-
                     }});
 
+                    SuperGlue.get('history').do('actionHasSucceeded', createState(myDocument));
                     
 
                 }, false);

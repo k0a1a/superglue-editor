@@ -574,6 +574,50 @@ SC.loadPackage({ 'Selection': {
 
                         }else{
 
+                            (function(elements, thisElement){
+
+                                var savedDimensions = []
+
+                                if(elements.length === 0){
+                                    savedDimensions.push({
+                                        top:    thisElement.get('top'),
+                                        left:   thisElement.get('left'),
+                                        width:  thisElement.get('width'),
+                                        height: thisElement.get('height')
+                                    })
+                                }else{
+                                    for(var i = 0, l = elements.length; i < l; i++){
+                                        savedDimensions.push({
+                                            top:    elements[i].get('top'),
+                                            left:   elements[i].get('left'),
+                                            width:  elements[i].get('width'),
+                                            height: elements[i].get('height')
+                                        })
+                                    }
+                                }
+
+                                SuperGlue.get('history').do('actionHasSucceeded', function(){
+                                    if(elements.length === 0){
+                                        thisElement.set({
+                                            top:    savedDimensions[0].top,
+                                            left:   savedDimensions[0].left,
+                                            width:  savedDimensions[0].width,
+                                            height: savedDimensions[0].height
+                                        })
+                                    }else{
+                                        for(var i = 0, l = elements.length; i < l; i++){
+                                            elements[i].set({
+                                                top:    savedDimensions[i].top,
+                                                left:   savedDimensions[i].left,
+                                                width:  savedDimensions[i].width,
+                                                height: savedDimensions[i].height
+                                            })
+                                        }
+                                    }
+                                })
+
+                            }).call(this, elements, thisElement)
+
                             SuperGlue.get('document').get('widthMarkers').set({ visible: widthMarkersVisible });
                             SuperGlue.get('document').get('grid').set({ visible: gridVisible });
 
@@ -609,6 +653,51 @@ SC.loadPackage({ 'Selection': {
                             gridVisible         = grid.get('visible');
                             widthMarkers.set({ visible: true });
                             grid.set({ visible: true });
+
+                            (function(elements, thisElement){
+
+                                var savedDimensions = []
+
+                                if(elements.length === 0){
+                                    savedDimensions.push({
+                                        top:    thisElement.get('top'),
+                                        left:   thisElement.get('left'),
+                                        width:  thisElement.get('width'),
+                                        height: thisElement.get('height')
+                                    })
+                                }else{
+                                    for(var i = 0, l = elements.length; i < l; i++){
+                                        savedDimensions.push({
+                                            top:    elements[i].get('top'),
+                                            left:   elements[i].get('left'),
+                                            width:  elements[i].get('width'),
+                                            height: elements[i].get('height')
+                                        })
+                                    }
+                                }
+
+                                SuperGlue.get('history').do('actionHasStarted', function(){
+                                    if(elements.length === 0){
+                                        thisElement.set({
+                                            top:    savedDimensions[0].top,
+                                            left:   savedDimensions[0].left,
+                                            width:  savedDimensions[0].width,
+                                            height: savedDimensions[0].height
+                                        })
+                                    }else{
+                                        for(var i = 0, l = elements.length; i < l; i++){
+                                            elements[i].set({
+                                                top:    savedDimensions[i].top,
+                                                left:   savedDimensions[i].left,
+                                                width:  savedDimensions[i].width,
+                                                height: savedDimensions[i].height
+                                            })
+                                        }
+                                    }
+                                })
+
+                            }).call(this, elements, thisElement)
+
 
                             withinClickPrecision = false;
                         }

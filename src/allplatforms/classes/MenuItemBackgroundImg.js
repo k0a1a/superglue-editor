@@ -98,7 +98,7 @@ SC.loadPackage({ 'MenuItemBackgroundImg': {
                     pathParser.href = menuPanel.querySelector('#sg-editing-menu-backgroundImg-input').value;
 
                     SuperGlue.get('fileManager').do('chooseFile', {
-                        oldPath: pathParser.pathName,
+                        oldPath: pathParser.pathname,
                         callback: function(srcPath){
                                         menuPanel.querySelector('#sg-editing-menu-backgroundImg-input').value = srcPath;
                                         self.do('setBackgroundImg', srcPath);
