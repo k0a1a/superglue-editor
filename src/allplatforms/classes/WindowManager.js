@@ -6,7 +6,33 @@ SC.loadPackage({ 'WindowManager': {
     properties: {
 
         windowsContainer:   { comment: 'I hold the DOM node which contains the windows.' },
-        windows:            { comment: 'I hold an map of id-->references to my window DOM nodes.' }
+        windows:            { comment: 'I hold an map of id-->references to my window DOM nodes.' },
+        activityIndicator:  { comment: 'I can show wether SuperGlue is working or not.',
+                              transform: function(aBoolean){
+                                    if(aBoolean){
+
+                                        if(!this.get('windowsContainer').querySelector('#sg-editing-activity-indicator')){
+
+                                            var indicator = document.createElement('div');
+                                            indicator.setAttribute('id', 'sg-editing-activity-indicator');
+                                            this.get('windowsContainer').appendChild(indicator)
+
+                                        }
+
+                                    }else{
+
+                                        if(this.get('windowsContainer').querySelector('#sg-editing-activity-indicator')){
+
+                                            this.get('windowsContainer').removeChild(
+                                                this.get('windowsContainer').querySelector('#sg-editing-activity-indicator')
+                                            );
+
+                                        }
+
+                                    }
+                                    return aBoolean;
+                              }
+                            }
 
     },
 

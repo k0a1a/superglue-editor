@@ -134,12 +134,12 @@ SC.loadPackage({ 'TextEditor': {
                     self.do('closeTextEditor');
 
                     evt.stopPropagation();
-                }, true);
+                }, false);
 
                 textEditorContainer.addEventListener('mousedown', function(evt){
                     evt.stopPropagation();
 
-                }, true);
+                }, false);
 
 
                 document.body.insertBefore(

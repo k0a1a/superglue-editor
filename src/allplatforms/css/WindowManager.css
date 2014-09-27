@@ -7,3 +7,15 @@
 	font-size:			15px;
 	letter-spacing: 	1px;
 }
+
+#sg-editing-activity-indicator {
+	position: 			fixed;
+	top: 				5px;
+	left: 				5px;
+	width: 				30px;
+	height: 			30px;
+	background-image:	url(./icons/loading.gif);
+	background-repeat: 	no-repeat;
+	background-size:	28px auto;
+	background-position: center;
+}

@@ -141,11 +141,13 @@ SC.loadPackage({ 'SuperGlue': {
                                 ? SC.init('Server', saveOptions.remoteOrigin)
                                 : this.get('server');
 
-                
+                this.get('windowManager').set({ activityIndicator: true });
+
                 server.do('uploadHTML', {
                     path:   saveOptions.path,
                     data:   thisPage,
                     onerror:    function(){
+                                    SuperGlue.get('windowManager').set({ activityIndicator: false });
                                     console.log(this);
                                     alert('Critical error: The page could not be saved.\nSee console for more details.');
                                 },
@@ -153,7 +155,7 @@ SC.loadPackage({ 'SuperGlue': {
 
                                 },
                     onresponse: function(){
-                                    alert('Page successfully saved.\n\n' + server.get('origin') + '/' + saveOptions.path);
+                                    SuperGlue.get('windowManager').set({ activityIndicator: false });
                                 }
                 })
 
