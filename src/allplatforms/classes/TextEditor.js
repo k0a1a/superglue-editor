@@ -206,7 +206,11 @@ SC.loadPackage({ 'TextEditor': {
 
                         initialColor: undefined,
                         setCallback: function(colorCode){
-                            editor.composer.commands.exec('fontColorStyle', colorCode );
+                            
+                            if ( editor.composer.commands.stateValue("fontColorStyle") !== colorCode ) {
+                                editor.composer.commands.exec('fontColorStyle', colorCode );
+                            }
+
                         }
 
                     });
@@ -266,34 +270,23 @@ SC.loadPackage({ 'TextEditor': {
 
                     document.querySelector('.wysihtml5-sandbox').contentWindow.addEventListener('mouseup', function(evt) {
                         if (!fired) {
-                            if (this.getSelection().type != 'Range') {
+                            if (this.getSelection().type == 'Range') {
                                                                 
-                                //$('#textShapeToolbar .colorpicker2').removeClass('active');
-                                tmpTextColor = "rgb(0,0,0)";
-
-                            } else {
-                                
                                 var currentFontColor = undefined;
 
-                                /*
-                                var sel = editor.composer.selection.getSelection();
-                                if (sel.rangeCount > 0) {
-                                    var range = sel.getRangeAt(0);
-                                    var parentElement = range.commonAncestorContainer;
-                                    if (parentElement.nodeType == 3) {
-                                        parentElement = parentElement.parentNode;
-                                    }
-                                    if (parentElement.style.color.length > 0) {
-                                        currentFontColor = parentElement.style.color;
-                                    }
+                                if ( editor.composer.commands.stateValue("fontColorStyle") ) {
+                                    currentFontColor = editor.composer.commands.stateValue("fontColorStyle");
                                 }
-                                */
 
                                 self.do('initColorpicker', {
 
                                     initialColor: currentFontColor,
                                     setCallback: function(colorCode){
-                                        editor.composer.commands.exec('fontColorStyle', colorCode );
+                                        
+                                        if ( editor.composer.commands.stateValue("fontColorStyle") !== colorCode ) {
+                                            editor.composer.commands.exec('fontColorStyle', colorCode );
+                                        }
+
                                     }
 
                                 });
@@ -627,7 +620,7 @@ SC.loadPackage({ 'TextEditor': {
                         colorpickerInputB.value = rgb.b;
                         
                         
-                        colorPickerConfig.setCallback.call(this, 'rgb('+rgb.r+', '+rgb.g+', '+rgb.b+')');
+                        colorPickerConfig.setCallback.call(this, 'rgb('+rgb.r+','+rgb.g+','+rgb.b+')');
                     }
 
                 }

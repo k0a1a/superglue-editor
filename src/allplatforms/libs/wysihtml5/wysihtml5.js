@@ -10266,6 +10266,8 @@ wysihtml5.Commands = Base.extend(
 			size = (typeof(size) == "object") ? size.size : size;
 			if (!(/^\s*$/).test(size)) {
 				wysihtml5.commands.formatInline.execWithToggle(composer, command, "span", false, false, "font-size:" + size+";", REG_EXP);
+				// SUPERGLUE HACK clean up to avoid wrong line heights
+				composer.cleanUp();
 			}
 		},
 
@@ -10418,6 +10420,25 @@ wysihtml5.Commands = Base.extend(
 
 		state: function(composer, command, value) {
 			return wysihtml5.commands.formatInline.state(composer, command, "span", false, false, "color", REG_EXP);
+		},
+		
+		stateValue: function(composer, command, props) {
+			var st = this.state(composer, command),
+				colorStr,
+				val = false;
+
+			if (st && wysihtml5.lang.object(st).isArray()) {
+				st = st[0];
+			}
+
+			if (st) {
+				colorStr = st.getAttribute('style');
+				if (colorStr) {
+					val = wysihtml5.quirks.styleParser.parseColor(colorStr, "color");
+					return wysihtml5.quirks.styleParser.unparseColor(val, props);
+				}
+			}
+			return false;
 		}
 	};
 })(wysihtml5);
