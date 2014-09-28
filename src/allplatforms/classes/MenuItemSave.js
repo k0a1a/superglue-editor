@@ -16,23 +16,31 @@ SC.loadPackage({ 'MenuItemSave': {
     		comment: 	'I init the MenuItem.',
     		code: 		function(theDocumentMenu){
 
+                var self = this;
+
                 this.delegate('MenuItem', 'init', theDocumentMenu);
                 this.set({ isActionButton: true });
 
                 this.get('menuContainer').firstChild.addEventListener('mouseup', function(evt){
-
-                    SuperGlue.do('savePage', {
-                        path: document.location.pathname
-                    });
-
+                    self.do('action');
                     theDocumentMenu.do('close');
-
                 }, false);
 
 
     		}
 
-    	}
+    	}, 
+
+        action: {
+            comment: 'I do the job.',
+            code: function(){
+
+                SuperGlue.do('savePage', {
+                        path: document.location.pathname
+                    });
+
+            }
+        }
 
 
     }

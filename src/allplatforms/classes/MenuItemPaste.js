@@ -23,8 +23,22 @@ SC.loadPackage({ 'MenuItemPaste': {
                 var self = this;
                 
                 this.get('menuButton').addEventListener('mouseup', function(){
+                    self.do('action');
+                    theDocumentMenu.do('close');
+                }, false)
 
-                    SuperGlue.get('clipboard').do('paste', function(pasteData){
+    		}
+
+    	}, 
+
+
+        action: {
+            comment: 'I do the job.',
+            code: function(){
+
+                var self = this;
+
+                SuperGlue.get('clipboard').do('paste', function(pasteData){
 
                         SuperGlue.get('history').do('actionHasStarted', self.do('createState'));
 
@@ -40,17 +54,11 @@ SC.loadPackage({ 'MenuItemPaste': {
 
                         SuperGlue.get('history').do('actionHasSucceeded', self.do('createState'));
 
-                        self.set({ isMenuItemActive: false });
-                        theDocumentMenu.do('close');
-
-
                     });
 
-                }, false)
+            }
+        },
 
-    		}
-
-    	},
 
         pasteSGElement: {
             comment: 'I paste a SuperGlue Element.', 

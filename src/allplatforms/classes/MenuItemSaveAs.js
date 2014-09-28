@@ -16,13 +16,25 @@ SC.loadPackage({ 'MenuItemSaveAs': {
     		comment: 	'I init the MenuItem.',
     		code: 		function(theDocumentMenu){
 
+                var self = this;
+
                 this.delegate('MenuItem', 'init', theDocumentMenu);
 
                 this.get('menuContainer').firstChild.addEventListener('mouseup', function(evt){
-
+                    self.do('action');
                     theDocumentMenu.do('close');
-                    
-                    SuperGlue.get('fileManager').do('saveAs', function(filePath){
+                }, false);
+
+
+    		}
+
+    	}, 
+
+        action: {
+            comment: 'I do the job.',
+            code: function(){
+
+                SuperGlue.get('fileManager').do('saveAs', function(filePath){
 
                         SuperGlue.do('savePage', {
                             path: filePath
@@ -30,14 +42,8 @@ SC.loadPackage({ 'MenuItemSaveAs': {
 
                     });
 
-                    
-
-                }, false);
-
-
-    		}
-
-    	}
+            }
+        }
 
 
     }

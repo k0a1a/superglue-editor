@@ -16,16 +16,27 @@ SC.loadPackage({ 'MenuItemUndo': {
     		comment: 	'I init the MenuItem.',
     		code: 		function(theDocumentMenu){
 
+                var self = this;
+
                 this.delegate('MenuItem', 'init', theDocumentMenu);
                 this.set({ isActionButton: true });
 
                 this.get('menuButton').addEventListener('mouseup', function(){
-                    SuperGlue.get('history').do('undo');
+                    self.do('action');
                 }, false);
 
     		}
 
-    	}
+    	}, 
+
+        action: {
+            comment: 'I do the job.',
+            code: function(){
+
+                SuperGlue.get('history').do('undo');
+
+            }
+        }
 
 
     }

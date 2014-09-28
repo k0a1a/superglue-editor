@@ -14,10 +14,14 @@ SC.loadPackage({ 'Keyboard': {
             comment:    'method comment',
             code:       function(){
 
-                var self = this;
+                var self = this,
+                    spaceBarDown = false;
 
 
                 document.addEventListener('keydown', function(evt){
+                    if(evt.target.tagName === 'INPUT' || evt.target.tagName === 'TEXTAREA' ){
+                        return;
+                    }
                     self.do('processKeyEvent', evt);
                 }, false);
 
@@ -28,18 +32,50 @@ SC.loadPackage({ 'Keyboard': {
                 this.set({ helperOverlay: helperOverlay })
 
                 document.addEventListener('keydown', function(evt){
+
+                    if(evt.target.tagName === 'INPUT' || evt.target.tagName === 'TEXTAREA' ){
+                        return;
+                    }
+
                     if(evt.keyCode === 72){
+
                         var helperOverlay = self.get('helperOverlay');
                         helperOverlay.style.width  = window.innerWidth + 'px';
                         helperOverlay.style.height = window.innerHeight + 'px';
                         document.body.appendChild(helperOverlay);
+
+                    } else if(evt.keyCode === 32){
+
+                        if(spaceBarDown === false){
+                            var myDocument = SuperGlue.get('document');
+                            myDocument.set({ showOutlines: !myDocument.get('showOutlines') });
+                            spaceBarDown = true;
+                        }
+
                     }
+
                 }, false);
 
                 document.addEventListener('keyup', function(evt){
-                    if(evt.keyCode === 72){
-                        document.body.removeChild(self.get('helperOverlay'));
+
+                    if(evt.target.tagName === 'INPUT' || evt.target.tagName === 'TEXTAREA' ){
+                        return;
                     }
+
+                    if(evt.keyCode === 72){
+
+                        document.body.removeChild(self.get('helperOverlay'));
+
+                    } else if(evt.keyCode === 32){
+
+                        if(spaceBarDown === true){
+                            var myDocument = SuperGlue.get('document');
+                            myDocument.set({ showOutlines: !myDocument.get('showOutlines') });
+                            spaceBarDown = false;
+                        }
+
+                    }
+
                 }, false);
 
 
@@ -51,8 +87,7 @@ SC.loadPackage({ 'Keyboard': {
             comment: 'I process key events.',
             code: function(evt){
 
-                var self      = this,
-                    relevant  = true;
+                var relevant  = true;
 
                 if(evt.ctrlKey){
 
@@ -81,6 +116,8 @@ SC.loadPackage({ 'Keyboard': {
 
                         case 65:
                             // Ctrl+A
+
+                            this.do('selectAll');
                             
                             break;
 
@@ -102,24 +139,70 @@ SC.loadPackage({ 'Keyboard': {
 
                             break;
 
+                        case 73:
+                            // Ctrl+I
+                            
+                            SuperGlue.get('document').get('documentMenu').do('callMenuItemAction', { 
+                                menuItem: 'MenuItemNewPage'
+                            });
+
+                            break;
+
+                        case 79:
+                            // Ctrl+O
+                            
+                            SuperGlue.get('document').get('documentMenu').do('callMenuItemAction', { 
+                                menuItem: 'MenuItemFileManager'
+                            });
+
+                            break;
+
                         case 83:
                             // Ctrl+S
-                                alert('ja SSSSS')
+                            
+                            if(evt.shiftKey){
+                                SuperGlue.get('document').get('documentMenu').do('callMenuItemAction', { 
+                                    menuItem: 'MenuItemSaveAs'
+                                });
+                            }else{
+                                SuperGlue.get('document').get('documentMenu').do('callMenuItemAction', { 
+                                    menuItem: 'MenuItemSave'
+                                });
+                            }
+
                             break;
 
                         case 86:
                             // Ctrl+V
-                                
+                            
+                            SuperGlue.get('selection').do('clearAll');
+
+                            SuperGlue.get('document').get('documentMenu').do('callMenuItemAction', { 
+                                menuItem: 'MenuItemPaste'
+                            });
+
                             break;
 
                         case 89:
                             // Ctrl+Y
+
+                            SuperGlue.get('selection').do('clearAll');
                             
+                            SuperGlue.get('document').get('documentMenu').do('callMenuItemAction', { 
+                                menuItem: 'MenuItemRedo'
+                            });
+
                             break;
 
                         case 90:
                             // Ctrl+Z
+
+                            SuperGlue.get('selection').do('clearAll');
                             
+                            SuperGlue.get('document').get('documentMenu').do('callMenuItemAction', { 
+                                menuItem: 'MenuItemUndo'
+                            });
+
                             break;
 
                         default:
@@ -141,28 +224,32 @@ SC.loadPackage({ 'Keyboard': {
                             
                             break;
 
-                        case 32:
-                            // Space
-                            
-                            break;
 
                         case 37:
                             // ArrowLeft
+
+                            this.do('moveSelection', 'left');
                             
                             break;
 
                         case 38:
                             // ArrowUp
+
+                            this.do('moveSelection', 'up');
                             
                             break;
 
                         case 39:
                             // ArrowRight
+
+                            this.do('moveSelection', 'right');
                             
                             break;
 
                         case 40:
                             // ArrowDown
+
+                            this.do('moveSelection', 'down');
                             
                             break;
 
@@ -182,7 +269,73 @@ SC.loadPackage({ 'Keyboard': {
 
 
             }
+        },
+
+
+        selectAll: {
+            comment: 'I select all (Ctrl+A)',
+            code: function(){
+
+                for(var selection   = SuperGlue.get('selection'),
+                        allElements = SuperGlue.get('document').get('children'),
+                        i = 0, l = allElements.length;
+                        i < l; i++){
+
+                    selection.do('addElement', allElements[i]);
+
+                }
+
+            }
+        },
+
+
+        moveSelection: {
+            comment: 'I move the selected elements on arrow key strokes in the given direction.',
+            code: function(direction){
+
+                var elements = SuperGlue.get('selection').get('elements'),
+                    stepSize = SuperGlue.get('document').get('grid').get('active') 
+                                ? SuperGlue.get('document').get('grid').get('gridSize') 
+                                : 1,
+                    layout   = SuperGlue.get('document').get('layout');
+
+
+                for(var i = 0, l = elements.length; i < l; i++){
+
+                    switch(direction){
+
+                        case 'up':
+                            elements[i].set({ top: (elements[i].get('top') - stepSize) });
+                            break;
+
+                        case 'down':
+                            elements[i].set({ top: (elements[i].get('top') + stepSize) });
+                            break;
+
+                        case 'left':
+                            elements[i].set({ left: (elements[i].get('left') - stepSize) });
+                            break;
+
+                        case 'right':
+                            if(layout.centered){
+                                if(layout.width >= elements[i].get('left') + elements[i].get('width') + stepSize){
+                                    elements[i].set({ left: (elements[i].get('left') + stepSize) });
+                                }
+                            }else{
+                                elements[i].set({ left: (elements[i].get('left') + stepSize) });
+                            }
+                            break;
+
+                    }
+
+                }
+
+                SuperGlue.get('selection').do('updateDimensions');
+                
+            }
         }
+
+
 
     }
 

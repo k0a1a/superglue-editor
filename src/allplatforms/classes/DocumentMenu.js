@@ -98,6 +98,39 @@ SC.loadPackage({ 'DocumentMenu': {
                 }
 
             }
+        },
+
+
+        callMenuItemAction: {
+            comment: 'I call a menuItem object\'s action',
+            code: function(config){
+
+                var menuItem = (function(){
+
+                                    var menuItemsTop  = this.get('menuItemsTop'),
+                                        menuItemsLeft = this.get('menuItemsLeft');
+
+                                    for(var i = 0, l = menuItemsTop.length; i < l; i++){
+                                        if(menuItemsTop[i].class() === config.menuItem){
+                                            return menuItemsTop[i];
+                                        }
+                                    }
+
+                                    for(var i = 0, l = menuItemsLeft.length; i < l; i++){
+                                        if(menuItemsLeft[i].class() === config.menuItem){
+                                            return menuItemsLeft[i];
+                                        }
+                                    }
+
+                                }).call(this);
+
+                if(!menuItem){
+                    return;
+                }
+
+                menuItem.do('action', config.modifier)
+                
+            }
         }
 
 
