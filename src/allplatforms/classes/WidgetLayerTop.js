@@ -51,7 +51,7 @@ SC.loadPackage({ 'WidgetLayerTop': {
                     return;
                 }
 
-                SuperGlue.get('history').do('actionHasStarted', self.do('createState'));
+                SuperGlue.get('history').do('actionHasStarted', this.do('createState'));
 
                 if(elements.length === 1){
 
@@ -137,7 +137,7 @@ SC.loadPackage({ 'WidgetLayerTop': {
 
                 }
 
-                SuperGlue.get('history').do('actionHasSucceeded', self.do('createState'));
+                SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'));
 
 
             }
