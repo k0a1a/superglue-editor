@@ -51,6 +51,8 @@ SC.loadPackage({ 'Keyboard': {
                             myDocument.set({ showOutlines: !myDocument.get('showOutlines') });
                             spaceBarDown = true;
                         }
+                        evt.stopPropagation();
+                        evt.preventDefault();
 
                     }
 
@@ -73,6 +75,8 @@ SC.loadPackage({ 'Keyboard': {
                             myDocument.set({ showOutlines: !myDocument.get('showOutlines') });
                             spaceBarDown = false;
                         }
+                        evt.stopPropagation();
+                        evt.preventDefault();
 
                     }
 

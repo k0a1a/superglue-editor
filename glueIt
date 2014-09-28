@@ -32,8 +32,7 @@ case "$1" in
         echo "Testing Firefox add-on..."
         cd ./tools/firefox-addon-sdk-1.16
         source bin/activate
-        cd ../..
-        cd ./build/firefox
+        cd ../../build/firefox
         cfx run
         cd ../..
         ;;
@@ -43,8 +42,7 @@ case "$1" in
         echo "Packaging Firefox add-on..."
         cd ./tools/firefox-addon-sdk-1.16
         source bin/activate
-        cd ../..
-        cd ./build/firefox
+        cd ../../build/firefox
         cfx xpi
         cd ../..
         ;;
