@@ -42,7 +42,7 @@ SC.loadPackage({ 'Selection': {
                     activeWidget:    null
                 });
 
-                var generalWidgets          = ['WidgetLayerTop', 'WidgetLayerBottom', 'WidgetEditHTML', 'WidgetCopy', 'WidgetDelete'],
+                var generalWidgets          = ['WidgetLayerTop', 'WidgetLayerBottom', 'WidgetCopy', 'WidgetDelete', 'WidgetEditHTML'],
                     generalWidgetsContainer = this.get('menuNodeRight'),
                     widget = null;
 
