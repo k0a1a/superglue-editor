@@ -21,8 +21,8 @@
 .sg-editing-selection-widget-menu-right {
 	position: absolute;
 	z-index:  100;
-	right:    -45px;
-	bottom:   0px;
+	right:    -36px;
+	bottom:   -36px;
 	width:    30px;
 }
 
@@ -30,7 +30,7 @@
 	position: absolute;
 	z-index:  100;
 	right:    0px;
-	bottom:   -45px;
+	bottom:   -36px;
 	height:   30px;
 	width:    500px;
 }
