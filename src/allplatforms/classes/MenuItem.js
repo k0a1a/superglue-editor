@@ -94,7 +94,14 @@ SC.loadPackage({ 'MenuItem': {
 
     		}
 
-    	}
+    	},
+
+        updateMenuItem: {
+            comment: 'I update the MenuItem when the documentMenu is shown.',
+            code: function(){
+                this.set({ isMenuItemActive: false });
+            }
+        }
 
 
     }

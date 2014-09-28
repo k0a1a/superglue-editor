@@ -195,6 +195,26 @@ SC.loadPackage({ 'Server': {
         },
 
 
+        newPage: {
+            comment: 'I create a new SuperGlue page, params = { newPath: aString, onsuccess: aFunction, onerror: aFunction, onprogress: aFunction }',
+            code: function(params){
+
+                var newPath = '.' + params.newPath.split(' ').join('\\ ');
+
+                this.do('cmdRequest', {
+
+                    cmd: 'wget http://localhost/resources/empty.html -O ' + newPath,
+
+                    onerror:    params.onerror,
+                    onprogress: params.onprogress,
+                    onresponse: params.onsuccess
+
+                });
+
+            }
+        },
+
+
         copyFile: {
             comment: 'I copy a file, params = { sourcePath: aString, targetPath: aString, onsuccess: aFunction, onerror: aFunction, onprogress: aFunction }',
             code: function(params){

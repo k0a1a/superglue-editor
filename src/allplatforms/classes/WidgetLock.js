@@ -35,32 +35,7 @@ SC.loadPackage({ 'WidgetLock': {
                 var self = this,
                     onMouseUp = function(evt){
 
-                        SuperGlue.get('history').do('actionHasStarted', self.do('createState'))
-
-                        if(self.get('locked')){
-
-                            for(var myElements = self.get('selection').get('elements'),
-                                    i = 0, l = myElements.length; i < l; i++){
-
-                                myElements[i].set({ group: null });
-
-                            }
-
-                        }else{
-
-                            for(var groupID    = Date.now(),
-                                    myElements = self.get('selection').get('elements'),
-                                    i = 0, l = myElements.length; i < l; i++){
-
-                                myElements[i].set({ group: groupID });
-
-                            }
-
-                        }
-
-                        self.get('selection').do('updateLockGroup');
-
-                        SuperGlue.get('history').do('actionHasSucceeded', self.do('createState'))
+                        self.do('action');
 
                     };
 
@@ -69,8 +44,42 @@ SC.loadPackage({ 'WidgetLock': {
 
     		}
 
-    	},
+    	}, 
 
+
+        action: {
+            comment: 'I do the job.',
+            code: function(){
+
+                SuperGlue.get('history').do('actionHasStarted', this.do('createState'))
+
+                if(this.get('locked')){
+
+                    for(var myElements = this.get('selection').get('elements'),
+                            i = 0, l = myElements.length; i < l; i++){
+
+                        myElements[i].set({ group: null });
+
+                    }
+
+                }else{
+
+                    for(var groupID    = Date.now(),
+                            myElements = this.get('selection').get('elements'),
+                            i = 0, l = myElements.length; i < l; i++){
+
+                        myElements[i].set({ group: groupID });
+
+                    }
+
+                }
+
+                this.get('selection').do('updateLockGroup');
+
+                SuperGlue.get('history').do('actionHasSucceeded', this.do('createState'))
+                
+            }
+        },
 
 
         createState: {

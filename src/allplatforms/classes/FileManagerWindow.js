@@ -1237,7 +1237,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                 SuperGlue.get('server').do('doesFileExist', {
                     path: destination,
                     onerror: function() {
-                        alert('Checking if path already exists threw an error.\nError Message:\n\n' + this);
+                        alert('The file does already exist.');
+                        console.log(this)
                     },
                     onsuccess: function(aBoolean) {
 
@@ -1254,11 +1255,11 @@ SC.loadPackage({ 'FileManagerWindow': {
                                 destination = self.get('basePath') +'/'+ cleanedName.substr(0, (cleanedName.lastIndexOf('.')) || cleanedName) + '-' + increment + cleanedName.substring(cleanedName.lastIndexOf('.'));
                             }                            
                             
-                            SuperGlue.get('server').do('copyFile', {
-                                sourcePath:   '/resources/empty.html',
-                                targetPath:   destination,
+                            SuperGlue.get('server').do('newPage', {
+                                newPath: destination,
                                 onerror: function() {
-                                    alert('File / Directory could not be copied.\nError Message:\n\n' + this);
+                                    alert('There was a critical error.\nSee console for more details');
+                                    console.log(this);
                                 },
                                 onprogress: function(evt){
                                     //

@@ -25,56 +25,62 @@ SC.loadPackage({ 'WidgetDelete': {
 
                     self.set({ isWidgetActive: false });
 
-
-                    var elements = self.get('selection').get('elements').slice();
-                    self.get('selection').do('clearAll');
-
-                    SuperGlue.get('history').do('actionHasStarted', (function(elements){
-
-                        var indicesAndElements = [];
-                        for(var i = 0, l = elements.length; i < l; i++){
-                            indicesAndElements.push({
-                                index:   SuperGlue.get('document').get('children').indexOf(elements[i]),
-                                element: elements[i]
-                            })
-                        }
-                        indicesAndElements.sort(function(a, b){
-                            if(a.index > b.index){
-                                return 1;
-                            }else{
-                                return -1;
-                            }
-                        });
-
-                        return function(){
-
-                            for(var i = 0, l = indicesAndElements.length; i < l; i++){
-                                SuperGlue.get('document').do('insertElement', indicesAndElements[i]);
-                            }
-                            
-                        }
-
-
-                    }).call(this, elements));
-
-                    var deleteElements = function(){
-                        for(var i = 0, l = elements.length; i < l; i++){
-                            SuperGlue.get('document').do('removeElement', elements[i]);
-                        }
-                    };
-
-                    deleteElements();
-
-                    SuperGlue.get('history').do('actionHasSucceeded', deleteElements);
-
-
+                    self.do('action');
 
                 }, false);
 
 
     		}
 
-    	}
+    	}, 
+
+        action: {
+            comment: 'I do the job.',
+            code: function(){
+
+                var elements = this.get('selection').get('elements').slice();
+                this.get('selection').do('clearAll');
+
+                SuperGlue.get('history').do('actionHasStarted', (function(elements){
+
+                    var indicesAndElements = [];
+                    for(var i = 0, l = elements.length; i < l; i++){
+                        indicesAndElements.push({
+                            index:   SuperGlue.get('document').get('children').indexOf(elements[i]),
+                            element: elements[i]
+                        })
+                    }
+                    indicesAndElements.sort(function(a, b){
+                        if(a.index > b.index){
+                            return 1;
+                        }else{
+                            return -1;
+                        }
+                    });
+
+                    return function(){
+
+                        for(var i = 0, l = indicesAndElements.length; i < l; i++){
+                            SuperGlue.get('document').do('insertElement', indicesAndElements[i]);
+                        }
+                        
+                    }
+
+
+                }).call(this, elements));
+
+                var deleteElements = function(){
+                    for(var i = 0, l = elements.length; i < l; i++){
+                        SuperGlue.get('document').do('removeElement', elements[i]);
+                    }
+                };
+
+                deleteElements();
+
+                SuperGlue.get('history').do('actionHasSucceeded', deleteElements);
+
+            }
+        }
 
 
     }

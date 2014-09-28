@@ -61,7 +61,9 @@ SC.loadPackage({ 'DocumentMenu': {
             comment: 'Show me at { x: anInt, y: anInt }',
             code: function(myCoordinates){
 
-                var myNode        = this.get('myNode');
+                var myNode        = this.get('myNode'),
+                    menuItemsTop  = this.get('menuItemsTop'),
+                    menuItemsLeft = this.get('menuItemsLeft');
 
                 if(myNode.parentNode === document.body){
                     return this.do('close');
@@ -69,6 +71,14 @@ SC.loadPackage({ 'DocumentMenu': {
 
 
                 document.body.insertBefore(myNode, SuperGlue.get('windowManager').get('windowsContainer'));
+
+                for(var i = 0, l = menuItemsTop.length; i < l; i++){
+                    menuItemsTop[i].do('updateMenuItem');
+                }
+
+                for(var i = 0, l = menuItemsLeft.length; i < l; i++){
+                    menuItemsLeft[i].do('updateMenuItem');
+                }
 
             }
         },

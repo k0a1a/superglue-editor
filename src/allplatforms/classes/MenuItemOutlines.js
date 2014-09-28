@@ -18,6 +18,8 @@ SC.loadPackage({ 'MenuItemOutlines': {
 
                 this.delegate('MenuItem', 'init', theDocumentMenu);
                 this.set({ isActionButton: true });
+
+                var self = this;
                 
                 this.get('menuContainer').firstChild.addEventListener('mouseup', function(evt){
 
@@ -28,13 +30,29 @@ SC.loadPackage({ 'MenuItemOutlines': {
 
                     });
 
+                    self.do('updateMenuItem');
 
                 }, false);
 
 
     		}
 
-    	}
+    	},
+
+        updateMenuItem: {
+            comment: 'I update the MenuItem when the documentMenu is shown.',
+            code: function(){
+                this.set({ isMenuItemActive: false });
+
+                if(SuperGlue.get('document').get('showOutlines')){
+                    this.get('menuContainer').firstElementChild.classList.add('hideOutlines');
+                }else{
+                    this.get('menuContainer').firstElementChild.classList.remove('hideOutlines');
+                }
+
+
+            }
+        }
 
 
     }

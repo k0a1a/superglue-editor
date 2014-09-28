@@ -174,7 +174,47 @@ SC.loadPackage({ 'Selection': {
 
         },
 
-        
+
+        callWidgetAction: {
+            comment: 'I call a widget object\'s action',
+            code: function(config){
+
+                if(this.do('isEmpty')){
+                    return;
+                }
+
+                var widget = (function(){
+
+                                    var widgetsRight  = this.get('widgetsRight'),
+                                        widgetsBottom = this.get('widgetsBottom');
+
+                                    for(var i = 0, l = widgetsRight.length; i < l; i++){
+                                        if(widgetsRight[i].class() === config.widget){
+                                            return widgetsRight[i];
+                                        }
+                                    }
+
+                                    for(var i = 0, l = widgetsBottom.length; i < l; i++){
+                                        if(widgetsBottom[i].class() === config.widget){
+                                            return widgetsBottom[i];
+                                        }
+                                    }
+
+                                    if('WidgetLock' === config.widget){
+                                        return this.get('lockWidget');
+                                    }
+
+                                }).call(this);
+
+                if(!widget){
+                    return;
+                }
+
+                widget.do('action', config.modifier)
+                
+            }
+        },
+
 
         addElement: { 
             comment:    'I add anElement to myself.',

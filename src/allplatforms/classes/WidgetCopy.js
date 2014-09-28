@@ -22,24 +22,32 @@ SC.loadPackage({ 'WidgetCopy': {
 
                 this.get('widgetButton').addEventListener('mouseup', function(){
 
-                    var elements   = theSelection.get('elements'),
-                        copyString = '';
-
-                    for(var i = 0, l = elements.length; i < l; i++){
-
-                        copyString += elements[i].do('renderYourself', { indent: 1 }) + '\n';
-
-                    }
-
-                    SuperGlue.get('clipboard').do('copy', copyString);
-
+                    self.do('action')
 
                 }, false)
 
 
     		}
 
-    	}
+    	}, 
+
+        action: {
+            comment: 'I do the job.',
+            code: function(){
+
+                var elements   = SuperGlue.get('selection').get('elements'),
+                    copyString = '';
+
+                for(var i = 0, l = elements.length; i < l; i++){
+
+                    copyString += elements[i].do('renderYourself', { indent: 1 }) + '\n';
+
+                }
+
+                SuperGlue.get('clipboard').do('copy', copyString);
+
+            }
+        }
 
 
     }

@@ -18,6 +18,8 @@ SC.loadPackage({ 'MenuItemCenter': {
 
                 this.delegate('MenuItem', 'init', theDocumentMenu);
                 this.set({ isActionButton: true });
+
+                var self = this;
                 
                 this.get('menuContainer').firstChild.addEventListener('mouseup', function(evt){
 
@@ -34,6 +36,7 @@ SC.loadPackage({ 'MenuItemCenter': {
                     myDocument.set({ layout: {
                         centered: !myDocument.get('layout').centered
                     }});
+                    self.do('updateMenuItem');
 
                     SuperGlue.get('history').do('actionHasSucceeded', createState(myDocument));
                     
@@ -43,7 +46,22 @@ SC.loadPackage({ 'MenuItemCenter': {
 
     		}
 
-    	}
+    	},
+
+        updateMenuItem: {
+            comment: 'I update the MenuItem when the documentMenu is shown.',
+            code: function(){
+                this.set({ isMenuItemActive: false });
+
+                if(SuperGlue.get('document').get('layout').centered){
+                    this.get('menuContainer').firstElementChild.classList.remove('infinite');
+                }else{
+                    this.get('menuContainer').firstElementChild.classList.add('infinite');
+                }
+
+
+            }
+        }
 
 
     }
