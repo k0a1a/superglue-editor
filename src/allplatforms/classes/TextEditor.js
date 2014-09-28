@@ -171,6 +171,9 @@ SC.loadPackage({ 'TextEditor': {
                 textShapeToolbar.addEventListener('mousedown', function(evt) {
                     evt.stopPropagation();
                 });
+                textShapeToolbar.addEventListener('mouseup', function(evt) {
+                    evt.stopPropagation();
+                });
 
                 this.get('textEditorContainer').appendChild(textShapeToolbar);
 
