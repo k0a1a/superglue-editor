@@ -5,11 +5,11 @@
     left:       0px;
     z-index:    900;
 
-    background-color:       rgba(92, 13, 14, 0.7);
+    background-color:       rgba(20, 20, 20, 0.85);
     background-image:       url(img/help.png);
     background-repeat:      no-repeat;
     background-position:    center;
-    background-size:        60%;
+    background-size:        700px;
 
     pointer-events:         none;
 
