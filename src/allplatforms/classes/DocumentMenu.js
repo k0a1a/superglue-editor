@@ -27,7 +27,7 @@ SC.loadPackage({ 'DocumentMenu': {
 
                     menuItemsTop  = [],
                     menuItemsLeft = [],
-                    menuItemsClassesTop  = [ 'MenuItemFileManager', 'MenuItemSave', 'MenuItemSaveAs', 'MenuItemSaveRemote', 'MenuItemOutlines', 'MenuItemPaste', 'MenuItemUndo', 'MenuItemRedo' ],
+                    menuItemsClassesTop  = [ 'MenuItemFileManager', 'MenuItemNewPage', 'MenuItemSave', 'MenuItemSaveAs', 'MenuItemSaveRemote', 'MenuItemServerSettings', 'MenuItemOutlines', 'MenuItemPaste', 'MenuItemUndo', 'MenuItemRedo' ],
                     menuItemsClassesLeft = [ 'MenuItemCenter', 'MenuItemPageTitle', 'MenuItemBackgroundColor', 'MenuItemBackgroundImg', 'MenuItemBackgroundRepeat' ],
                     menuItem = null;
 

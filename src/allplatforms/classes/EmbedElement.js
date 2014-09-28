@@ -7,7 +7,7 @@ SC.loadPackage({ 'EmbedElement': {
 
     sharedProperties: {
         protoHTML:          { initValue: '<div class="sg-element" data-superglue-type="EmbedElement" style="left: 0px; top: 0px; width: 0px; height: 0px;">'
-                                        +'\t<pre><h1>&lt;/&gt;</h1>Replace this with embedded code.</pre>'
+                                        +'\t<pre><h1>&lt;/&gt;</h1>Replace this with HTML code.</pre>'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity' ] },
         creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-embedElement" class="sg-editing-creation-menu-button" data-tooltip="Embed HTML Code"></button></div>' }
