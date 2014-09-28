@@ -36,7 +36,7 @@ SC.loadPackage({ 'History': {
                 }
                 this.set({ stackPointer: (this.get('stackPointer') - 1) });
                 this.get('stack')[this.get('stackPointer')].restoreFunction.call();
-console.log('undo', this.get('stackPointer'));
+
             }
         },
 
@@ -50,7 +50,7 @@ console.log('undo', this.get('stackPointer'));
                 }
                 this.get('stack')[this.get('stackPointer')].repeatFunction.call();
                 this.set({ stackPointer: (this.get('stackPointer') + 1) });
-console.log('redo', this.get('stackPointer'));
+
             }
         },
 
@@ -64,7 +64,6 @@ console.log('redo', this.get('stackPointer'));
                     temporaryRestoreFunc: restoreFunction
                 });
 
-console.log('start', this.get('stack'))
 
             }
         },
@@ -97,7 +96,6 @@ console.log('start', this.get('stack'))
                     this.set({ stackPointer: (this.get('stackPointer') - 1) });
                 }
 
-console.log('success', this.get('stack').length)
 
             }
         }
