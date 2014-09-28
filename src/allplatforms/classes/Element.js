@@ -247,11 +247,16 @@ SC.loadPackage({ 'Element': {
                                             : '')
                                         +'>'
 
-                            + '\n' + (this.get('contentNode').innerHTML
-                                        .split('\n')
-                                        .filter(function(line){ return line.trim() !== '' })
-                                        .join('\n'))
+                            + '\n' +    (function(innerHTML){
 
+                                            var renderedContent = innerHTML;
+
+                                            renderedContent = renderedContent.split('\n').filter(function(line){ return line.trim() !== '' });
+
+                                            return renderedContent.join('\n')
+
+                                        }).call(this, this.get('contentNode').innerHTML)
+                                        
                             
                             + indent + '</div>';
 

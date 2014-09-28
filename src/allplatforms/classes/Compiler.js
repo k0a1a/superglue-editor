@@ -31,10 +31,11 @@ SC.loadPackage({ 'Compiler': {
                             +'\n\t\t<link rel="stylesheet" href="/resources/css/SuperGlue.css" data-superglue="text-css">'
                             +'\n\t</head>';
                 
-                thePage += '\n\t<body style="'+ document.body.getAttribute('style')
-                                                                .replace(document.location.origin, '')
-                                                                .replace('url("', 'url(')
-                                                                .replace('");', ');')
+                thePage += '\n\t<body style="'+ (document.body.getAttribute('style')
+                                                    ? document.body.getAttribute('style').replace(document.location.origin, '')
+                                                                                         .replace('url("', 'url(')
+                                                                                         .replace('");', ');')
+                                                    : '')
 
                             +'">';
         

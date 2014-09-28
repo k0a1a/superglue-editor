@@ -101,8 +101,6 @@ SC.loadPackage({ 'FileManagerWindow': {
             comment: 'I hold the path that was given to me to auto-select a file / directory.',
             transform: function(path) {
 
-                console.log(path);
-                
                 if ( path ) {
                     var fullPath = path;
                     var fullPathArray = fullPath.split('/');
