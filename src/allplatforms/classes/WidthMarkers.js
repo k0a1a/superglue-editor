@@ -106,7 +106,7 @@ SC.loadPackage({ 'WidthMarkers': {
                         if(evt.button !== 0) return;
                         startX   = evt.pageX;
                         minWidth = SuperGlue.get('document').do('getMinWidth');
-                        leftSide = evt.target === markerLeft;
+                        leftSide = evt.target === markerLeft || evt.target === triangleLeft;
                         SuperGlue.get('document').set({ interactionInProgress: true });
                         wasVisible = self.get('visible');
                         self.set({ visible: true });
