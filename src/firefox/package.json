@@ -1,9 +1,11 @@
 {
-  "name": "superglue",
-  "title": "SuperGlue",
-  "id": "jid1-C1BbtcqPveDNXw",
-  "description": "This is the SuperGlue Plugin to create and modify web content stored on a SuperGlue server",
-  "author": "The SuperGlue Team (2014). www.superglue.it",
-  "license": "GPL",
-  "version": "1.0"
+  "name":         "superglue",
+  "title":        "SuperGlue",
+  "id":           "jid1-C1BbtcqPveDNXw",
+  "description":  "This is the SuperGlue browser add-on to create and modify web content stored on a SuperGlue server",
+  "author":       "The SuperGlue Team (2014). www.superglue.it",
+  "license":      "GPL",
+  "version":      "1.0",
+  "icon":         "data/logo-32.png",
+  "icon64":       "data/logo-64.png"
 }

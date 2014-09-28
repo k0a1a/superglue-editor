@@ -300,6 +300,36 @@ SC.loadPackage({ 'Keyboard': {
                     layout   = SuperGlue.get('document').get('layout');
 
 
+                (function(elements){
+
+                    var savedDimensions = []
+
+                    for(var i = 0, l = elements.length; i < l; i++){
+                        savedDimensions.push({
+                            top:    elements[i].get('top'),
+                            left:   elements[i].get('left'),
+                            width:  elements[i].get('width'),
+                            height: elements[i].get('height')
+                        })
+                    }
+                    
+                    SuperGlue.get('history').do('actionHasStarted', function(){
+                        
+                        for(var i = 0, l = elements.length; i < l; i++){
+                            elements[i].set({
+                                top:    savedDimensions[i].top,
+                                left:   savedDimensions[i].left,
+                                width:  savedDimensions[i].width,
+                                height: savedDimensions[i].height
+                            })
+                        }
+                    
+                    });
+
+                }).call(this, elements);
+
+
+
                 for(var i = 0, l = elements.length; i < l; i++){
 
                     switch(direction){
@@ -331,6 +361,36 @@ SC.loadPackage({ 'Keyboard': {
                 }
 
                 SuperGlue.get('selection').do('updateDimensions');
+
+
+                (function(elements){
+
+                    var savedDimensions = []
+
+                    for(var i = 0, l = elements.length; i < l; i++){
+                        savedDimensions.push({
+                            top:    elements[i].get('top'),
+                            left:   elements[i].get('left'),
+                            width:  elements[i].get('width'),
+                            height: elements[i].get('height')
+                        })
+                    }
+                    
+                    SuperGlue.get('history').do('actionHasSucceeded', function(){
+                        
+                        for(var i = 0, l = elements.length; i < l; i++){
+                            elements[i].set({
+                                top:    savedDimensions[i].top,
+                                left:   savedDimensions[i].left,
+                                width:  savedDimensions[i].width,
+                                height: savedDimensions[i].height
+                            })
+                        }
+                    
+                    });
+
+                }).call(this, elements);
+
                 
             }
         }

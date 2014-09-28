@@ -19,10 +19,11 @@ SC.loadPackage({ 'WidgetCopy': {
                 this.delegate('Widget', 'init', theSelection);
                 this.set({ isActionButton: true });
 
+                var self = this;
 
                 this.get('widgetButton').addEventListener('mouseup', function(){
 
-                    self.do('action')
+                    self.do('action');
 
                 }, false)
 

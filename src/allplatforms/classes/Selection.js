@@ -571,7 +571,7 @@ SC.loadPackage({ 'Selection': {
                             document.addEventListener('mousemove', onMouseMove, true);
                             document.addEventListener('mouseup',   onMouseUp,   true);
                             SuperGlue.get('document').set({ interactionInProgress: true });
-                            // UNDO
+                            
 
                         }
 
@@ -587,7 +587,6 @@ SC.loadPackage({ 'Selection': {
                         document.removeEventListener('mouseup', onMouseUpWithModifier, true);
                         SuperGlue.get('document').set({ interactionInProgress: false });
                         
-                        // UNDO
                         
                         evt.stopPropagation();
                         evt.preventDefault();
