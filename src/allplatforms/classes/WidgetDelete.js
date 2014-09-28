@@ -23,8 +23,6 @@ SC.loadPackage({ 'WidgetDelete': {
 
                 this.get('widgetButton').addEventListener('mouseup', function(evt){
 
-                    self.set({ isWidgetActive: false });
-
                     self.do('action');
 
                 }, false);

@@ -100,7 +100,7 @@ SC.loadPackage({ 'WidthMarkers': {
                     wasVisible = true,
                     moving = false,
 
-                    gridVisible,
+                    showOutlines,
 
                     onMouseDown = function(evt){
                         if(evt.button !== 0) return;
@@ -112,8 +112,8 @@ SC.loadPackage({ 'WidthMarkers': {
                         self.set({ visible: true });
                         moving = true;
 
-                        gridVisible = SuperGlue.get('document').get('grid').get('visible');
-                        SuperGlue.get('document').get('grid').set({ visible: true });
+                        showOutlines = SuperGlue.get('document').get('showOutlines');
+                        SuperGlue.get('document').set({ showOutlines: true });
 
                         
                         (function(width){
@@ -149,7 +149,7 @@ SC.loadPackage({ 'WidthMarkers': {
                         self.get('markerLeft').classList.add('sg-editing-width-marker-left-visible');
                         self.get('markerRight').classList.add('sg-editing-width-marker-right-visible');
 
-                        SuperGlue.get('document').get('grid').set({ visible: gridVisible });
+                        SuperGlue.get('document').set({ showOutlines: showOutlines });
 
                         (function(width){
 

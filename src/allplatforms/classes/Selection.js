@@ -64,6 +64,13 @@ SC.loadPackage({ 'Selection': {
             comment:    'I update the menu of widgets according to the current selection.',
             code:       function(){
 
+
+                // Update widget menu to the right
+                for(var widgetsRight = this.get('widgetsRight'), i = 0, l = widgetsRight.length;
+                    i < l; i++){
+                    widgetsRight[i].set({ isWidgetActive: false });
+                }
+
                 // Update widget menu to the bottom
 
                 var elements                = this.get('elements'),
