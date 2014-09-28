@@ -95,6 +95,7 @@
         'css/FileManagerWindow.css',
         'css/Grid.css',
         'css/HTMLEditor.css',
+        'css/Keyboard.css',
         'css/MenuItem.css',
         'css/MenuItemBackgroundColor.css',
         'css/MenuItemBackgroundImg.css',

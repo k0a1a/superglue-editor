@@ -1,0 +1,16 @@
+#sg-editing-helperOverlay {
+
+    position:   fixed;
+    top:        0px;
+    left:       0px;
+    z-index:    900;
+
+    background-color:       rgba(92, 13, 14, 0.7);
+    background-image:       url(img/help.png);
+    background-repeat:      no-repeat;
+    background-position:    center;
+    background-size:        60%;
+
+    pointer-events:         none;
+
+}

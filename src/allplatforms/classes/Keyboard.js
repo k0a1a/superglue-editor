@@ -2,6 +2,11 @@ SC.loadPackage({ 'Keyboard': {
 
     comment: 'I am a controller for keyboard commands.',
 
+    properties: {
+
+        helperOverlay: { comment: 'I store the helper overlay DOM node.' }
+
+    },
     
     methods: {
 
@@ -11,9 +16,32 @@ SC.loadPackage({ 'Keyboard': {
 
                 var self = this;
 
+
                 document.addEventListener('keydown', function(evt){
                     self.do('processKeyEvent', evt);
                 }, false);
+
+
+
+                var helperOverlay = document.createElement('div');
+                    helperOverlay.setAttribute('id', 'sg-editing-helperOverlay');
+                this.set({ helperOverlay: helperOverlay })
+
+                document.addEventListener('keydown', function(evt){
+                    if(evt.keyCode === 72){
+                        var helperOverlay = self.get('helperOverlay');
+                        helperOverlay.style.width  = window.innerWidth + 'px';
+                        helperOverlay.style.height = window.innerHeight + 'px';
+                        document.body.appendChild(helperOverlay);
+                    }
+                }, false);
+
+                document.addEventListener('keyup', function(evt){
+                    if(evt.keyCode === 72){
+                        document.body.removeChild(self.get('helperOverlay'));
+                    }
+                }, false);
+
 
             }
         },
@@ -23,8 +51,8 @@ SC.loadPackage({ 'Keyboard': {
             comment: 'I process key events.',
             code: function(evt){
 
-                var self       = this,
-                    irrelevant = false;
+                var self      = this,
+                    relevant  = true;
 
                 if(evt.ctrlKey){
 
@@ -95,7 +123,7 @@ SC.loadPackage({ 'Keyboard': {
                             break;
 
                         default:
-                            irrelevant = true;
+                            relevant = false;
                             break;
 
                     }
@@ -138,13 +166,8 @@ SC.loadPackage({ 'Keyboard': {
                             
                             break;
 
-                        case 72:
-                            // H (Help)
-                            
-                            break;
-
                         default:
-                            irrelevant = true;
+                            relevant = false;
                             break;
 
                     }
@@ -152,7 +175,7 @@ SC.loadPackage({ 'Keyboard': {
 
                 }
 
-                if(!irrelevant){
+                if(relevant){
                     evt.stopPropagation();
                     evt.preventDefault();
                 }
