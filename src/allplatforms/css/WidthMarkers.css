@@ -10,16 +10,6 @@
 	min-height: 	150px;
 }
 
-#sg-editing-width-marker-left .sg-editing-width-marker-left-triangle {
-	position: absolute;
-	margin-top: 	-15px;
-	left: 13px;
-	border-style: 	solid;
-	border-width: 	15px 0 15px 15px;
-	border-color: 	transparent transparent transparent rgb(255, 41, 61);
-	display: none;
-}
-
 #sg-editing-width-marker-right {
 	position: 		absolute;
 	pointer-events: all;
@@ -30,28 +20,32 @@
 	min-height: 	150px;
 }
 
-#sg-editing-width-marker-right .sg-editing-width-marker-right-triangle {
-	position: absolute;
+#sg-editing-width-marker-left .sg-editing-width-marker-left-triangle {
+	position: 		absolute;
 	margin-top: 	-15px;
-	right: 13px;
+	left: 			13px;
+	border-style: 	solid;
+	border-width: 	15px 0 15px 15px;
+	border-color: 	transparent transparent transparent rgb(255, 41, 61);
+	display: 		none;
+}
+
+#sg-editing-width-marker-right .sg-editing-width-marker-right-triangle {
+	position: 		absolute;
+	margin-top: 	-15px;
+	right: 			13px;
 	border-style: 	solid;
 	border-width: 	15px 15px 15px 0;
 	border-color: 	transparent rgb(255, 41, 61) transparent transparent;
-	display: none;
+	display: 		none;
 }
 
 .sg-editing-width-marker-left-visible {
 	border-right: 2px dashed rgb(255, 41, 61);
 }
 
-#sg-editing-width-marker-left.sg-editing-width-marker-left-visible .sg-editing-width-marker-left-triangle {
-	display: block;
-}
 
 .sg-editing-width-marker-right-visible {
 	border-left: 2px dashed rgb(255, 41, 61);
 }
 
-#sg-editing-width-marker-right.sg-editing-width-marker-right-visible .sg-editing-width-marker-right-triangle {
-	display: block;
-}

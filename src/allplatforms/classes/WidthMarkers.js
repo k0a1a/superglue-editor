@@ -11,9 +11,10 @@ SC.loadPackage({ 'WidthMarkers': {
 
     properties: {
 
+        editingContainer: { comment: 'I need a reference to the editingContainer.' },
+
         markerLeft:       { comment: 'My left marker'  },
         markerRight:      { comment: 'My right marker' },
-        editingContainer: { comment: 'I need a reference to the editingContainer.' },
 
         active:     { comment:      'Shall my markers be functional or not?',
                       transform:    function(aBoolean){
@@ -55,7 +56,10 @@ SC.loadPackage({ 'WidthMarkers': {
 
                 var widthMarkers = (new DOMParser()).parseFromString(this.class.get('markerContainers'), 'text/html').body,
                     markerLeft   = widthMarkers.childNodes.item(0),
-                    markerRight  = widthMarkers.childNodes.item(1);
+                    markerRight  = widthMarkers.childNodes.item(1),
+
+                    triangleLeft  = markerLeft.querySelector('.sg-editing-width-marker-left-triangle'),
+                    triangleRight = markerRight.querySelector('.sg-editing-width-marker-right-triangle');
 
                 this.set({ 
                     editingContainer:   editingContainer,
@@ -73,8 +77,10 @@ SC.loadPackage({ 'WidthMarkers': {
                             self.get('markerRight').classList.add('sg-editing-width-marker-right-visible');
                         }
 
-                        self.get('markerLeft').querySelector('.sg-editing-width-marker-left-triangle').style.top = evt.pageY + 'px';
-                        self.get('markerRight').querySelector('.sg-editing-width-marker-right-triangle').style.top = evt.pageY + 'px';
+                        triangleLeft.style.top      = evt.pageY + 'px';
+                        triangleRight.style.top     = evt.pageY + 'px';
+                        triangleLeft.style.display  = 'block';
+                        triangleRight.style.display = 'block';
 
                     },
                     onMouseOut = function(evt){
@@ -82,12 +88,17 @@ SC.loadPackage({ 'WidthMarkers': {
                             self.get('markerLeft').classList.remove('sg-editing-width-marker-left-visible');
                             self.get('markerRight').classList.remove('sg-editing-width-marker-right-visible');
                         }
+                        if(!moving){
+                            triangleLeft.style.display  = 'none';
+                            triangleRight.style.display = 'none';
+                        }
                     },
 
                     startX   = 0,
                     minWidth = 0,
                     leftSide = false,
                     wasVisible = true,
+                    moving = false,
 
                     gridVisible,
 
@@ -99,6 +110,7 @@ SC.loadPackage({ 'WidthMarkers': {
                         SuperGlue.get('document').set({ interactionInProgress: true });
                         wasVisible = self.get('visible');
                         self.set({ visible: true });
+                        moving = true;
 
                         gridVisible = SuperGlue.get('document').get('grid').get('visible');
                         SuperGlue.get('document').get('grid').set({ visible: true });
@@ -129,6 +141,9 @@ SC.loadPackage({ 'WidthMarkers': {
                         var myDocument = SuperGlue.get('document');
                         myDocument.do('afterLayoutHasChanged');
                         myDocument.set({ interactionInProgress: false });
+                        moving = false;
+                        triangleLeft.style.display  = 'none';
+                        triangleRight.style.display = 'none';
                         
                         self.set({ visible: wasVisible });
                         self.get('markerLeft').classList.add('sg-editing-width-marker-left-visible');
@@ -167,6 +182,9 @@ SC.loadPackage({ 'WidthMarkers': {
                                 width:    minWidth
                             }});
                         }
+
+                        triangleLeft.style.top      = evt.pageY + 'px';
+                        triangleRight.style.top     = evt.pageY + 'px';
 
                         evt.stopPropagation();
                         evt.preventDefault();
