@@ -93,7 +93,7 @@ SC.loadPackage({ 'Keyboard': {
 
                 var relevant  = true;
 
-                if(evt.ctrlKey){
+                if(evt.ctrlKey || evt.metaKey){
 
 
                     switch(evt.keyCode){
