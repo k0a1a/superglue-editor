@@ -660,6 +660,7 @@ SC.loadPackage({ 'Selection': {
                                             })
                                         }
                                     }
+                                    SuperGlue.get('document').do('afterLayoutHasChanged');
                                 })
 
                             }).call(this, elements, thisElement)
@@ -673,8 +674,6 @@ SC.loadPackage({ 'Selection': {
                         }
 
 
-                        // UNDO
-                        
                         evt.stopPropagation();
                         evt.preventDefault();
 
@@ -740,6 +739,7 @@ SC.loadPackage({ 'Selection': {
                                             })
                                         }
                                     }
+                                    SuperGlue.get('document').do('afterLayoutHasChanged');
                                 })
 
                             }).call(this, elements, thisElement)

@@ -327,6 +327,8 @@ SC.loadPackage({ 'Keyboard': {
                                 height: savedDimensions[i].height
                             })
                         }
+
+                        SuperGlue.get('document').do('afterLayoutHasChanged');
                     
                     });
 
@@ -365,6 +367,7 @@ SC.loadPackage({ 'Keyboard': {
                 }
 
                 SuperGlue.get('selection').do('updateDimensions');
+                SuperGlue.get('document').do('afterLayoutHasChanged');
 
 
                 (function(elements){
@@ -390,6 +393,8 @@ SC.loadPackage({ 'Keyboard': {
                                 height: savedDimensions[i].height
                             })
                         }
+
+                        SuperGlue.get('document').do('afterLayoutHasChanged');
                     
                     });
 
