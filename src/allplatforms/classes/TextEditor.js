@@ -155,7 +155,7 @@ SC.loadPackage({ 'TextEditor': {
                     textShapeToolbar.setAttribute('data-target', '#currentEditor');
                     textShapeToolbar.style.display = 'block';
 
-                    textShapeToolbar.style.top = this.get('textEditor').offsetTop - 85 + 'px';
+                    textShapeToolbar.style.top = this.get('textEditor').offsetTop - 76 + 'px';
                     textShapeToolbar.style.left = this.get('textEditor').offsetLeft + this.get('textEditor').offsetWidth - 300 + 'px';
 
                 var editGroups = this.class.get('activeEditGroups');
