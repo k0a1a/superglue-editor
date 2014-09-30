@@ -832,7 +832,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                         	
                         	self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').classList.add('active');
 
-                            self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').scrollIntoView(false);
+                            self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').scrollIntoView(true);
                         	
                         	self.set({ selectedType: self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').getAttribute('data-type') });
                         	self.set({ selectedName: self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').getAttribute('data-name') });
