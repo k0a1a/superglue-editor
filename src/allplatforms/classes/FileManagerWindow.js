@@ -101,12 +101,14 @@ SC.loadPackage({ 'FileManagerWindow': {
             comment: 'I hold the path that was given to me to auto-select a file / directory.',
             transform: function(path) {
 
-                if ( path ) {
+                if ( path && path.indexOf('/resources/img/') == -1 ) {
                     var fullPath = path;
                     var fullPathArray = fullPath.split('/');
                         fullPathArray.pop();
                     var parentDirectory = fullPathArray.join('/');
                     this.do('listDirectory', { path: parentDirectory, selectPath: path });
+                } else {
+                    this.do('listDirectory', { path: '/' });
                 }
 
                 return path;
@@ -826,6 +828,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                             }
                         	
                         	self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').classList.add('active');
+
+                            self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').scrollIntoView(false);
                         	
                         	self.set({ selectedType: self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').getAttribute('data-type') });
                         	self.set({ selectedName: self.get('directoryListing').querySelector('[data-path="'+ arg.selectPath +'"]').getAttribute('data-name') });
