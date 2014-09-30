@@ -598,7 +598,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                                 SuperGlue.get('server').do('removeFile', {
                                     path: fullPath,
                                     onerror: function() {
-                                        alert('File could not be removed.\nError Message:\n\n' + arguments);
+                                        alert('File could not be removed.\nSee console for error message.');
+                                        console.log(arguments);
                                     },
                                     onsuccess: function() {
                                         
@@ -619,7 +620,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                                 SuperGlue.get('server').do('removeDirectory', {
                                     path: fullPath,
                                     onerror: function() {
-                                        alert('Directory could not be removed.\nError Message:\n\n' + arguments);
+                                        alert('Directory could not be removed.\nSee console for error message.');
+                                        console.log(arguments);
                                     },
                                     onsuccess: function() {
                                         
@@ -681,7 +683,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                 SuperGlue.get('server').do('directoryListing', {
                     path: arg.path,
                     onerror: function() {
-                        alert('Directory Listing failed.\nError Message:\n\n' + this);
+                        alert('Directory listing failed.\nSee console for error message.');
+                        console.log(arguments);
                     },
                     onsuccess: function() { 
 
@@ -893,7 +896,8 @@ SC.loadPackage({ 'FileManagerWindow': {
             	SuperGlue.get('server').do('doesDirectoryExist', {
                     path: destination,
                     onerror: function() {
-                        alert('Checking if directory exists threw an error.\nError Message:\n\n' + this);
+                        alert('Could not check if directory exists.\nSee console for error message.');
+                        console.log(this);
                     },
                     onsuccess: function(aBoolean) {
                     	
@@ -912,7 +916,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                             SuperGlue.get('server').do('makeDirectory', {
                                 path: destination,
                                 onerror: function() {
-                                    alert('Directory could not be created.\nError Message:\n\n' + this);
+                                    alert('Directory could not be created.\nSee console for error message.');
+                                    console.log(arguments);
                                 },
                                 onsuccess: function() {
                                     
@@ -958,7 +963,8 @@ SC.loadPackage({ 'FileManagerWindow': {
             	SuperGlue.get('server').do('doesFileExist', {
                     path: destination,
                     onerror: function() {
-                        alert('Checking if file exists threw an error.\nError Message:\n\n' + this);
+                        alert('Could not check if file already exists.\nSee console for error message.');
+                        console.log(arguments);
                     },
                     onsuccess: function(aBoolean) {
                     	
@@ -995,7 +1001,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                                 data:   uploadForm,
                                 path:   destination,
                                 onerror: function() {
-                                    alert('Upload failed.\nError Message:\n\n' + this);
+                                    alert('File could not be uploaded.\nSee console for error message.');
+                                    console.log(arguments);
                                 },
                                 onprogress: function(evt){
 
@@ -1071,7 +1078,8 @@ SC.loadPackage({ 'FileManagerWindow': {
             	SuperGlue.get('server').do(checkFunctionName, {
                     path: destination,
                     onerror: function() {
-                        alert('Checking if path already exists threw an error.\nError Message:\n\n' + this);
+                        alert('Could not check if path already exists.\nSee console for error message.');
+                        console.log(arguments);
                     },
                     onsuccess: function(aBoolean) {
 
@@ -1096,7 +1104,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                                 sourcePath:   arg.origin,
                                 targetPath:   destination,
                                 onerror: function() {
-                                    alert('File could not be copied to new location.\nError Message:\n\n' + this);
+                                    alert('File could not be copied to new location.\nSee console for error message.');
+                                    console.log(arguments);
                                 },
                                 onprogress: function(evt){
                                     //
@@ -1156,7 +1165,8 @@ SC.loadPackage({ 'FileManagerWindow': {
             	SuperGlue.get('server').do(checkFunctionName, {
                     path: destination,
                     onerror: function() {
-                        alert('Checking if path already exists threw an error.\nError Message:\n\n' + this);
+                        alert('Could not check if path already exists.\nSee console for error message.');
+                        console.log(arguments);
                     },
                     onsuccess: function(aBoolean) {
 
@@ -1189,7 +1199,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                                 sourcePath:   arg.originPath,
                                 targetPath:   destination,
                                 onerror: function() {
-                                    alert('File / Directory could not be copied.\nError Message:\n\n' + this);
+                                    alert('Could not copy file / directory.\nSee console for error message.');
+                                    console.log(arguments);
                                 },
                                 onprogress: function(evt){
                                     //
@@ -1239,8 +1250,8 @@ SC.loadPackage({ 'FileManagerWindow': {
                 SuperGlue.get('server').do('doesFileExist', {
                     path: destination,
                     onerror: function() {
-                        alert('The file does already exist.');
-                        console.log(this)
+                        alert('Could not check if file already exists.\nSee console for error message.');
+                        console.log(arguments);
                     },
                     onsuccess: function(aBoolean) {
 
@@ -1260,7 +1271,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                             SuperGlue.get('server').do('newPage', {
                                 newPath: destination,
                                 onerror: function() {
-                                    alert('There was a critical error.\nSee console for more details');
+                                    alert('There was a critical error while creating a new page.\nSee console for error message.');
                                     console.log(this);
                                 },
                                 onprogress: function(evt){
