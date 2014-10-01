@@ -1,11 +1,17 @@
-## Clientplugin - browser add-on/extension for SuperGlue
-### [Documentation](http://git.superglue.it/superglue/documentation/wikis/home)
-&nbsp;  
-
-Take a look a [SuperGlue project summary](http://git.superglue.it/superglue/documentation/wikis/home) to learn more about the project.  
+# Editor - the browser add-on for Superglue
 
 
-http://superglue.it
+## Getting started
+
+To build SuperGlue clients, go to the root directory of this repo, and execute 
+
+```
+./glueIt
+```
 
 
-To build SuperGlue clients, go to the root directory of this repo, and execute ./glueIt
+## Credits and License
+
+This software was originally written by Joscha Jäger and Michael Zeder.
+
+It is licensed under GPL 3 - see file ./license
