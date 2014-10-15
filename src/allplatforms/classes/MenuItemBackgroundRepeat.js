@@ -6,14 +6,14 @@ SC.loadPackage({ 'MenuItemBackgroundRepeat': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-backgroundRepeat" class="sg-editing-menu-button"></button></div>' },
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-backgroundRepeat" class="sg-editing-menu-button" title="repeat background image"></button></div>' },
 
         menuPanel: { initValue: '<div id="sg-editing-menu-backgroundRepeat-panel">'
                                         +'<div class="sg-editing-menu-panel">'
                                             +'<div class="sg-menu-triangle-right"></div>'
-                                            +'<button id="sg-editing-menu-backgroundRepeat-tile"        data-superglue-backgroundRepeat="tile" class="sg-editing-menu-button"></button>'
-                                            +'<button id="sg-editing-menu-backgroundRepeat-tileX"       data-superglue-backgroundRepeat="tileX" class="sg-editing-menu-button"></button>'
-                                            +'<button id="sg-editing-menu-backgroundRepeat-tileY"       data-superglue-backgroundRepeat="tileY" class="sg-editing-menu-button"></button>'
+                                            +'<button id="sg-editing-menu-backgroundRepeat-tile"  title="repeat"              data-superglue-backgroundRepeat="tile" class="sg-editing-menu-button"></button>'
+                                            +'<button id="sg-editing-menu-backgroundRepeat-tileX" title="repeat horizontally" data-superglue-backgroundRepeat="tileX" class="sg-editing-menu-button"></button>'
+                                            +'<button id="sg-editing-menu-backgroundRepeat-tileY" title="repeat vertically"   data-superglue-backgroundRepeat="tileY" class="sg-editing-menu-button"></button>'
                                         +'</div>'
                                     +'</div>' 
                      }

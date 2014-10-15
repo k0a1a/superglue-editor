@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetEditHTML': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-editHTML" class="sg-editing-widget-button"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-editHTML" class="sg-editing-widget-button" title="HTML source code"></button></div>' }
 
     },
 

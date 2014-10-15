@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemRedo': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-redo" class="sg-editing-menu-button"></button></div>' }
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-redo" class="sg-editing-menu-button" title="redo [ctrl+y]"></button></div>' }
 
     },
 

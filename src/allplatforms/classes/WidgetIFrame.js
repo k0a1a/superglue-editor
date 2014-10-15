@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetIFrame': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-iframe" class="sg-editing-widget-button"></button></div>' },
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-iframe" class="sg-editing-widget-button" title="URL"></button></div>' },
 
         widgetPanel: { initValue:   '<div id="sg-editing-widget-iframe-panel">'
                                         +'<div class="sg-editing-widget-panel">'

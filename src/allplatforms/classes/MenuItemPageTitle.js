@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemPageTitle': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-pageTitle" class="sg-editing-menu-button"></button></div>' },
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-pageTitle" class="sg-editing-menu-button" title="page title"></button></div>' },
 
         menuPanel:    { initValue:   '<div id="sg-editing-menu-pageTitle-panel">'
                                             +'<div class="sg-editing-menu-panel">'

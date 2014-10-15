@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetOpacity': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-opacity" class="sg-editing-widget-button"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-opacity" class="sg-editing-widget-button" title="transparency"></button></div>' }
 
     },
 

@@ -10,7 +10,7 @@ SC.loadPackage({ 'IFrameElement': {
                                         +'\t<iframe src="http://localhost/" style="width: 100%; height: 100%;"></iframe>'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity', 'WidgetIFrame' ] },
-        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-iframeElement" class="sg-editing-creation-menu-button" data-tooltip="Webpage"></button></div>' }
+        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-iframeElement" class="sg-editing-creation-menu-button" title="other web page"></button></div>' }
     },
 
     properties: {

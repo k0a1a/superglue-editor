@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemServerSettings': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-serverSettings" class="sg-editing-menu-button"></button></div>' }
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-serverSettings" class="sg-editing-menu-button" title="server settings"></button></div>' }
 
     },
 

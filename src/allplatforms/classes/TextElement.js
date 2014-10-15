@@ -10,7 +10,7 @@ SC.loadPackage({ 'TextElement': {
                                         +'\t<p>Text</p>'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity' ] },
-        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-textElement" class="sg-editing-creation-menu-button" data-tooltip="Text"></button></div>' }
+        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-textElement" class="sg-editing-creation-menu-button" title="text"></button></div>' }
     },
 
     properties: {

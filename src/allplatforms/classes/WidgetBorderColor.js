@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetBorderColor': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-borderColor" class="sg-editing-widget-button"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-borderColor" class="sg-editing-widget-button" title="border color"></button></div>' }
 
     },
 

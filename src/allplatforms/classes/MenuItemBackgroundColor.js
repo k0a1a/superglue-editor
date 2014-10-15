@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemBackgroundColor': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-backgroundColor" class="sg-editing-menu-button"></button></div>' }
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-backgroundColor" class="sg-editing-menu-button" title="background color"></button></div>' }
 
     },
 

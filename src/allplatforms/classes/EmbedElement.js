@@ -10,7 +10,7 @@ SC.loadPackage({ 'EmbedElement': {
                                         +'\t<pre><h1>&lt;/&gt;</h1>Replace this with HTML code.</pre>'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity' ] },
-        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-embedElement" class="sg-editing-creation-menu-button" data-tooltip="Embed HTML Code"></button></div>' }
+        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-embedElement" class="sg-editing-creation-menu-button" title="HTML source code"></button></div>' }
     },
     
     properties: {

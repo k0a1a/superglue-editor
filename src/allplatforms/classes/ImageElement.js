@@ -10,7 +10,7 @@ SC.loadPackage({ 'ImageElement': {
                                         +'\t<img src="/resources/img/defaultImage.png" style="min-width: 100%; min-height: 100%;">'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity', 'WidgetImgLink', 'WidgetImgDimensions', 'WidgetImgSrc' ] },
-        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-imageElement" class="sg-editing-creation-menu-button" data-tooltip="Image"></button></div>' }
+        creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-imageElement" class="sg-editing-creation-menu-button" title="image"></button></div>' }
     },
 
     properties: {

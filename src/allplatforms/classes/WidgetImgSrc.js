@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetImgSrc': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-imgSrc" class="sg-editing-widget-button"></button></div>' },
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-imgSrc" class="sg-editing-widget-button" title="image file"></button></div>' },
 
         widgetPanel: { initValue:   '<div id="sg-editing-widget-imgSrc-panel">'
                                         +'<div class="sg-editing-widget-panel">'

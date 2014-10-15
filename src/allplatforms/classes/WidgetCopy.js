@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetCopy': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-copy" class="sg-editing-widget-button"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-copy" class="sg-editing-widget-button" title="copy to clipboard [ctrl+c]"></button></div>' }
 
     },
 

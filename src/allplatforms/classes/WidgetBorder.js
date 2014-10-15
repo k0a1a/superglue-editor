@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetBorder': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-border" class="sg-editing-widget-button"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-border" class="sg-editing-widget-button" title="border width"></button></div>' }
 
     },
 

@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemBackgroundImg': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-backgroundImg" class="sg-editing-menu-button"></button></div>' },
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-backgroundImg" class="sg-editing-menu-button" title="background image"></button></div>' },
 
         menuPanel:    { initValue:   '<div id="sg-editing-menu-backgroundImg-panel">'
                                             +'<div class="sg-editing-menu-panel">'

@@ -1,7 +1,7 @@
 #sg-editing-menu-center {
-	background-image: url("icons/pageCentered.svg");
+	background-image: url("icons/pageInfinite.svg");
 }
 
 #sg-editing-menu-center.infinite {
-	background-image: url("icons/pageInfinite.svg");
+	background-image: url("icons/pageCentered.svg");
 }

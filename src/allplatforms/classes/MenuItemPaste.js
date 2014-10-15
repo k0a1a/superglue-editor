@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemPaste': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-paste" class="sg-editing-menu-button"></button></div>' }
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-paste" class="sg-editing-menu-button" title="paste from clipboard [ctrl+v]"></button></div>' }
 
     },
 

@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemSave': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-save" class="sg-editing-menu-button"></button></div>' }
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-save" class="sg-editing-menu-button" title="save page [ctrl+s]"></button></div>' }
 
     },
 

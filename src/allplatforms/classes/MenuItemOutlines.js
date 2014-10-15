@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemOutlines': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-outlines" class="sg-editing-menu-button"></button></div>' }
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-outlines" class="sg-editing-menu-button" title="x-ray view [spacebar]"></button></div>' }
 
     },
 

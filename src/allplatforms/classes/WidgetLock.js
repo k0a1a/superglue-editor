@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetLock': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-lock" class="sg-editing-widget-button"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-lock" class="sg-editing-widget-button" title="group/ungroup"></button></div>' }
 
     },
 

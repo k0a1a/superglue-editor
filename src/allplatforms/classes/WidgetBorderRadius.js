@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetBorderRadius': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-borderRadius" class="sg-editing-widget-button"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-borderRadius" class="sg-editing-widget-button" title="rounded borders"></button></div>' }
 
     },
 

@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemFileManager': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-fileManager" class="sg-editing-menu-button"></button></div>' }
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-fileManager" class="sg-editing-menu-button" title="file manager [ctrl+o]"></button></div>' }
 
     },
 
