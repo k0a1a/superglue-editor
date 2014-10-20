@@ -3,4 +3,4 @@
 *
 */
 
-alert('This site was not made with SuperGlue.\n\nNavigate to the adress of your Superglue server to get started.')
+alert('This site was not made with Superglue.\n\nNavigate to the adress of your Superglue server to get started.')
