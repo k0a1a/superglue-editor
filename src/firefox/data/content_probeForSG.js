@@ -205,42 +205,42 @@
         script.setAttribute("src", self.options.dataPath + "injections/init.js" );
         document.head.appendChild(script);
 
+
     };
 
 
-    
+    var notSGpage = function(){
 
-    self.port.on('SuperGlue', function(message) {
-        
+        var script = document.createElement("script");
+        script.setAttribute("data-superglue", "editing-interface");
+        script.setAttribute("type", "text/javascript");
+        script.async = false;
+        script.setAttribute("src", self.options.dataPath + "injections/notSGpage.js" );
+        document.head.appendChild(script);
+        document.head.removeChild(script);
 
-        if(message.powerOn){
+    };
 
-            // check if page is superglue page
-            if(     document.querySelectorAll('meta[name=generator]').length > 0 
-                &&  document.querySelector('meta[name=generator]').getAttribute('content') === 'SuperGlue'){
 
-                // check if editing is active
-                if(     document.querySelectorAll('meta[name=superglue-mode]').length === 0
-                    ||  document.querySelector('meta[name=superglue-mode]').getAttribute('content') !== 'editing'){
 
-                    activateSuperGlue();
+    // check if page is superglue page
+    if(     document.querySelectorAll('meta[name=generator]').length > 0 
+        &&  document.querySelector('meta[name=generator]').getAttribute('content') === 'SuperGlue'){
 
-                }
+        // check if editing is active
+        if(     document.querySelectorAll('meta[name=superglue-mode]').length === 0
+            ||  document.querySelector('meta[name=superglue-mode]').getAttribute('content') !== 'editing'){
 
-            } 
+            activateSuperGlue();
 
         }
 
+    } else { // page is not a superglue page
 
-    });
-    
-    self.port.on('SuperGlueState', function(message){
-        if(message.contentProbeForSG === 'updateStatusOfSG'){
-            self.port.emit('SuperGlue', { contentProbeForSG: 'isPowerOn?' });
-        }
-    })
+        notSGpage();
 
-    self.port.emit('SuperGlue', { contentProbeForSG: 'isPowerOn?' });
+    }
+
 
 
 

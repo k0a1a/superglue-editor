@@ -4,20 +4,8 @@ var buttons     = require('sdk/ui/button/action'),
     self        = require('sdk/self'),
     pageMod     = require('sdk/page-mod'),
     clipboard   = require('sdk/clipboard'),
-    iconsOn     =   {
-                        '16': './icon-16-powerOn.png',
-                        '32': './icon-32-powerOn.png',
-                        '64': './icon-64-powerOn.png'
-                    },
-    iconsOff    =   {
-                        '16': './icon-16-powerOff.png',
-                        '32': './icon-32-powerOff.png',
-                        '64': './icon-64-powerOff.png'
-                    },
 
-    workers     = [],
-
-    powerSwitch = false;
+    workers     = [];
 
 
 function detachWorker(worker, workerArray) {
@@ -27,59 +15,52 @@ function detachWorker(worker, workerArray) {
     }
 }
 
-pageMod.PageMod({
-    include:                [ '*', 'file://*' ],
-    contentScriptFile:      self.data.url('content_probeForSG.js'),
-    contentScriptOptions:   {'dataPath' : self.data.url('superglue-client') + '/'},
-    onAttach: function(worker){
 
-        workers.push(worker);
-
-        worker.port.on('SuperGlue', function(request) {
-            if(request.contentProbeForSG === 'isPowerOn?'){
-                worker.port.emit('SuperGlue', { powerOn: powerSwitch })
-            }
-        });
-
-        worker.port.on('SuperGlueClipboard', function(message){
-
-            if(message.action === 'copy'){
-                clipboard.set(message.value);
-            }
-
-            if(message.action === 'paste'){
-                worker.port.emit('SuperGlueClipboard', {
-                    action: 'pasteResponse',
-                    value:  clipboard.get()
-                })
-            }
-
-        });
-
-        worker.on('detach', function () {
-            detachWorker(this, workers);
-        });
-
-    }
-});
 
 
 var button = buttons.ActionButton({
 
         id:         'superglue-button',
         label:      'SuperGlue',
-        icon:       iconsOff,
+        icon:       {
+                        "16": "./icon-16.png",
+                        "32": "./icon-32.png",
+                        "64": "./icon-64.png"
+                    },
         onClick:    function() {
 
-            powerSwitch = !powerSwitch;
+            
+            var worker = tabs.activeTab.attach({
+                contentScriptFile:      self.data.url("content_probeForSG.js"),
+                contentScriptOptions:   { "dataPath" : self.data.url("superglue-client") + "/" }
+            });
 
-            for(var i = 0, l = workers.length; i < l; i++){
-                workers[i].port.emit('SuperGlueState', { contentProbeForSG: 'updateStatusOfSG' })
-            }
+            
+            workers.push(worker);
 
-            button.state(button, { icon: powerSwitch ? iconsOn : iconsOff });
             
 
+            worker.port.on('SuperGlueClipboard', function(message){
+
+                if(message.action === 'copy'){
+                    clipboard.set(message.value);
+                }
+
+                if(message.action === 'paste'){
+                    worker.port.emit('SuperGlueClipboard', {
+                        action: 'pasteResponse',
+                        value:  clipboard.get()
+                    })
+                }
+
+            });
+
+            worker.on('detach', function () {
+                detachWorker(this, workers);
+            });
+
+
         }
+
     });
 

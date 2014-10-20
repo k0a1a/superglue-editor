@@ -148,8 +148,6 @@
     var activateSuperGlue = function(){
 
 
-
-
         var clipboardCss = document.createElement("link");
         clipboardCss.setAttribute("data-superglue", "editing-interface");
         clipboardCss.setAttribute("rel", "stylesheet");
@@ -216,36 +214,41 @@
         script.setAttribute("src", chrome.extension.getURL("superglue-client/injections/init.js") );
         document.head.appendChild(script);
 
+    
+
     };
 
 
-    
+    var notSGpage = function(){
 
-    
+        var script = document.createElement("script");
+        script.setAttribute("data-superglue", "editing-interface");
+        script.setAttribute("type", "text/javascript");
+        script.async = false;
+        script.setAttribute("src", chrome.extension.getURL("superglue-client/injections/notSGpage.js") );
+        document.head.appendChild(script);
+        document.head.removeChild(script);
 
-    chrome.runtime.sendMessage({ contentProbeForSG: "isPowerOn?" }, function(response) {
+    };
 
-        if(response.powerOn){
 
-            // check if page is superglue page
-            if(     document.querySelectorAll('meta[name=generator]').length > 0 
-                &&  document.querySelector('meta[name=generator]').getAttribute('content') === 'SuperGlue'){
+    // check if page is superglue page
+    if(     document.querySelectorAll('meta[name=generator]').length > 0 
+        &&  document.querySelector('meta[name=generator]').getAttribute('content') === 'SuperGlue'){
 
-                // check if editing is active
-                if(     document.querySelectorAll('meta[name=superglue-mode]').length === 0
-                    ||  document.querySelector('meta[name=superglue-mode]').getAttribute('content') !== 'editing'){
+        // check if editing is active
+        if(     document.querySelectorAll('meta[name=superglue-mode]').length === 0
+            ||  document.querySelector('meta[name=superglue-mode]').getAttribute('content') !== 'editing'){
 
-                    activateSuperGlue();
-
-                }
-
-            } 
+            activateSuperGlue();
 
         }
 
+    } else { // page is not a superglue page
 
+        notSGpage();
 
-    });
+    }
 
 
     

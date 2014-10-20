@@ -112,11 +112,18 @@ SC.loadPackage({ 'SuperGlue': {
                         '************************************************',
                         '   SuperGlue editor has successfully started!',
                         '',
-                        '   To access the running system for live',
-                        '   development, enter',
+                        '   To access the running system\'s code',
+                        '   open the bystem browser, just enter',
                         '   > SC.do(\'SCSystemBrowser\', \'open\')',
                         '************************************************'
-                    ].join('\n'))
+                    ].join('\n'));
+
+
+                    // Flash the outlines
+                    SuperGlue.get('document').set({ showOutlines: true });
+                    window.setTimeout(function(){
+                        SuperGlue.get('document').set({ showOutlines: false });
+                    }, 700);
 
                     
                 } catch(error) {
