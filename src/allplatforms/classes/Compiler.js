@@ -45,7 +45,7 @@ SC.loadPackage({ 'Compiler': {
                                 : '')
                             + 'data-superglue-grid="'
                                 + (theDocument.get('grid').get('active') ? 'on' : 'off')
-                                + '/'+
+                                + '/'
                                 + theDocument.get('grid').get('gridSize')
                                 + 'px">';
                 
