@@ -62,6 +62,8 @@ SC.loadPackage({ 'MenuItemBackgroundColor': {
                 var initialColor = document.body.style.backgroundColor,
                     pickerLoad   = true;
 
+                initialColor = initialColor ? initialColor : 'rgb(100, 100, 100)';
+
                 this.do('initColorPickerWidget', {
 
                     theDocumentMenu: theDocumentMenu,

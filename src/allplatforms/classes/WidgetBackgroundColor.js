@@ -23,6 +23,8 @@ SC.loadPackage({ 'WidgetBackgroundColor': {
                     pickerLoad   = true,
                     self = this;
 
+                initialColor = initialColor ? initialColor : 'rgb(100, 100, 100)';
+
                 this.do('initColorPickerWidget', {
 
                     theSelection: theSelection,

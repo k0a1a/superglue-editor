@@ -24,6 +24,8 @@ SC.loadPackage({ 'WidgetBorderColor': {
                     pickerLoad   = true,
                     self = this;
 
+                initialColor = initialColor ? initialColor : 'rgb(100, 100, 100)';
+
 
                 this.do('initColorPickerWidget', {
 
