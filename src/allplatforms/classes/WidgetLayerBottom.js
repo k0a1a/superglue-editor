@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetLayerBottom': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-layerBottom" class="sg-editing-widget-button" title="to bottom / [shift] downwards"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-layerBottom" class="sg-editing-widget-button" title="to bottom layer / [shift] downwards"></button></div>' }
 
     },
 

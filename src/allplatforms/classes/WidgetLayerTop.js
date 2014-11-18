@@ -6,7 +6,7 @@ SC.loadPackage({ 'WidgetLayerTop': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-layerTop" class="sg-editing-widget-button" title="to top / [shift] upwards"></button></div>' }
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-layerTop" class="sg-editing-widget-button" title="to top layer / [shift] upwards"></button></div>' }
 
     },
 

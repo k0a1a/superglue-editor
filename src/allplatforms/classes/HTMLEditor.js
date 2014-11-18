@@ -32,15 +32,21 @@ SC.loadPackage({ 'HTMLEditor': {
                     html:     startConfig.html
                 });
                 
+
+                var warningText = document.createElement('div');
+                    warningText.classList.add('sg-editing-superuser-warning');
+                    warningText.innerHTML = '<b>Caution:</b> Your are now editing the source code!';
+                self.get('content').appendChild(warningText);
+
+
+
                 var editTextarea = document.createElement('textarea');
                     editTextarea.classList.add('sg-editing-superuser-textarea');
                     editTextarea.value = self.get('html');
-
-                    
-
                 self.get('content').appendChild(editTextarea);
                 editTextarea.focus();
                 
+
                 var modalButtonContainer = document.createElement('div');
                     modalButtonContainer.classList.add('sg-editing-superuser-modal-container');
 

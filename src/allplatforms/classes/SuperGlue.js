@@ -1,11 +1,11 @@
 SC.loadPackage({ 'SuperGlue': {
 
 
-    comment: 'Hello friend, I am SuperGlue!\nMy single instance is the central object of the system. It provides the start routine with method SuperGlue>>init, and stores itsself in the global variable window.SuperGlue',
+    comment: 'Hello friend, I am Superglue!\nMy single instance is the central object of the system. It provides the start routine with method Superglue>>init, and stores itsself in the global variable window.SuperGlue',
 
     sharedProperties: {
 
-        version: {  comment:   'SuperGlue\'s current version is...', 
+        version: {  comment:   'Superglue\'s current version is...', 
                     initValue: '1.0.1' 
                  }
 
@@ -41,7 +41,7 @@ SC.loadPackage({ 'SuperGlue': {
     methods: {
 
         init: {
-            comment:  'I am SuperGlue\'s start routine, yay!',
+            comment:  'I am Superglue\'s start routine, yay!',
             code:     function(){
 
                 // Initialization of the whole system is "mission critical", 
@@ -57,7 +57,7 @@ SC.loadPackage({ 'SuperGlue': {
                     // Explicit failures
                     var metaData = document.querySelector('meta[name=generator]');
                     if( metaData.getAttribute('content') !== 'SuperGlue' ){
-                        throw new Error('This is not a SuperGlue page, you can\'t change it.')
+                        throw new Error('This is not a Superglue page, you can\'t change it.')
                     }
                     if( this.do('compareVersions', {
                             pageVersion:   metaData.getAttribute('data-superglue-version'), 
@@ -65,11 +65,15 @@ SC.loadPackage({ 'SuperGlue': {
                         })
                     ){
                         throw new Error(
-                              'This page needs version '
+                              'This page was made with  Superglue version '
                             + metaData.getAttribute('data-superglue-version')
-                            + '. Please update your SuperGlue browser add-on.'
+                            + '.\nPlease update your Superglue browser add-on!'
                         )
                     }
+
+
+                    // Update the page structure for older file formats
+                    this.do('updatePageStructure', metaData.getAttribute('data-superglue-version'))
 
 
                     // Make myself a global object (the only one, thou shall not have others beside me)
@@ -110,7 +114,7 @@ SC.loadPackage({ 'SuperGlue': {
                     // Print console.log
                     console.log([
                         '************************************************',
-                        '   SuperGlue editor has successfully started!',
+                        '   Superglue editor has successfully started!',
                         '',
                         '   To access the running system\'s code',
                         '   open the bystem browser, just enter',
@@ -128,8 +132,8 @@ SC.loadPackage({ 'SuperGlue': {
                     
                 } catch(error) {
                     // Catch any initialization error
-                    alert('Something went wrong starting SuperGlue\'s editing tool.\n\n' + error.message);
-                    console.log('Failed to initialize SuperGlue:\n', error);
+                    alert('Something went wrong starting Superglue\'s editing tool.\n\n' + error.message);
+                    console.log('Failed to initialize Superglue:\n', error);
                     return;
                 }
 
@@ -174,7 +178,7 @@ SC.loadPackage({ 'SuperGlue': {
 
         compareVersions: {
             comment:  'I check for version compatability of page and plugin. Return is true for out-of-date!',
-            code:     function (arg) {
+            code:     function(arg){
                 
                 var v1 = arg.pageVersion,
                     v2 = arg.pluginVersion,
@@ -198,6 +202,29 @@ SC.loadPackage({ 'SuperGlue': {
                     return false;
                 }
                 return false;
+            }
+        },
+
+
+
+        updatePageStructure: {
+            comment:    'I update older file versions to the current page structure.',
+            code:       function(pageVersion){
+
+                if(this.do('compareVersions', {
+                    pluginVersion: pageVersion,
+                    pageVersion:   '1.0.1'
+                })){
+
+                    var userCSS = document.createElement('style');
+                        userCSS.setAttribute('type', 'text/css');
+                        userCSS.setAttribute('data-superglue-css', 'user');
+
+                    document.getElementsByTagName('head')[0].appendChild(userCSS);
+
+                }
+
+
             }
         }
 
