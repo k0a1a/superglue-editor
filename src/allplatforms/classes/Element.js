@@ -247,11 +247,23 @@ SC.loadPackage({ 'Element': {
                                             : '')
                                         +'>'
 
-                            + '\n' +    (function(innerHTML){
+                                        + (function(innerHTML){
 
-                                            var renderedContent = innerHTML;
+                                            var renderedContent = innerHTML.split('\n').filter(function(line){ return line.trim() !== '' }),
+                                                whitespace      = [],
+                                                cutOff          = 0;
 
-                                            renderedContent = renderedContent.split('\n').filter(function(line){ return line.trim() !== '' });
+                                            renderedContent.forEach(function(line){
+                                                whitespace.push( line.length - line.trimLeft().length );
+                                            });
+                                            cutOff = Math.min.apply(Math, whitespace);
+
+                                            for(var i = 0, l = renderedContent.length; i < l; i++){
+
+                                                renderedContent[i] = indent + '\t' + renderedContent[i].substr(cutOff);
+
+                                            }
+
 
                                             return renderedContent.join('\n')
 

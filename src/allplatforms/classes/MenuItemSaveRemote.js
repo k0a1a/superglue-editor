@@ -6,7 +6,7 @@ SC.loadPackage({ 'MenuItemSaveRemote': {
 
     sharedProperties: {
 
-        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-saveRemote" class="sg-editing-menu-button" title="save to other server"></button></div>' },
+        menuContainer:  { initValue: '<div class="sg-editing-menu-container"><button id="sg-editing-menu-saveRemote" class="sg-editing-menu-button" title="save page to other server"></button></div>' },
 
         menuPanel:    { initValue:   '<div id="sg-editing-menu-saveRemote-panel">'
                                             +'<div class="sg-editing-menu-panel">'

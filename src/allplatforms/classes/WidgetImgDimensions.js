@@ -6,17 +6,18 @@ SC.loadPackage({ 'WidgetImgDimensions': {
 
     sharedProperties: {
 
-        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-imgDimensions" class="sg-editing-widget-button" title="dimensions"></button></div>' },
+        widgetMenu:  { initValue: '<div class="sg-editing-widget-container"><button id="sg-editing-widget-imgDimensions" class="sg-editing-widget-button" title="image dimensions"></button></div>' },
 
         widgetPanel: { initValue: '<div id="sg-editing-widget-imgDimensions-panel">'
                                         +'<div class="sg-editing-widget-panel">'
                                             +'<div class="sg-widget-triangle-up"></div>'
+                                            +'<button id="sg-editing-widget-imgDimensions-original"           title="original size"               data-superglue-imgDimensions="original" class="sg-editing-widget-button"></button>'
+                                            +'<button id="sg-editing-widget-imgDimensions-fitAspectRatio"     title="fit to frame + keep aspect ratio" data-superglue-imgDimensions="fitAspectRatio" class="sg-editing-widget-button"></button>'
                                             +'<button id="sg-editing-widget-imgDimensions-stretchAspectRatio" title="stretch + keep aspect ratio" data-superglue-imgDimensions="stretchAspectRatio" class="sg-editing-widget-button"></button>'
                                             +'<button id="sg-editing-widget-imgDimensions-stretch"            title="stretch"                     data-superglue-imgDimensions="stretch" class="sg-editing-widget-button"></button>'
                                             +'<button id="sg-editing-widget-imgDimensions-tile"               title="repeat"                      data-superglue-imgDimensions="tile" class="sg-editing-widget-button"></button>'
                                             +'<button id="sg-editing-widget-imgDimensions-tileX"              title="repeat horizontally"         data-superglue-imgDimensions="tileX" class="sg-editing-widget-button"></button>'
                                             +'<button id="sg-editing-widget-imgDimensions-tileY"              title="repeat vertically"           data-superglue-imgDimensions="tileY" class="sg-editing-widget-button"></button>'
-                                            +'<button id="sg-editing-widget-imgDimensions-aspectRatio"        title="original size"               data-superglue-imgDimensions="aspectRatio" class="sg-editing-widget-button"></button>'
                                         +'</div>'
                                     +'</div>' 
                      }

@@ -6,7 +6,7 @@ SC.loadPackage({ 'SuperGlue': {
     sharedProperties: {
 
         version: {  comment:   'SuperGlue\'s current version is...', 
-                    initValue: '1.0' 
+                    initValue: '1.0.1' 
                  }
 
     },

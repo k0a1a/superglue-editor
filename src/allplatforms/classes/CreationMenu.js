@@ -219,6 +219,15 @@ SC.loadPackage({ 'CreationMenu': {
                     height:     parseInt(myNodeStyle.height)
                 });
 
+                if(newElement.class() === 'ImageElement'){
+                    SuperGlue.get('fileManager').do('chooseFile', {
+                        oldPath:  '',
+                        callback: function(srcPath){
+                                        newElement.set({ imgSource: srcPath });
+                                    }
+                    });
+                }
+
                 (function(newElement){
 
                     SuperGlue.get('history').do('actionHasStarted', function(){

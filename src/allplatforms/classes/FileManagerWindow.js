@@ -373,6 +373,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                 // Go UP one directory button
                 var optionDirectoryUp = document.createElement('div');
                     optionDirectoryUp.classList.add('sg-filemanager-operation', 'directory-up');
+                    optionDirectoryUp.setAttribute('title', 'up')
                     optionDirectoryUp.addEventListener('click', function() {
                         
                         if ( self.get('currentPath') == '/' ) {
@@ -381,6 +382,11 @@ SC.loadPackage({ 'FileManagerWindow': {
 
                         var path = self.get('currentPath');
                         var pathArray = path.split('/');
+
+                        if(pathArray.length === 1){
+                            return;
+                        }
+
                         pathArray.pop();
                         
                         var newPath;
@@ -412,6 +418,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                 // Upload file button
                 var optionUploadFile = document.createElement('div');
                     optionUploadFile.classList.add('sg-filemanager-operation', 'file-upload', 'active');
+                    optionUploadFile.setAttribute('title', 'upload a file...');
                     optionUploadFile.addEventListener('click', function(evt) {                                
                         
                         self.set({ isFileSelected: false });
@@ -435,6 +442,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                 // Add new directory button (in current directory)
                 var optionNewDirectory = document.createElement('div');
                     optionNewDirectory.classList.add('sg-filemanager-operation', 'directory-new', 'active');
+                    optionNewDirectory.setAttribute('title', 'create new folder');
                     optionNewDirectory.addEventListener('click', function() {
                         
                         self.get('directoryListing').scrollTop = 0;
@@ -492,6 +500,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                 // Rename button (file or folder)
                 var optionRename = document.createElement('div');
                     optionRename.classList.add('sg-filemanager-operation', 'rename');
+                    optionRename.setAttribute('title', 'rename');
                     optionRename.addEventListener('click', function(evt) {
                         
                         if ( !this.classList.contains('active') ) {
@@ -548,6 +557,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                 // Copy button (file or folder)
                 var optionCopy = document.createElement('div');
                     optionCopy.classList.add('sg-filemanager-operation', 'copy');
+                    optionCopy.setAttribute('title', 'copy');
                     optionCopy.addEventListener('click', function(evt) {
                         
                         if ( !this.classList.contains('active') ) {
@@ -561,6 +571,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                 // Paste button (file or folder)
                 var optionPaste = document.createElement('div');
                     optionPaste.classList.add('sg-filemanager-operation', 'paste');
+                    optionPaste.setAttribute('title', 'paste');
                     optionPaste.addEventListener('click', function(evt) {
                         
                         if ( !this.classList.contains('active') || !self.get('copiedFilePath') ) {
@@ -580,6 +591,7 @@ SC.loadPackage({ 'FileManagerWindow': {
                 // Delete button (file or folder)
                 var optionDelete = document.createElement('div');
                     optionDelete.classList.add('sg-filemanager-operation', 'delete');
+                    optionDelete.setAttribute('title', 'delete');
                     optionDelete.addEventListener('click', function(evt) {
                         
                         if ( !this.classList.contains('active') ) {
@@ -683,8 +695,14 @@ SC.loadPackage({ 'FileManagerWindow': {
                 SuperGlue.get('server').do('directoryListing', {
                     path: arg.path,
                     onerror: function() {
+
+                        if(this.status === 401){
+                            SuperGlue.get('windowManager').do('closeWindow', self);
+                            return;
+                        }
+
                         alert('Directory listing failed.\nSee console for error message.');
-                        console.log(arguments);
+                        console.log(this);
                     },
                     onsuccess: function() { 
 

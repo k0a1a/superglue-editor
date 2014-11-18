@@ -56,7 +56,7 @@ SC.loadPackage({ 'Compiler': {
                     thePage += children[i].do('renderYourself', { indent: 4 })
 
                 }
-                            
+                
                 
                 thePage += '\n\t\t</div>\n\t</body>\n</html>';
 

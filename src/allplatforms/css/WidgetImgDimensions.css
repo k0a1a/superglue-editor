@@ -6,7 +6,7 @@
 	position: 			absolute;
 	top: 				26px;
 	left: 				-20px;
-	width: 				192px;
+	width: 				222px;
 }
 
 #sg-editing-widget-imgDimensions-panel > .sg-editing-widget-panel {
@@ -51,6 +51,10 @@
 	background-image: url("icons/imgStretchAspectRatio.svg");
 }
 
-#sg-editing-widget-imgDimensions-aspectRatio {
-	background-image: url("icons/imgAspectRatio.svg");
+#sg-editing-widget-imgDimensions-fitAspectRatio {
+	background-image: url("icons/imgFitAspectRatio.svg");
+}
+
+#sg-editing-widget-imgDimensions-original {
+	background-image: url("icons/imgOriginal.svg");
 }

@@ -7,7 +7,7 @@ SC.loadPackage({ 'ImageElement': {
 
     sharedProperties: {
         protoHTML:          { initValue: '<div class="sg-element" data-superglue-type="ImageElement" style="left: 0px; top: 0px; width: 0px; height: 0px;">'
-                                        +'\t<img src="/resources/img/defaultImage.png" style="min-width: 100%; min-height: 100%;">'
+                                        +'\t<img src="/resources/img/defaultImage.png">'
                                         +'</div>' },
         applicableWidgets:  { initValue: [ 'WidgetBackgroundColor', 'WidgetBorderColor', 'WidgetBorder', 'WidgetBorderRadius', 'WidgetPadding', 'WidgetOpacity', 'WidgetImgLink', 'WidgetImgDimensions', 'WidgetImgSrc' ] },
         creationMenuItem:   { initValue: '<div class="sg-editing-creation-menu-container"><button id="sg-editing-creation-menu-imageElement" class="sg-editing-creation-menu-button" title="image"></button></div>' }
@@ -39,7 +39,7 @@ SC.loadPackage({ 'ImageElement': {
         },
 
         dimensions: {
-            comment: 'An ImageElement can have 6 enumerative dimension options: tile, tileX, tileY, stretch, stretchAspectRatio, aspectRatio',
+            comment: 'An ImageElement can have 7 enumerative dimension options: tile, tileX, tileY, stretch, stretchAspectRatio, fitAspectRatio, original',
             transform: function(aSymbolicString){
 
                 var contentNode   = this.get('node'),
@@ -92,7 +92,14 @@ SC.loadPackage({ 'ImageElement': {
                         newImgDomElement.src = imgSrc;
                         break;
 
-                    case 'aspectRatio':
+                    case 'fitAspectRatio':
+                        newImgDomElement = document.createElement('img');
+                        newImgDomElement.style.maxWidth  = '100%';
+                        newImgDomElement.style.maxHeight = '100%';
+                        newImgDomElement.src = imgSrc;
+                        break;
+
+                    case 'original':
                         newImgDomElement = document.createElement('img');
                         newImgDomElement.src = imgSrc;
                         break;
@@ -155,19 +162,7 @@ SC.loadPackage({ 'ImageElement': {
             code: function(config){
 
                 var indent = '\n' + Array(config.indent).join('\t'),
-                    thisElement,
-                    contentNode;
-
-                contentNode = (this.get('node').innerHTML
-                                        .split('\n')
-                                        .filter(function(line){ return line.trim() !== '' })
-                                        .join('\n'));
-
-                if(document.location.origin !== "null"){
-                    contentNode = contentNode.replace(document.location.origin, '')
-                }
-                
-                contentNode = contentNode.replace('url("', 'url(').replace('");', ');');
+                    thisElement;
 
 
                 thisElement = indent + '<div class="sg-element" data-superglue-type="ImageElement" style="'
@@ -178,9 +173,36 @@ SC.loadPackage({ 'ImageElement': {
                                             : '')
                                         +'>'
 
-                            + '\n' +    contentNode
+                                        +   (function(innerHTML){
+
+                                                var whitespace      = [],
+                                                    cutOff          = 0,
+                                                    renderedContent = innerHTML.replace('url("', 'url(').replace('");', ');');
+
+                                                if(document.location.origin !== "null"){
+                                                    renderedContent = renderedContent.replace(document.location.origin, '')
+                                                }
+                                                
+                                                renderedContent = renderedContent.split('\n').filter(function(line){ 
+                                                    return line.trim() !== '' 
+                                                });
+                                                
+                                                renderedContent.forEach(function(line){
+                                                    whitespace.push( line.length - line.trimLeft().length );
+                                                });
+                                                cutOff = Math.min.apply(Math, whitespace);
+
+                                                for(var i = 0, l = renderedContent.length; i < l; i++){
+
+                                                    renderedContent[i] = indent + '\t' + renderedContent[i].substr(cutOff);
+
+                                                }
+
+                                                return renderedContent.join('\n')
+
+                                            }).call(this, this.get('node').innerHTML)
                             
-                            + indent + '</div>';
+                                        + indent + '</div>';
 
 
                 return thisElement;
