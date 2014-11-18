@@ -34,6 +34,8 @@ SC.loadPackage({ 'WidgetEditHTML': {
                             SuperGlue.get('windowManager').do('createWindow', {
 
                                 class:      'HTMLEditor',
+
+                                warning:    '<b>Caution:</b> You are now editing HTML source code!',
                                 
                                 html:       rawHtml,
                                 

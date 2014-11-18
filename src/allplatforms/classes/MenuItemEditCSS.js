@@ -57,6 +57,8 @@ SC.loadPackage({ 'MenuItemEditCSS': {
                     SuperGlue.get('windowManager').do('createWindow', {
 
                         class:      'HTMLEditor',
+
+                        warning:    '<b>CSS Style Definitions</b> (Be careful, mistakes can break your page)',
                         
                         html:       rawCSS,
                         

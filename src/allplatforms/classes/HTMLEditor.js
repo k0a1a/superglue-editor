@@ -35,7 +35,7 @@ SC.loadPackage({ 'HTMLEditor': {
 
                 var warningText = document.createElement('div');
                     warningText.classList.add('sg-editing-superuser-warning');
-                    warningText.innerHTML = '<b>Caution:</b> Your are now editing the source code!';
+                    warningText.innerHTML = startConfig.warning ? startConfig.warning : '<b>Code Editor</b>';
                 self.get('content').appendChild(warningText);
 
 
