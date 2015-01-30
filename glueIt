@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -o xtrace
 
 case "$1" in
 
@@ -31,7 +32,7 @@ case "$1" in
     "testFF") 
         echo "Testing Firefox add-on..."
         cd ./tools/firefox-addon-sdk-1.16
-        source bin/activate
+        . ./bin/activate
         cd ../../build/firefox
         cfx run
         cd ../..
@@ -41,7 +42,7 @@ case "$1" in
     "pkgFF")
         echo "Packaging Firefox add-on..."
         cd ./tools/firefox-addon-sdk-1.16
-        source bin/activate
+        . ./bin/activate
         cd ../../build/firefox
         cfx xpi
         cd ../..
