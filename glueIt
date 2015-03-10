@@ -45,9 +45,18 @@ case "$1" in
         . ./bin/activate
         cd ../../build/firefox
         cfx xpi
+        mv *.xpi ../
         cd ../..
         ;;
 
+    "pkgCH")
+        if [ ! -x $(which chromium) ]; then
+          echo "Chromium not found, can't build.."
+          exit 1
+        fi
+        echo "Packaging Chromium extension..."
+        chromium --pack-extension=./build/chromium
+        ;;
 
    *) 
         echo "Usage: $0"
@@ -56,8 +65,9 @@ case "$1" in
         echo "  build    Build SuperGlue clients"
         echo " "
         echo "  testFF   Test Firefox add-on in sandboxed browser"
-        echo "  pkgFF    Make Firefox add-on package (./build/SuperGlue.xpi)"
-        echo "  (----    To package Chromium extension, go there to chrome://extensions)" 
+        echo "  pkgFF    Make Firefox add-on package (./build/superglue.xpi)"
+        echo "  pkgCH    Make Chromium extension package (./build/superglue.crx)"
+ #       echo "  (----    To package Chromium extension, go there to chrome://extensions)" 
         echo " "
         echo "ATTENTION!! Call $0 only in root of the project directory!"
         echo " "
