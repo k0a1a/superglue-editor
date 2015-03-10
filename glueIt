@@ -45,17 +45,19 @@ case "$1" in
         . ./bin/activate
         cd ../../build/firefox
         cfx xpi
-        mv *.xpi ../
+        mv *.xpi ../superglue-firefox.xpi
         cd ../..
         ;;
 
     "pkgCH")
         test -x $(which xvfb-run || echo 'false') && test -x $(which chromium || echo 'false') &&
         echo "Packaging Chromium extension..." &&
-        (xvfb-run --server-args='-screen 0, 1024x768x16' chromium --pack-extension=./build/chromium >/dev/null || echo 'run "./glueIt clean" before building') ||
-        echo "'chromium' and 'xvfb-run' executables must be available" ;;
-
-   *) 
+        (xvfb-run --server-args='-screen 0, 1024x768x16' chromium --pack-extension=./build/chromium >/dev/null &&
+         cd ./build; for i in chromium.*; do mv $i superglue-$i; done; cd .. ||
+         echo 'run "./glueIt clean" before building') ||
+        echo "'chromium' and 'xvfb' must be installed"
+        ;;
+    *) 
         echo "Usage: $0"
         echo " "
         echo "  clean    Remove build dir"
