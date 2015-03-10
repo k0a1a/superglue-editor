@@ -50,13 +50,10 @@ case "$1" in
         ;;
 
     "pkgCH")
-        if [ ! -x $(which chromium) ]; then
-          echo "Chromium not found, can't build.."
-          exit 1
-        fi
-        echo "Packaging Chromium extension..."
-        chromium --pack-extension=./build/chromium
-        ;;
+        test -x $(which xvfb-run || echo 'false') && test -x $(which chromium || echo 'false') &&
+        echo "Packaging Chromium extension..." &&
+        (xvfb-run --server-args='-screen 0, 1024x768x16' chromium --pack-extension=./build/chromium >/dev/null || echo 'run "./glueIt clean" before building') ||
+        echo "'chromium' and 'xvfb-run' executables must be available" ;;
 
    *) 
         echo "Usage: $0"
